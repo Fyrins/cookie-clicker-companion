@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/banner.jpg" alt="Cookie Clicker Companion" width="720">
+</p>
+
 # Cookie Clicker Companion
 
 All-in-one automation mod for Cookie Clicker (Steam / PC). Automates repetitive tasks without touching progression values — achievements remain unaffected.
