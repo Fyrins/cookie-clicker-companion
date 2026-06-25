@@ -26,13 +26,13 @@
         "wrath": "Clicca automaticamente i Wrath Cookie (rossi). Può innescare effetti negativi della Grandmapocalisse.",
         "bigCookie": "Clicca il grande biscotto continuamente il più velocemente possibile per accumulare biscotti.",
         "wrinklers": "Fa esplodere tutti i Rugosi quando raggiungono lo stadio finale, raccogliendo i loro biscotti.",
-        "spell": "Lancia Force the Hand of Fate automaticamente quando il Grimorio è completamente carico.",
+        "spell": "Lancia Force the Hand of Fate automaticamente quando il Grimorio è completamente carico. Condivide la magia con Conjure Baked Goods, evita di attivarli entrambi insieme.",
         "fortune": "Clicca i messaggi di fortuna nel ticker delle notizie per raccogliere le ricompense.",
         "dragon": "Aumenta automaticamente il livello del drago Krumblor non appena le risorse lo consentono.",
         "buy": "Acquista l'edificio più redditizio in base al rapporto CPS/prezzo, inclusi i bonus di sinergia.",
         "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela.",
         "lumps": "Raccoglie automaticamente una zolletta di zucchero non appena è matura, per un guadagno garantito.",
-        "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra.",
+        "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra. Condivide la magia con Force the Hand of Fate, evita di attivarli entrambi insieme.",
         "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus."
     },
     "notify": {

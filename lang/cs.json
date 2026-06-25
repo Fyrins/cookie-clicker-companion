@@ -26,13 +26,13 @@
         "wrath": "Automaticky kliká na Wrath Cookies (červené). Může spustit negativní efekty Babičkalypsy.",
         "bigCookie": "Nepřetržitě kliká na velkou sušenku co nejrychleji, aby hromadila sušenky.",
         "wrinklers": "Praskne všechny Vráskavce, jakmile všichni dosáhnou posledního stadia, a sebere jejich sušenky.",
-        "spell": "Automaticky sešle Force the Hand of Fate, když je Grimoár plně nabitý.",
+        "spell": "Automaticky sešle Force the Hand of Fate, když je Grimoár plně nabitý. Sdílí magii s Conjure Baked Goods – nepovol obě najednou.",
         "fortune": "Kliká na zprávy štěstí v běžícím textu a sbírá jejich odměny.",
         "dragon": "Automaticky zvyšuje úroveň draka Krumblora, jakmile to zdroje dovolí.",
         "buy": "Kupuje nejziskovější budovu na základě poměru CPS/cena, včetně synergií.",
         "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně.",
         "lumps": "Automaticky sklidí kousek cukru, jakmile dozraje, pro zaručený zisk.",
-        "conjure": "Sešle Přivolání pečiva, kdykoli má Grimoár dostatek magie, pro extra sušenky.",
+        "conjure": "Sešle Přivolání pečiva, kdykoli má Grimoár dostatek magie, pro extra sušenky. Sdílí magii s Force the Hand of Fate – nepovol obě najednou.",
         "luckyReserve": "Udržuje zásobu sušenek (přibližně 6000× CPS), aby zlaté sušenky 'Štěstí!' vyplácely maximum. Auto Nákup utrácí pouze přebytek."
     },
     "notify": {

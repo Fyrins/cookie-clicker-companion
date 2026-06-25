@@ -26,13 +26,13 @@
         "wrath": "Automatically clicks Wrath Cookies (red). May trigger negative grandmapocalypse effects.",
         "bigCookie": "Continuously clicks the big cookie as fast as possible to accumulate cookies.",
         "wrinklers": "Pops all Wrinklers once they have all reached their final stage, collecting their cookies.",
-        "spell": "Casts Force the Hand of Fate automatically when the Grimoire is fully charged.",
+        "spell": "Casts Force the Hand of Fate automatically when the Grimoire is fully charged. Shares magic with Conjure Baked Goods, so avoid enabling both at once.",
         "fortune": "Clicks fortune messages in the news ticker to collect their reward.",
         "dragon": "Automatically levels up the Krumblor dragon when resources allow.",
         "buy": "Buys the most profitable building based on CPS/price ratio, including synergy bonuses.",
         "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution.",
         "lumps": "Harvests a sugar lump automatically once it is ripe, for a guaranteed gain.",
-        "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies.",
+        "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies. Shares magic with Force the Hand of Fate, so avoid enabling both at once.",
         "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus."
     },
     "notify": {

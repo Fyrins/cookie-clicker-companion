@@ -26,13 +26,13 @@
         "wrath": "Klikt automatisch op Wrath Cookies (rode). Kan negatieve Grootmoeder-Apocalyps-effecten activeren.",
         "bigCookie": "Klikt de grote koek zo snel mogelijk aan om koekjes te verzamelen.",
         "wrinklers": "Knapt alle Rimpelers open zodra ze het eindstadium bereiken en verzamelt hun koekjes.",
-        "spell": "Cast Force the Hand of Fate automatisch wanneer het Grimoire volledig is opgeladen.",
+        "spell": "Cast Force the Hand of Fate automatisch wanneer het Grimoire volledig is opgeladen. Deelt magie met Conjure Baked Goods, activeer niet beide tegelijk.",
         "fortune": "Klikt op geluksberichten in de nieuwsticker om beloningen te verzamelen.",
         "dragon": "Verhoogt automatisch de draak Krumblor zodra de middelen het toelaten.",
         "buy": "Koopt het meest winstgevende gebouw op basis van de CPS/prijs-ratio, inclusief synergiesbonussen.",
         "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid.",
         "lumps": "Oogst automatisch een suikerklontje zodra het rijp is, voor een gegarandeerde opbrengst.",
-        "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes.",
+        "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes. Deelt magie met Force the Hand of Fate, activeer niet beide tegelijk.",
         "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit."
     },
     "notify": {

@@ -26,13 +26,13 @@
         "wrath": "Clique les Wrath Cookies (rouges). Peut déclencher des effets négatifs de la Grandmapocalypse.",
         "bigCookie": "Clique le grand cookie en continu aussi vite que possible pour accumuler des cookies.",
         "wrinklers": "Crève tous les Wrinklers quand ils sont tous au stade final pour récupérer leurs cookies.",
-        "spell": "Lance Force the Hand of Fate automatiquement quand le Grimoire est complètement rechargé.",
+        "spell": "Lance Force the Hand of Fate automatiquement quand le Grimoire est complètement rechargé. Partage la magie avec Conjure Baked Goods, évitez d'activer les deux en même temps.",
         "fortune": "Clique les messages de fortune dans le bandeau d'actualités pour en collecter la récompense.",
         "dragon": "Monte en niveau le dragon Krumblor automatiquement dès que les ressources le permettent.",
         "buy": "Achète le bâtiment le plus rentable selon le ratio CPS/prix, synergies incluses.",
         "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution.",
         "lumps": "Récolte automatiquement une pépite de sucre dès qu'elle est mûre, pour un gain garanti.",
-        "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires.",
+        "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires. Partage la magie avec Force the Hand of Fate, évitez d'activer les deux en même temps.",
         "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus."
     },
     "notify": {

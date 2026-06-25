@@ -26,13 +26,13 @@
         "wrath": "Klickt automatisch Wrath Cookies (rote). Kann negative Effekte der Großmutter-Apokalypse auslösen.",
         "bigCookie": "Klickt den großen Keks kontinuierlich so schnell wie möglich, um Kekse anzuhäufen.",
         "wrinklers": "Platzt alle Fältlinge, sobald sie alle das letzte Stadium erreicht haben, und sammelt ihre Kekse.",
-        "spell": "Wirkt Force the Hand of Fate automatisch, wenn das Grimoire vollständig aufgeladen ist.",
+        "spell": "Wirkt Force the Hand of Fate automatisch, wenn das Grimoire vollständig aufgeladen ist. Teilt Magie mit Conjure Baked Goods – aktiviere nicht beide gleichzeitig.",
         "fortune": "Klickt Glücksnachrichten im Newsticker, um deren Belohnungen zu sammeln.",
         "dragon": "Steigert den Drachen Krumblor automatisch, sobald die Ressourcen es erlauben.",
         "buy": "Kauft das profitabelste Gebäude basierend auf dem CPS/Preis-Verhältnis, einschließlich Synergieboni.",
         "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden.",
         "lumps": "Erntet automatisch ein Zuckerstück, sobald es reif ist, für einen garantierten Gewinn.",
-        "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse.",
+        "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse. Teilt Magie mit Force the Hand of Fate – aktiviere nicht beide gleichzeitig.",
         "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus."
     },
     "notify": {

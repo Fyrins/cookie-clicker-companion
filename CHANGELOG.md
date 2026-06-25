@@ -11,6 +11,10 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+### Changed
+- The Spell and Conjure Baked Goods tooltips now warn that both spells draw from the
+  same magic pool, so enabling them at the same time is counter-productive.
+
 ## [1.2.0] - 2026-06-25
 
 ### Added

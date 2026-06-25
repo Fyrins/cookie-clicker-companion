@@ -26,13 +26,13 @@
         "wrath": "Automatycznie klika Wrath Cookies (czerwone). Może wywołać negatywne efekty Grandmapocalypse.",
         "bigCookie": "Nieustannie klika duże ciastko tak szybko, jak to możliwe, aby gromadzić ciastka.",
         "wrinklers": "Wybucha wszystkich Zmarszczaczy, gdy wszyscy osiągną ostatnie stadium, zbierając ich ciastka.",
-        "spell": "Automatycznie rzuca Force the Hand of Fate, gdy Grimuar jest w pełni naładowany.",
+        "spell": "Automatycznie rzuca Force the Hand of Fate, gdy Grimuar jest w pełni naładowany. Dzieli magię z Conjure Baked Goods – nie włączaj obu jednocześnie.",
         "fortune": "Klika wiadomości fortuny w pasku newsów, zbierając ich nagrody.",
         "dragon": "Automatycznie podnosi poziom smoka Krumblora, gdy zasoby na to pozwalają.",
         "buy": "Kupuje najbardziej dochodowy budynek na podstawie stosunku CPS/cena, z bonusami synergii.",
         "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie.",
         "lumps": "Automatycznie zbiera bryłkę cukru, gdy tylko dojrzeje, dla gwarantowanego zysku.",
-        "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek.",
+        "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek. Dzieli magię z Force the Hand of Fate – nie włączaj obu jednocześnie.",
         "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę."
     },
     "notify": {
