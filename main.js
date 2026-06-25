@@ -484,12 +484,27 @@ Game.registerMod("cookie clicker companion", {
 
     // ── Ratio display update ──────────────────────────────────────────
 
+    // Multiplier that turns a per-unit ratio into the ratio for a whole bulk purchase,
+    // matching the store's 1 / 10 / 100 selector (Game.buyBulk). Buying N units costs a
+    // geometric sum (×1.15 per unit), so the bulk ratio is the single-unit ratio scaled
+    // by N·0.15 / (1.15^N − 1). Returns 1 for N = 1, so single-buy mode is unchanged.
+    bulkFactor: function() {
+        var n = Game.buyBulk || 1;
+        if (n <= 1) return 1;
+        return (n * 0.15) / (Math.pow(1.15, n) - 1);
+    },
+
     updateRatios: function(mod) {
+        // Scale every displayed ratio to the current bulk selector. The factor is the
+        // same for all buildings, so the colour ranking is unchanged; only the shown
+        // values follow the 1 / 10 / 100 selector to match the prices the game displays.
+        var factor = mod.bulkFactor();
         // First pass: compute every ratio and track the min/max for colour scaling.
         var min = Infinity, max = -Infinity;
         for (var i in Game.Objects) {
             var building = Game.Objects[i];
             var ratio    = mod.calculateRatio(building);
+            if (ratio > 0 && factor !== 1) ratio = Number((ratio * factor).toPrecision(3));
             mod.values[building.id] = ratio > 0 ? ratio : 0;
             var el = l('ccc-ratio' + building.id);
             if (el && ratio > 0) {

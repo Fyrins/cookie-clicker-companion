@@ -11,6 +11,12 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+### Added
+- Store ratios now follow the 1 / 10 / 100 bulk selector: the displayed CPS/price
+  ratio is scaled to the cost of a full bulk purchase, so it matches the bulk price
+  the game shows. The colour ranking is unchanged, and Auto Buy still purchases one
+  unit at a time at the best marginal ratio.
+
 ## [1.0.0] - 2026-06-25
 
 First public release.
