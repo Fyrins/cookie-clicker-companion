@@ -174,18 +174,12 @@ Game.registerMod("cookie clicker companion", {
                 dragon: {
                     configKey: 'autoDragon',
                     t: makeToggle(function() {
-                        if (Game.dragonLevel < 5) {
-                            if (Game.dragonLevels[Game.dragonLevel].cost()) {
-                                PlaySound('snd/shimmerClick.mp3');
-                                Game.dragonLevels[Game.dragonLevel].buy();
-                                Game.dragonLevel = (Game.dragonLevel + 1) % Game.dragonLevels.length;
-                                if (Game.dragonLevel >= Game.dragonLevels.length - 1) Game.Win('Here be dragon');
-                                Game.recalculateGains = 1;
-                                Game.upgradesToRebuild = 1;
-                            }
-                        } else {
-                            Game.dragonAura = 1;
-                        }
+                        // Game.UpgradeDragon() is the game's own single-level-up routine:
+                        // it checks the next level's cost, pays it, plays the sound,
+                        // advances Game.dragonLevel and fires the "Here be dragon" win at
+                        // the final level (27). It is a no-op when the dragon is maxed out
+                        // or the next level is unaffordable, and it never touches auras.
+                        Game.UpgradeDragon();
                     }, 500, 'dragonOn', 'dragonOff'),
                 },
                 buy: {
