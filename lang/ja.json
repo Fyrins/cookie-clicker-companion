@@ -5,6 +5,7 @@
     "sections": {
         "clicks": "クリック",
         "auto": "自動化",
+        "spells": "呪文",
         "other": "その他"
     },
     "labels": {

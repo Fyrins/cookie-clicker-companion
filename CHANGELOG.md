@@ -11,6 +11,10 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+### Changed
+- The two spells (Force the Hand of Fate, Conjure Baked Goods) now have their own
+  "Spells" section in the panel, separate from "Automation".
+
 ## [1.2.1] - 2026-06-25
 
 ### Changed

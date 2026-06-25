@@ -5,6 +5,7 @@
     "sections": {
         "clicks": "点击",
         "auto": "自动化",
+        "spells": "法术",
         "other": "其他"
     },
     "labels": {

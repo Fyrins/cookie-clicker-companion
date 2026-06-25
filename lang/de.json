@@ -5,6 +5,7 @@
     "sections": {
         "clicks": "Klicks",
         "auto": "Automatisierung",
+        "spells": "Zauber",
         "other": "Sonstiges"
     },
     "labels": {

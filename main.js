@@ -59,8 +59,8 @@ Game.registerMod("cookie clicker companion", {
         { id: 'buy',          labelKey: 'buy',          section: 'auto'   },
         { id: 'wrinklers',    labelKey: 'wrinklers',    section: 'auto'   },
         { id: 'lumps',        labelKey: 'lumps',        section: 'auto'   },
-        { id: 'spell',        labelKey: 'spell',        section: 'auto'   },
-        { id: 'conjure',      labelKey: 'conjure',      section: 'auto'   },
+        { id: 'spell',        labelKey: 'spell',        section: 'spells' },
+        { id: 'conjure',      labelKey: 'conjure',      section: 'spells' },
         { id: 'fortune',      labelKey: 'fortune',      section: 'auto'   },
         { id: 'dragon',       labelKey: 'dragon',       section: 'auto'   },
         { id: 'onemind',      labelKey: 'oneMind',      section: 'other'  },
@@ -96,7 +96,7 @@ Game.registerMod("cookie clicker companion", {
             S = S || {
                 modEnabled: 'Cookie Clicker Companion loaded',
                 enableAll: '+ Enable all', disableAll: '- Disable all',
-                sections: { clicks: 'Clicks', auto: 'Automation', other: 'Other' },
+                sections: { clicks: 'Clicks', auto: 'Automation', spells: 'Spells', other: 'Other' },
                 labels: { golden:'Golden Cookie', wrath:'Wrath Cookie', bigCookie:'Big Cookie',
                     wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Spell', conjure:'Conjure Baked Goods',
                     fortune:'Fortune', dragon:'Dragon', buy:'Auto Buy', oneMind:'One Mind',
@@ -362,7 +362,7 @@ Game.registerMod("cookie clicker companion", {
             tooltip.id  = 'ccc-tooltip';
             document.body.appendChild(tooltip);
 
-            ['clicks', 'auto', 'other'].forEach(function(sect, si) {
+            ['clicks', 'auto', 'spells', 'other'].forEach(function(sect, si) {
                 if (si > 0) {
                     var sep = document.createElement('div');
                     sep.className = 'ccc-sep';

@@ -5,6 +5,7 @@
     "sections": {
         "clicks": "Клики",
         "auto": "Автоматизация",
+        "spells": "Заклинания",
         "other": "Прочее"
     },
     "labels": {
