@@ -1,0 +1,9 @@
+{
+	"Name": "Cookie Clicker Companion",
+	"ID": "cookie clicker companion",
+	"Author": "Alexandre Revire",
+	"Description": "All-in-one automation: auto-buy (CPS/price + synergies), golden/wrath cookies, spell casting, wrinklers, dragon leveling, fortune news. 12 languages.",
+	"ModVersion": 1,
+	"GameVersion": 2.031,
+	"Date": "25/06/2026"
+}

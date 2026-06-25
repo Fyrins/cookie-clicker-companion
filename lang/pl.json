@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion włączony!",
+    "enableAll": "+ Włącz wszystko",
+    "disableAll": "- Wyłącz wszystko",
+    "sections": {
+        "clicks": "Kliknięcia",
+        "auto": "Automatyzacja",
+        "other": "Inne"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Duże Ciastko",
+        "wrinklers": "Zmarszczacze",
+        "spell": "Zaklęcie",
+        "fortune": "Wiadomość Fortuny",
+        "dragon": "Smok",
+        "buy": "Auto-Zakup",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Automatycznie klika Golden Cookies i Renifery, gdy tylko się pojawią. Renifery pojawiają się tylko podczas sezonowych wydarzeń.",
+        "wrath": "Automatycznie klika Wrath Cookies (czerwone). Może wywołać negatywne efekty Grandmapocalypse.",
+        "bigCookie": "Nieustannie klika duże ciastko tak szybko, jak to możliwe, aby gromadzić ciastka.",
+        "wrinklers": "Wybucha wszystkich Zmarszczaczy, gdy wszyscy osiągną ostatnie stadium, zbierając ich ciastka.",
+        "spell": "Automatycznie rzuca Force the Hand of Fate, gdy Grimuar jest w pełni naładowany.",
+        "fortune": "Klika wiadomości fortuny w pasku newsów, zbierając ich nagrody.",
+        "dragon": "Automatycznie podnosi poziom smoka Krumblora, gdy zasoby na to pozwalają.",
+        "buy": "Kupuje najbardziej dochodowy budynek na podstawie stosunku CPS/cena, z bonusami synergii.",
+        "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie włączony.",
+        "goldenOff": "Auto Golden Cookie wyłączony.",
+        "wrathOn": "Auto Wrath Cookie włączony.",
+        "wrathOff": "Auto Wrath Cookie wyłączony.",
+        "bigOn": "Auto Duże Ciastko włączone.",
+        "bigOff": "Auto Duże Ciastko wyłączone.",
+        "wrinklOn": "Auto Zmarszczacze włączony.",
+        "wrinklOff": "Auto Zmarszczacze wyłączony.",
+        "spellOn": "Auto Zaklęcie włączone.",
+        "spellOff": "Auto Zaklęcie wyłączone.",
+        "fortuneOn": "Auto Wiadomość Fortuny włączona.",
+        "fortuneOff": "Auto Wiadomość Fortuny wyłączona.",
+        "dragonOn": "Auto Smok włączony.",
+        "dragonOff": "Auto Smok wyłączony.",
+        "buyOn": "Auto-Zakup włączony.",
+        "buyOff": "Auto-Zakup wyłączony.",
+        "oneMindOn": "One Mind włączony.",
+        "oneMindOff": "One Mind wyłączony."
+    }
+}

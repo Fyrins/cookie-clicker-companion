@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion geactiveerd!",
+    "enableAll": "+ Alles activeren",
+    "disableAll": "- Alles deactiveren",
+    "sections": {
+        "clicks": "Klikken",
+        "auto": "Automatisering",
+        "other": "Overige"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Grote Koek",
+        "wrinklers": "Rimpelers",
+        "spell": "Spreuk",
+        "fortune": "Geluksbericht",
+        "dragon": "Draak",
+        "buy": "Auto-Aankoop",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Klikt automatisch op Golden Cookies en Rendieren zodra ze verschijnen. Rendieren verschijnen alleen tijdens seizoensevenementen.",
+        "wrath": "Klikt automatisch op Wrath Cookies (rode). Kan negatieve Grootmoeder-Apocalyps-effecten activeren.",
+        "bigCookie": "Klikt de grote koek zo snel mogelijk aan om koekjes te verzamelen.",
+        "wrinklers": "Knapt alle Rimpelers open zodra ze het eindstadium bereiken en verzamelt hun koekjes.",
+        "spell": "Cast Force the Hand of Fate automatisch wanneer het Grimoire volledig is opgeladen.",
+        "fortune": "Klikt op geluksberichten in de nieuwsticker om beloningen te verzamelen.",
+        "dragon": "Verhoogt automatisch de draak Krumblor zodra de middelen het toelaten.",
+        "buy": "Koopt het meest winstgevende gebouw op basis van de CPS/prijs-ratio, inclusief synergiesbonussen.",
+        "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie ingeschakeld.",
+        "goldenOff": "Auto Golden Cookie uitgeschakeld.",
+        "wrathOn": "Auto Wrath Cookie ingeschakeld.",
+        "wrathOff": "Auto Wrath Cookie uitgeschakeld.",
+        "bigOn": "Auto Grote Koek ingeschakeld.",
+        "bigOff": "Auto Grote Koek uitgeschakeld.",
+        "wrinklOn": "Auto Rimpelers ingeschakeld.",
+        "wrinklOff": "Auto Rimpelers uitgeschakeld.",
+        "spellOn": "Auto Spreuk ingeschakeld.",
+        "spellOff": "Auto Spreuk uitgeschakeld.",
+        "fortuneOn": "Auto Geluksbericht ingeschakeld.",
+        "fortuneOff": "Auto Geluksbericht uitgeschakeld.",
+        "dragonOn": "Auto Draak ingeschakeld.",
+        "dragonOff": "Auto Draak uitgeschakeld.",
+        "buyOn": "Auto-Aankoop ingeschakeld.",
+        "buyOff": "Auto-Aankoop uitgeschakeld.",
+        "oneMindOn": "One Mind ingeschakeld.",
+        "oneMindOff": "One Mind uitgeschakeld."
+    }
+}

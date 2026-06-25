@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion aktivován!",
+    "enableAll": "+ Vše zapnout",
+    "disableAll": "- Vše vypnout",
+    "sections": {
+        "clicks": "Kliknutí",
+        "auto": "Automatizace",
+        "other": "Ostatní"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Velká Sušenka",
+        "wrinklers": "Vráskavci",
+        "spell": "Kouzlo",
+        "fortune": "Zpráva Štěstí",
+        "dragon": "Drak",
+        "buy": "Auto Nákup",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Automaticky kliká na Golden Cookies a Soby, jakmile se objeví. Sobi se objevují pouze během sezónních událostí.",
+        "wrath": "Automaticky kliká na Wrath Cookies (červené). Může spustit negativní efekty Babičkalypsy.",
+        "bigCookie": "Nepřetržitě kliká na velkou sušenku co nejrychleji, aby hromadila sušenky.",
+        "wrinklers": "Praskne všechny Vráskavce, jakmile všichni dosáhnou posledního stadia, a sebere jejich sušenky.",
+        "spell": "Automaticky sešle Force the Hand of Fate, když je Grimoár plně nabitý.",
+        "fortune": "Kliká na zprávy štěstí v běžícím textu a sbírá jejich odměny.",
+        "dragon": "Automaticky zvyšuje úroveň draka Krumblora, jakmile to zdroje dovolí.",
+        "buy": "Kupuje nejziskovější budovu na základě poměru CPS/cena, včetně synergií.",
+        "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie zapnuto.",
+        "goldenOff": "Auto Golden Cookie vypnuto.",
+        "wrathOn": "Auto Wrath Cookie zapnuto.",
+        "wrathOff": "Auto Wrath Cookie vypnuto.",
+        "bigOn": "Auto Velká Sušenka zapnuto.",
+        "bigOff": "Auto Velká Sušenka vypnuto.",
+        "wrinklOn": "Auto Vráskavci zapnuto.",
+        "wrinklOff": "Auto Vráskavci vypnuto.",
+        "spellOn": "Auto Kouzlo zapnuto.",
+        "spellOff": "Auto Kouzlo vypnuto.",
+        "fortuneOn": "Auto Zpráva Štěstí zapnuto.",
+        "fortuneOff": "Auto Zpráva Štěstí vypnuto.",
+        "dragonOn": "Auto Drak zapnuto.",
+        "dragonOff": "Auto Drak vypnuto.",
+        "buyOn": "Auto Nákup zapnuto.",
+        "buyOff": "Auto Nákup vypnuto.",
+        "oneMindOn": "One Mind zapnuto.",
+        "oneMindOff": "One Mind vypnuto."
+    }
+}

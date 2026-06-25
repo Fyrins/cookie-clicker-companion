@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion attivato!",
+    "enableAll": "+ Abilita tutto",
+    "disableAll": "- Disabilita tutto",
+    "sections": {
+        "clicks": "Click",
+        "auto": "Automazione",
+        "other": "Altro"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Biscotto Grande",
+        "wrinklers": "Rugosi",
+        "spell": "Incantesimo",
+        "fortune": "Notizia Fortuna",
+        "dragon": "Drago",
+        "buy": "Auto-Acquisto",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Clicca automaticamente i Golden Cookie e le Renne non appena appaiono. Le Renne compaiono solo durante gli eventi stagionali.",
+        "wrath": "Clicca automaticamente i Wrath Cookie (rossi). Può innescare effetti negativi della Grandmapocalisse.",
+        "bigCookie": "Clicca il grande biscotto continuamente il più velocemente possibile per accumulare biscotti.",
+        "wrinklers": "Fa esplodere tutti i Rugosi quando raggiungono lo stadio finale, raccogliendo i loro biscotti.",
+        "spell": "Lancia Force the Hand of Fate automaticamente quando il Grimorio è completamente carico.",
+        "fortune": "Clicca i messaggi di fortuna nel ticker delle notizie per raccogliere le ricompense.",
+        "dragon": "Aumenta automaticamente il livello del drago Krumblor non appena le risorse lo consentono.",
+        "buy": "Acquista l'edificio più redditizio in base al rapporto CPS/prezzo, inclusi i bonus di sinergia.",
+        "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie attivato.",
+        "goldenOff": "Auto Golden Cookie disattivato.",
+        "wrathOn": "Auto Wrath Cookie attivato.",
+        "wrathOff": "Auto Wrath Cookie disattivato.",
+        "bigOn": "Auto Biscotto Grande attivato.",
+        "bigOff": "Auto Biscotto Grande disattivato.",
+        "wrinklOn": "Auto Rugosi attivato.",
+        "wrinklOff": "Auto Rugosi disattivato.",
+        "spellOn": "Auto Incantesimo attivato.",
+        "spellOff": "Auto Incantesimo disattivato.",
+        "fortuneOn": "Auto Notizia Fortuna attivata.",
+        "fortuneOff": "Auto Notizia Fortuna disattivata.",
+        "dragonOn": "Auto Drago attivato.",
+        "dragonOff": "Auto Drago disattivato.",
+        "buyOn": "Auto-Acquisto attivato.",
+        "buyOff": "Auto-Acquisto disattivato.",
+        "oneMindOn": "One Mind attivato.",
+        "oneMindOff": "One Mind disattivato."
+    }
+}

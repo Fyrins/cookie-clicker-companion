@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion ativado!",
+    "enableAll": "+ Ativar tudo",
+    "disableAll": "- Desativar tudo",
+    "sections": {
+        "clicks": "Cliques",
+        "auto": "Automação",
+        "other": "Outros"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Biscoito Grande",
+        "wrinklers": "Rugosos",
+        "spell": "Feitiço",
+        "fortune": "Notícia Fortuna",
+        "dragon": "Dragão",
+        "buy": "Auto-Compra",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Clica automaticamente nos Golden Cookies e Renas assim que aparecem. As Renas aparecem apenas durante eventos sazonais.",
+        "wrath": "Clica automaticamente nos Wrath Cookies (vermelhos). Pode desencadear efeitos negativos do Grandmapocalipse.",
+        "bigCookie": "Clica no biscoito grande continuamente o mais rápido possível para acumular biscoitos.",
+        "wrinklers": "Estoura todos os Rugosos quando atingem o estágio final, coletando seus biscoitos.",
+        "spell": "Lança Force the Hand of Fate automaticamente quando o Grimório está completamente carregado.",
+        "fortune": "Clica nas mensagens de fortuna no ticker de notícias para coletar suas recompensas.",
+        "dragon": "Aumenta automaticamente o nível do dragão Krumblor quando os recursos permitem.",
+        "buy": "Compra o edifício mais lucrativo com base na relação CPS/preço, incluindo bônus de sinergia.",
+        "oneMind": "Permite à Auto-Compra adquirir a melhoria 'One Mind' (caminho Elder Covenant). Use com cuidado."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie ativado.",
+        "goldenOff": "Auto Golden Cookie desativado.",
+        "wrathOn": "Auto Wrath Cookie ativado.",
+        "wrathOff": "Auto Wrath Cookie desativado.",
+        "bigOn": "Auto Biscoito Grande ativado.",
+        "bigOff": "Auto Biscoito Grande desativado.",
+        "wrinklOn": "Auto Rugosos ativado.",
+        "wrinklOff": "Auto Rugosos desativado.",
+        "spellOn": "Auto Feitiço ativado.",
+        "spellOff": "Auto Feitiço desativado.",
+        "fortuneOn": "Auto Notícia Fortuna ativada.",
+        "fortuneOff": "Auto Notícia Fortuna desativada.",
+        "dragonOn": "Auto Dragão ativado.",
+        "dragonOff": "Auto Dragão desativado.",
+        "buyOn": "Auto-Compra ativada.",
+        "buyOff": "Auto-Compra desativada.",
+        "oneMindOn": "One Mind ativado.",
+        "oneMindOff": "One Mind desativado."
+    }
+}

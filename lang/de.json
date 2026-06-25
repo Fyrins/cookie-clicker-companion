@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion aktiviert!",
+    "enableAll": "+ Alle aktivieren",
+    "disableAll": "- Alle deaktivieren",
+    "sections": {
+        "clicks": "Klicks",
+        "auto": "Automatisierung",
+        "other": "Sonstiges"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Großer Keks",
+        "wrinklers": "Fältlinge",
+        "spell": "Zauber",
+        "fortune": "Glücksnachricht",
+        "dragon": "Drache",
+        "buy": "Auto-Kauf",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Klickt automatisch Golden Cookies und Rentiere, sobald sie erscheinen. Rentiere erscheinen nur während saisonaler Ereignisse.",
+        "wrath": "Klickt automatisch Wrath Cookies (rote). Kann negative Effekte der Großmutter-Apokalypse auslösen.",
+        "bigCookie": "Klickt den großen Keks kontinuierlich so schnell wie möglich, um Kekse anzuhäufen.",
+        "wrinklers": "Platzt alle Fältlinge, sobald sie alle das letzte Stadium erreicht haben, und sammelt ihre Kekse.",
+        "spell": "Wirkt Force the Hand of Fate automatisch, wenn das Grimoire vollständig aufgeladen ist.",
+        "fortune": "Klickt Glücksnachrichten im Newsticker, um deren Belohnungen zu sammeln.",
+        "dragon": "Steigert den Drachen Krumblor automatisch, sobald die Ressourcen es erlauben.",
+        "buy": "Kauft das profitabelste Gebäude basierend auf dem CPS/Preis-Verhältnis, einschließlich Synergieboni.",
+        "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie aktiviert.",
+        "goldenOff": "Auto Golden Cookie deaktiviert.",
+        "wrathOn": "Auto Wrath Cookie aktiviert.",
+        "wrathOff": "Auto Wrath Cookie deaktiviert.",
+        "bigOn": "Auto Großer Keks aktiviert.",
+        "bigOff": "Auto Großer Keks deaktiviert.",
+        "wrinklOn": "Auto Fältlinge aktiviert.",
+        "wrinklOff": "Auto Fältlinge deaktiviert.",
+        "spellOn": "Auto Zauber aktiviert.",
+        "spellOff": "Auto Zauber deaktiviert.",
+        "fortuneOn": "Auto Glücksnachricht aktiviert.",
+        "fortuneOff": "Auto Glücksnachricht deaktiviert.",
+        "dragonOn": "Auto Drache aktiviert.",
+        "dragonOff": "Auto Drache deaktiviert.",
+        "buyOn": "Auto-Kauf aktiviert.",
+        "buyOff": "Auto-Kauf deaktiviert.",
+        "oneMindOn": "One Mind aktiviert.",
+        "oneMindOff": "One Mind deaktiviert."
+    }
+}

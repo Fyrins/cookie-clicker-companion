@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion enabled!",
+    "enableAll": "+ Enable all",
+    "disableAll": "- Disable all",
+    "sections": {
+        "clicks": "Clicks",
+        "auto": "Automation",
+        "other": "Other"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Big Cookie",
+        "wrinklers": "Wrinklers",
+        "spell": "Spell",
+        "fortune": "Fortune",
+        "dragon": "Dragon",
+        "buy": "Auto Buy",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Automatically clicks Golden Cookies and Reindeer as soon as they appear. Reindeer only appear during seasonal events.",
+        "wrath": "Automatically clicks Wrath Cookies (red). May trigger negative grandmapocalypse effects.",
+        "bigCookie": "Continuously clicks the big cookie as fast as possible to accumulate cookies.",
+        "wrinklers": "Pops all Wrinklers once they have all reached their final stage, collecting their cookies.",
+        "spell": "Casts Force the Hand of Fate automatically when the Grimoire is fully charged.",
+        "fortune": "Clicks fortune messages in the news ticker to collect their reward.",
+        "dragon": "Automatically levels up the Krumblor dragon when resources allow.",
+        "buy": "Buys the most profitable building based on CPS/price ratio, including synergy bonuses.",
+        "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie enabled.",
+        "goldenOff": "Auto Golden Cookie disabled.",
+        "wrathOn": "Auto Wrath Cookie enabled.",
+        "wrathOff": "Auto Wrath Cookie disabled.",
+        "bigOn": "Auto Big Cookie enabled.",
+        "bigOff": "Auto Big Cookie disabled.",
+        "wrinklOn": "Auto Wrinklers enabled.",
+        "wrinklOff": "Auto Wrinklers disabled.",
+        "spellOn": "Auto Spell enabled.",
+        "spellOff": "Auto Spell disabled.",
+        "fortuneOn": "Auto Fortune enabled.",
+        "fortuneOff": "Auto Fortune disabled.",
+        "dragonOn": "Auto Dragon enabled.",
+        "dragonOff": "Auto Dragon disabled.",
+        "buyOn": "Auto Buy enabled.",
+        "buyOff": "Auto Buy disabled.",
+        "oneMindOn": "One Mind enabled.",
+        "oneMindOff": "One Mind disabled."
+    }
+}

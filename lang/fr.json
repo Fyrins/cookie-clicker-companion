@@ -1,0 +1,52 @@
+{
+    "modEnabled": "Cookie Clicker Companion activé !",
+    "enableAll": "+ Tout activer",
+    "disableAll": "- Tout désactiver",
+    "sections": {
+        "clicks": "Clics",
+        "auto": "Automatisation",
+        "other": "Autres"
+    },
+    "labels": {
+        "golden": "Golden Cookie",
+        "wrath": "Wrath Cookie",
+        "bigCookie": "Big Cookie",
+        "wrinklers": "Wrinklers",
+        "spell": "Sort",
+        "fortune": "Fortune",
+        "dragon": "Dragon",
+        "buy": "Auto Achat",
+        "oneMind": "One Mind"
+    },
+    "descriptions": {
+        "golden": "Clique les Golden Cookies automatiquement dès leur apparition, ainsi que les rennes lors des événements saisonniers.",
+        "wrath": "Clique les Wrath Cookies (rouges). Peut déclencher des effets négatifs de la Grandmapocalypse.",
+        "bigCookie": "Clique le grand cookie en continu aussi vite que possible pour accumuler des cookies.",
+        "wrinklers": "Crève tous les Wrinklers quand ils sont tous au stade final pour récupérer leurs cookies.",
+        "spell": "Lance Force the Hand of Fate automatiquement quand le Grimoire est complètement rechargé.",
+        "fortune": "Clique les messages de fortune dans le bandeau d'actualités pour en collecter la récompense.",
+        "dragon": "Monte en niveau le dragon Krumblor automatiquement dès que les ressources le permettent.",
+        "buy": "Achète le bâtiment le plus rentable selon le ratio CPS/prix, synergies incluses.",
+        "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution."
+    },
+    "notify": {
+        "goldenOn": "Auto Golden Cookie activé.",
+        "goldenOff": "Auto Golden Cookie désactivé.",
+        "wrathOn": "Auto Wrath Cookie activé.",
+        "wrathOff": "Auto Wrath Cookie désactivé.",
+        "bigOn": "Auto Big Cookie activé.",
+        "bigOff": "Auto Big Cookie désactivé.",
+        "wrinklOn": "Auto Wrinklers activé.",
+        "wrinklOff": "Auto Wrinklers désactivé.",
+        "spellOn": "Auto Sort activé.",
+        "spellOff": "Auto Sort désactivé.",
+        "fortuneOn": "Auto Fortune activé.",
+        "fortuneOff": "Auto Fortune désactivé.",
+        "dragonOn": "Auto Dragon activé.",
+        "dragonOff": "Auto Dragon désactivé.",
+        "buyOn": "Auto Achat activé.",
+        "buyOff": "Auto Achat désactivé.",
+        "oneMindOn": "One Mind activé.",
+        "oneMindOff": "One Mind désactivé."
+    }
+}
