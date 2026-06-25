@@ -15,16 +15,20 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | Feature | Description |
 |---|---|
 | **Golden Cookie** | Auto-clicks golden cookies and reindeer as soon as they appear |
-| **Wrath Cookie** | Auto-clicks wrath cookies (red) — enable with caution during Grandmapocalypse |
+| **Wrath Cookie** | Auto-clicks wrath cookies (red); appears during the Grandmapocalypse |
 | **Big Cookie** | Continuously clicks the main cookie at max speed |
-| **Auto Buy** | Purchases the most profitable building using CPS/price ratio + synergy bonuses |
+| **Auto Buy** | Buys the most profitable building (CPS/price ratio + synergies) and every affordable upgrade |
 | **Wrinklers** | Pops all wrinklers once they all reach final stage, collecting their cookies |
-| **Spell** | Casts Force the Hand of Fate automatically when the Grimoire is fully charged |
+| **Sugar Lumps** | Harvests a sugar lump automatically once it is ripe, for a guaranteed gain |
+| **Spell** | Casts Force the Hand of Fate when the Grimoire is fully charged |
+| **Conjure Baked Goods** | Casts Conjure Baked Goods whenever enough Grimoire magic is available |
 | **Fortune** | Clicks fortune messages in the news ticker to collect rewards |
-| **Dragon** | Levels up Krumblor automatically when resources allow |
-| **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Elder Covenant path) — use with caution |
+| **Dragon** | Levels up Krumblor automatically, using only cookie-paid levels by default |
+| **Dragon Sacrifice** | Opt-in (shown while Dragon is on): also levels the sacrifice levels, which cost buildings |
+| **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Grandmapocalypse path) |
+| **Lucky Reserve** | Keeps about CPS × 6000 banked so Golden "Lucky!" cookies pay their maximum |
 
-The panel is draggable and collapsible. Each feature can be toggled independently. Settings are saved with your Cookie Clicker save file.
+The panel is draggable and collapsible, and each feature toggles independently. Every toggle stays hidden until its in-game system is unlocked (the dragon, the Grimoire spells, sugar lumps, and so on) and appears automatically as you progress, so you only ever see what you can actually use. Settings are saved with your Cookie Clicker save file.
 
 A colour-coded CPS/price ratio is displayed on each building tile in the store to help identify the most profitable purchase at a glance.
 

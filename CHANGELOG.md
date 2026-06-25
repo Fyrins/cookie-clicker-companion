@@ -11,6 +11,8 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-06-25
+
 ### Added
 - Toggles whose game system is not unlocked yet (Dragon, Spells, Sugar Lumps,
   Wrath/Wrinklers, Fortune, One Mind) are now hidden until the game unlocks them, and
@@ -78,7 +80,8 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.3.0
 [1.2.1]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.1
 [1.2.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.1.0
