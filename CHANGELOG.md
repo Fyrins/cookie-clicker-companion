@@ -11,6 +11,8 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-25
+
 ### Added
 - Store ratios now follow the 1 / 10 / 100 bulk selector: the displayed CPS/price
   ratio is scaled to the cost of a full bulk purchase, so it matches the bulk price
@@ -37,5 +39,6 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.0.0
