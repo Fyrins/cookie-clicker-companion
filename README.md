@@ -4,7 +4,7 @@
 
 # Cookie Clicker Companion
 
-All-in-one automation mod for Cookie Clicker (Steam / PC). Automates repetitive tasks without touching progression values — achievements remain unaffected.
+All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetitive actions (clicking, buying, collecting) without injecting cookies or editing game values. It is an assistance tool that plays for you, so please read [Is this cheating?](#is-this-cheating) before using it.
 
 <p align="center">
   <img src="docs/panel.jpg" alt="Cookie Clicker Companion panel in-game" width="320">
@@ -62,6 +62,30 @@ The mod detects the game language automatically. If the language file is not fou
 
 - Cookie Clicker **2.031+** (Steam)
 - Works alongside other mods
+
+## Is this cheating?
+
+Yes, in spirit. This mod automates actions you could perform by hand; it plays the
+idle parts of the game for you. It does **not** inject cookies or edit game values,
+so the game's own checks still consider your save clean. Decide for yourself with the
+facts below (all verified against the game's source):
+
+- **No resource hacking.** The mod never changes your cookie count or any progression
+  value, so it does not trigger the *Cheated cookies taste awful* shadow achievement.
+- **No *Third-party* mark on Steam.** That shadow achievement is only granted on the
+  web version of the game; the Steam build never awards it for loading a mod.
+- **Steam achievements stay active.** Cookie Clicker keeps earning and syncing its
+  normal achievements while the mod is loaded. In practice you can unlock Steam
+  achievements with far less effort than intended, which many players consider unfair.
+- **Some achievements become unreachable.** Turning on the big-cookie auto-clicker
+  permanently rules out *Neverclick* and *True Neverclick*; the auto-buy rules out
+  *Hardcore*. The mod also resets the click-speed counter, so it will not grant
+  *Uncanny clicker*.
+- **Not for leaderboards or records.** Competitive and vanilla play forbid third-party
+  automation. Use this for a relaxed or idle playthrough, not for a ranked run.
+
+In short: it keeps your save legitimate to the game, but it does the playing for you.
+Use it because it is convenient, not to claim achievements you did not earn.
 
 ## Changelog
 

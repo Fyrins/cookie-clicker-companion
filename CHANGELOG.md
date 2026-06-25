@@ -27,8 +27,9 @@ First public release.
   three customizable colours.
 - 12 languages with automatic detection and English fallback (EN, FR, DE, NL, CS,
   PL, IT, ES, PT-BR, JA, ZH-CN, RU).
-- Settings persisted with the Cookie Clicker save file. Progression values are
-  never altered, so achievements stay legitimate.
+- Settings persisted with the Cookie Clicker save file. Progression values are never
+  altered (no resource hacking); see the README's "Is this cheating?" section for how
+  automation affects achievements.
 
 [Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.0.0
