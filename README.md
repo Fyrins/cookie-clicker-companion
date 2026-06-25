@@ -2,6 +2,10 @@
 
 All-in-one automation mod for Cookie Clicker (Steam / PC). Automates repetitive tasks without touching progression values — achievements remain unaffected.
 
+<p align="center">
+  <img src="docs/panel.jpg" alt="Cookie Clicker Companion panel in-game" width="320">
+</p>
+
 ## Features
 
 | Feature | Description |
@@ -19,6 +23,10 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). Automates repetitive 
 The panel is draggable and collapsible. Each feature can be toggled independently. Settings are saved with your Cookie Clicker save file.
 
 A colour-coded CPS/price ratio is displayed on each building tile in the store to help identify the most profitable purchase at a glance.
+
+<p align="center">
+  <img src="docs/store-ratios.jpg" alt="Colour-coded CPS/price ratios in the building store" width="240">
+</p>
 
 ## Installation
 
