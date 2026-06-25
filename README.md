@@ -34,7 +34,17 @@ A colour-coded CPS/price ratio is displayed on each building tile in the store t
 2. Copy the `Cookie Clicker Companion` folder into your Cookie Clicker mods directory:
    - **Steam (Mac):** `~/Library/Application Support/Steam/steamapps/common/Cookie Clicker/Cookie Clicker.app/Contents/Resources/app/mods/local/`
    - **Steam (Windows):** `C:\Program Files (x86)\Steam\steamapps\common\Cookie Clicker\resources\app\mods\local\`
-3. Launch Cookie Clicker, go to **Options → Mods**, enable **Cookie Clicker Companion**, and click **Save & Reload**
+3. Launch Cookie Clicker, go to **Options → Mods**, and open **Manage mods**:
+
+<p align="center">
+  <img src="docs/mods-bar.jpg" alt="Mods section in Cookie Clicker options" width="640">
+</p>
+
+4. Select **Cookie Clicker Companion** in the list (it loads as a local mod) and make sure it is enabled, then click **Save & Reload**:
+
+<p align="center">
+  <img src="docs/mods-manage.jpg" alt="Cookie Clicker Companion selected in the Manage mods window" width="520">
+</p>
 
 The required `info.txt` manifest is included in the repository — no manual setup needed.
 
