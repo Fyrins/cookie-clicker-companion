@@ -16,7 +16,10 @@
         "fortune": "Wiadomość Fortuny",
         "dragon": "Smok",
         "buy": "Auto-Zakup",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Bryłki cukru",
+        "conjure": "Przywoływanie wypieków",
+        "luckyReserve": "Rezerwa Szczęścia"
     },
     "descriptions": {
         "golden": "Automatycznie klika Golden Cookies i Renifery, gdy tylko się pojawią. Renifery pojawiają się tylko podczas sezonowych wydarzeń.",
@@ -27,7 +30,10 @@
         "fortune": "Klika wiadomości fortuny w pasku newsów, zbierając ich nagrody.",
         "dragon": "Automatycznie podnosi poziom smoka Krumblora, gdy zasoby na to pozwalają.",
         "buy": "Kupuje najbardziej dochodowy budynek na podstawie stosunku CPS/cena, z bonusami synergii.",
-        "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie."
+        "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie.",
+        "lumps": "Automatycznie zbiera bryłkę cukru, gdy tylko dojrzeje, dla gwarantowanego zysku.",
+        "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek.",
+        "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie włączony.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto-Zakup włączony.",
         "buyOff": "Auto-Zakup wyłączony.",
         "oneMindOn": "One Mind włączony.",
-        "oneMindOff": "One Mind wyłączony."
+        "oneMindOff": "One Mind wyłączony.",
+        "lumpsOn": "Auto Bryłki cukru włączone.",
+        "lumpsOff": "Auto Bryłki cukru wyłączone.",
+        "conjureOn": "Auto Przywoływanie wypieków włączone.",
+        "conjureOff": "Auto Przywoływanie wypieków wyłączone.",
+        "luckyReserveOn": "Rezerwa Szczęścia włączona.",
+        "luckyReserveOff": "Rezerwa Szczęścia wyłączona."
     }
 }

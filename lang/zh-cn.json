@@ -16,7 +16,10 @@
         "fortune": "财富消息",
         "dragon": "龙",
         "buy": "自动购买",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "糖块",
+        "conjure": "召唤烘焙食品",
+        "luckyReserve": "幸运储备"
     },
     "descriptions": {
         "golden": "黄金饼干和驯鹿出现时自动点击。驯鹿仅在季节性活动期间出现。",
@@ -27,7 +30,10 @@
         "fortune": "点击新闻滚动条中的财富消息以收取奖励。",
         "dragon": "当资源允许时自动提升龙克拉姆布洛的等级。",
         "buy": "根据CPS/价格比（含协同加成）购买最有利可图的建筑。",
-        "oneMind": "允许自动购买获取「One Mind」升级（Elder Covenant路线）。请谨慎使用。"
+        "oneMind": "允许自动购买获取「One Mind」升级（Elder Covenant路线）。请谨慎使用。",
+        "lumps": "糖块成熟时自动收获，保证获得固定收益。",
+        "conjure": "当魔法书魔力充足时自动施放召唤烘焙食品，获取额外饼干。",
+        "luckyReserve": "维持饼干储备（约为CPS的6000倍），使黄金「幸运！」饼干获得最大奖励。自动购买仅花费超出储备的部分。"
     },
     "notify": {
         "goldenOn": "黄金饼干自动点击已启用。",
@@ -47,6 +53,12 @@
         "buyOn": "自动购买已启用。",
         "buyOff": "自动购买已禁用。",
         "oneMindOn": "One Mind 已启用。",
-        "oneMindOff": "One Mind 已禁用。"
+        "oneMindOff": "One Mind 已禁用。",
+        "lumpsOn": "糖块自动收获已启用。",
+        "lumpsOff": "糖块自动收获已禁用。",
+        "conjureOn": "自动召唤烘焙食品已启用。",
+        "conjureOff": "自动召唤烘焙食品已禁用。",
+        "luckyReserveOn": "幸运储备已启用。",
+        "luckyReserveOff": "幸运储备已禁用。"
     }
 }

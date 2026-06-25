@@ -16,7 +16,10 @@
         "fortune": "Glücksnachricht",
         "dragon": "Drache",
         "buy": "Auto-Kauf",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Zuckerstücke",
+        "conjure": "Backwaren beschwören",
+        "luckyReserve": "Glücks-Reserve"
     },
     "descriptions": {
         "golden": "Klickt automatisch Golden Cookies und Rentiere, sobald sie erscheinen. Rentiere erscheinen nur während saisonaler Ereignisse.",
@@ -27,7 +30,10 @@
         "fortune": "Klickt Glücksnachrichten im Newsticker, um deren Belohnungen zu sammeln.",
         "dragon": "Steigert den Drachen Krumblor automatisch, sobald die Ressourcen es erlauben.",
         "buy": "Kauft das profitabelste Gebäude basierend auf dem CPS/Preis-Verhältnis, einschließlich Synergieboni.",
-        "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden."
+        "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden.",
+        "lumps": "Erntet automatisch ein Zuckerstück, sobald es reif ist, für einen garantierten Gewinn.",
+        "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse.",
+        "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie aktiviert.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto-Kauf aktiviert.",
         "buyOff": "Auto-Kauf deaktiviert.",
         "oneMindOn": "One Mind aktiviert.",
-        "oneMindOff": "One Mind deaktiviert."
+        "oneMindOff": "One Mind deaktiviert.",
+        "lumpsOn": "Auto Zuckerstücke aktiviert.",
+        "lumpsOff": "Auto Zuckerstücke deaktiviert.",
+        "conjureOn": "Auto Backwaren beschwören aktiviert.",
+        "conjureOff": "Auto Backwaren beschwören deaktiviert.",
+        "luckyReserveOn": "Glücks-Reserve aktiviert.",
+        "luckyReserveOff": "Glücks-Reserve deaktiviert."
     }
 }

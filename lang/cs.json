@@ -16,7 +16,10 @@
         "fortune": "Zpráva Štěstí",
         "dragon": "Drak",
         "buy": "Auto Nákup",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Kousky cukru",
+        "conjure": "Přivolat pečivo",
+        "luckyReserve": "Šťastná rezerva"
     },
     "descriptions": {
         "golden": "Automaticky kliká na Golden Cookies a Soby, jakmile se objeví. Sobi se objevují pouze během sezónních událostí.",
@@ -27,7 +30,10 @@
         "fortune": "Kliká na zprávy štěstí v běžícím textu a sbírá jejich odměny.",
         "dragon": "Automaticky zvyšuje úroveň draka Krumblora, jakmile to zdroje dovolí.",
         "buy": "Kupuje nejziskovější budovu na základě poměru CPS/cena, včetně synergií.",
-        "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně."
+        "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně.",
+        "lumps": "Automaticky sklidí kousek cukru, jakmile dozraje, pro zaručený zisk.",
+        "conjure": "Sešle Přivolání pečiva, kdykoli má Grimoár dostatek magie, pro extra sušenky.",
+        "luckyReserve": "Udržuje zásobu sušenek (přibližně 6000× CPS), aby zlaté sušenky 'Štěstí!' vyplácely maximum. Auto Nákup utrácí pouze přebytek."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie zapnuto.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto Nákup zapnuto.",
         "buyOff": "Auto Nákup vypnuto.",
         "oneMindOn": "One Mind zapnuto.",
-        "oneMindOff": "One Mind vypnuto."
+        "oneMindOff": "One Mind vypnuto.",
+        "lumpsOn": "Auto Kousky cukru zapnuto.",
+        "lumpsOff": "Auto Kousky cukru vypnuto.",
+        "conjureOn": "Auto Přivolat pečivo zapnuto.",
+        "conjureOff": "Auto Přivolat pečivo vypnuto.",
+        "luckyReserveOn": "Šťastná rezerva zapnuta.",
+        "luckyReserveOff": "Šťastná rezerva vypnuta."
     }
 }

@@ -16,7 +16,10 @@
         "fortune": "Fortune",
         "dragon": "Dragon",
         "buy": "Auto Achat",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Pépites de sucre",
+        "conjure": "Invoquer des produits de boulangerie",
+        "luckyReserve": "Réserve Chanceuse"
     },
     "descriptions": {
         "golden": "Clique les Golden Cookies automatiquement dès leur apparition, ainsi que les rennes lors des événements saisonniers.",
@@ -27,7 +30,10 @@
         "fortune": "Clique les messages de fortune dans le bandeau d'actualités pour en collecter la récompense.",
         "dragon": "Monte en niveau le dragon Krumblor automatiquement dès que les ressources le permettent.",
         "buy": "Achète le bâtiment le plus rentable selon le ratio CPS/prix, synergies incluses.",
-        "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution."
+        "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution.",
+        "lumps": "Récolte automatiquement une pépite de sucre dès qu'elle est mûre, pour un gain garanti.",
+        "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires.",
+        "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activé.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto Achat activé.",
         "buyOff": "Auto Achat désactivé.",
         "oneMindOn": "One Mind activé.",
-        "oneMindOff": "One Mind désactivé."
+        "oneMindOff": "One Mind désactivé.",
+        "lumpsOn": "Pépites de sucre automatiques activées.",
+        "lumpsOff": "Pépites de sucre automatiques désactivées.",
+        "conjureOn": "Auto Invoquer activé.",
+        "conjureOff": "Auto Invoquer désactivé.",
+        "luckyReserveOn": "Réserve Chanceuse activée.",
+        "luckyReserveOff": "Réserve Chanceuse désactivée."
     }
 }

@@ -53,15 +53,18 @@ Game.registerMod("cookie clicker companion", {
 `,
 
     FEATURES: [
-        { id: 'golden',    labelKey: 'golden',    section: 'clicks' },
-        { id: 'wrath',     labelKey: 'wrath',     section: 'clicks' },
-        { id: 'bigcookie', labelKey: 'bigCookie', section: 'clicks' },
-        { id: 'buy',       labelKey: 'buy',       section: 'auto'   },
-        { id: 'wrinklers', labelKey: 'wrinklers', section: 'auto'   },
-        { id: 'spell',     labelKey: 'spell',     section: 'auto'   },
-        { id: 'fortune',   labelKey: 'fortune',   section: 'auto'   },
-        { id: 'dragon',    labelKey: 'dragon',    section: 'auto'   },
-        { id: 'onemind',   labelKey: 'oneMind',   section: 'other'  },
+        { id: 'golden',       labelKey: 'golden',       section: 'clicks' },
+        { id: 'wrath',        labelKey: 'wrath',        section: 'clicks' },
+        { id: 'bigcookie',    labelKey: 'bigCookie',    section: 'clicks' },
+        { id: 'buy',          labelKey: 'buy',          section: 'auto'   },
+        { id: 'wrinklers',    labelKey: 'wrinklers',    section: 'auto'   },
+        { id: 'lumps',        labelKey: 'lumps',        section: 'auto'   },
+        { id: 'spell',        labelKey: 'spell',        section: 'auto'   },
+        { id: 'conjure',      labelKey: 'conjure',      section: 'auto'   },
+        { id: 'fortune',      labelKey: 'fortune',      section: 'auto'   },
+        { id: 'dragon',       labelKey: 'dragon',       section: 'auto'   },
+        { id: 'onemind',      labelKey: 'oneMind',      section: 'other'  },
+        { id: 'luckyreserve', labelKey: 'luckyReserve', section: 'other'  },
     ],
 
     loadStrings: function(langCode) {
@@ -95,13 +98,15 @@ Game.registerMod("cookie clicker companion", {
                 enableAll: '+ Enable all', disableAll: '- Disable all',
                 sections: { clicks: 'Clicks', auto: 'Automation', other: 'Other' },
                 labels: { golden:'Golden Cookie', wrath:'Wrath Cookie', bigCookie:'Big Cookie',
-                    wrinklers:'Wrinklers', spell:'Spell',
-                    fortune:'Fortune', dragon:'Dragon', buy:'Auto Buy', oneMind:'One Mind' },
+                    wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Spell', conjure:'Conjure Baked Goods',
+                    fortune:'Fortune', dragon:'Dragon', buy:'Auto Buy', oneMind:'One Mind',
+                    luckyReserve:'Lucky Reserve' },
                 descriptions: {}, notify: {
                     goldenOn:'', goldenOff:'', wrathOn:'', wrathOff:'', bigOn:'', bigOff:'',
-                    wrinklOn:'', wrinklOff:'', spellOn:'', spellOff:'',
-                    fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'', buyOn:'', buyOff:'',
-                    oneMindOn:'', oneMindOff:'',
+                    wrinklOn:'', wrinklOff:'', lumpsOn:'', lumpsOff:'', spellOn:'', spellOff:'',
+                    conjureOn:'', conjureOff:'', fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
+                    buyOn:'', buyOff:'', oneMindOn:'', oneMindOff:'',
+                    luckyReserveOn:'', luckyReserveOff:'',
                 },
             };
 
@@ -179,6 +184,17 @@ Game.registerMod("cookie clicker companion", {
                         Game.CollectWrinklers();
                     }, 500, 'wrinklOn', 'wrinklOff'),
                 },
+                lumps: {
+                    configKey: 'autoLumps',
+                    t: makeToggle(function() {
+                        // Harvest a sugar lump only once it is ripe (age >= lumpRipeAge),
+                        // when the gain is a guaranteed +1. clickLump() is a no-op before
+                        // maturity; the ripe check also skips the random 20-23h window.
+                        if (Game.canLumps() && (Date.now() - Game.lumpT) >= Game.lumpRipeAge) {
+                            Game.clickLump();
+                        }
+                    }, 500, 'lumpsOn', 'lumpsOff'),
+                },
                 spell: {
                     configKey: 'autoCastSpell',
                     t: makeToggle(function() {
@@ -186,6 +202,17 @@ Game.registerMod("cookie clicker companion", {
                         var grimoire = Game.ObjectsById[7].minigame;
                         if (grimoire && grimoire.magic === grimoire.magicM) grimoire.castSpell(grimoire.spellsById[1]);
                     }, 500, 'spellOn', 'spellOff'),
+                },
+                conjure: {
+                    configKey: 'autoConjure',
+                    t: makeToggle(function() {
+                        // Cast "Conjure Baked Goods" whenever enough magic is available.
+                        var grimoire = Game.ObjectsById[7].minigame;
+                        if (grimoire) {
+                            var spell = grimoire.spells['conjure baked goods'];
+                            if (grimoire.magic >= grimoire.getSpellCost(spell)) grimoire.castSpell(spell);
+                        }
+                    }, 500, 'conjureOn', 'conjureOff'),
                 },
                 fortune: {
                     configKey: 'autoFortuneNews',
@@ -207,6 +234,9 @@ Game.registerMod("cookie clicker companion", {
                 buy: {
                     configKey: 'autoBuy',
                     t: makeToggle(function() {
+                        // When the Lucky Reserve toggle is on, keep CPS*6000 in the bank so a
+                        // Golden "Lucky!" pays its full capped amount; spend only the surplus.
+                        var spendable = Game.cookies - (TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
                         // Phase 1 — find the building with the best profitability ratio.
                         var bestBuilding = null, bestRatio = 0;
                         for (var i in Game.Objects) {
@@ -223,7 +253,7 @@ Game.registerMod("cookie clicker companion", {
                         for (var i in Game.UpgradesInStore) {
                             var upgrade      = Game.UpgradesInStore[i];
                             var upgradePrice = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
-                            if (upgrade.pool === 'toggle' || upgradePrice >= Game.cookies) continue;
+                            if (upgrade.pool === 'toggle' || upgradePrice >= spendable) continue;
                             if (upgrade.name === 'Communal brainsweep' || upgrade.name === 'Elder Pact' ||
                                 upgrade.name === 'Elder Pledge'        || upgrade.name === 'Elder Covenant' ||
                                 upgrade.name === 'Revoke Elder Covenant') continue;
@@ -234,12 +264,16 @@ Game.registerMod("cookie clicker companion", {
                             }
                         }
                         // Phase 3 — buy one unit of the best building if it is affordable.
-                        if (bestBuilding && bestBuilding.price < Game.cookies) bestBuilding.buy(1);
+                        if (bestBuilding && bestBuilding.price < spendable) bestBuilding.buy(1);
                     }, 500, 'buyOn', 'buyOff'),
                 },
                 onemind: {
                     configKey: 'oneMind',
                     t: makeBoolToggle('oneMindOn', 'oneMindOff'),
+                },
+                luckyreserve: {
+                    configKey: 'luckyReserve',
+                    t: makeBoolToggle('luckyReserveOn', 'luckyReserveOff'),
                 },
             };
 
@@ -284,7 +318,10 @@ Game.registerMod("cookie clicker companion", {
             }
             l('ccc-ratioColor0').style.right = '26px';
             l('ccc-ratioColor1').style.right = '13px';
-            Game.registerHook('check', function() { MOD.updateRatios(MOD); });
+            // The 'check' hook fires every logic frame (30 fps); recomputing all ratios
+            // and synergies that often is wasteful, so throttle to ~4 times per second.
+            // Game.T is the frame counter. Store refreshes still update instantly below.
+            Game.registerHook('check', function() { if (Game.T % 8 === 0) MOD.updateRatios(MOD); });
 
             var _origRefreshStore = Game.RefreshStore;
             Game.RefreshStore = function() { _origRefreshStore.apply(this, arguments); MOD.updateRatios(MOD); };

@@ -11,6 +11,21 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-25
+
+### Added
+- **Sugar Lumps auto-harvest**: new toggle that collects a sugar lump as soon as it is
+  ripe, when the gain is a guaranteed +1.
+- **Conjure Baked Goods**: new toggle that casts the Grimoire's Conjure Baked Goods
+  spell whenever enough magic is available, alongside the existing Force the Hand of
+  Fate toggle.
+- **Lucky Reserve**: new toggle that makes Auto Buy keep about CPS × 6000 in the bank so
+  Golden "Lucky!" cookies pay out their full capped amount; only the surplus is spent.
+
+### Changed
+- Store ratios are now recomputed about four times per second instead of every frame,
+  reducing CPU use with no visible difference.
+
 ## [1.1.0] - 2026-06-25
 
 ### Added
@@ -39,6 +54,7 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.0.0

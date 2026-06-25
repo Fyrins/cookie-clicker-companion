@@ -16,7 +16,10 @@
         "fortune": "Notizia Fortuna",
         "dragon": "Drago",
         "buy": "Auto-Acquisto",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Zollette di zucchero",
+        "conjure": "Evocare dolci da forno",
+        "luckyReserve": "Riserva Fortunata"
     },
     "descriptions": {
         "golden": "Clicca automaticamente i Golden Cookie e le Renne non appena appaiono. Le Renne compaiono solo durante gli eventi stagionali.",
@@ -27,7 +30,10 @@
         "fortune": "Clicca i messaggi di fortuna nel ticker delle notizie per raccogliere le ricompense.",
         "dragon": "Aumenta automaticamente il livello del drago Krumblor non appena le risorse lo consentono.",
         "buy": "Acquista l'edificio più redditizio in base al rapporto CPS/prezzo, inclusi i bonus di sinergia.",
-        "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela."
+        "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela.",
+        "lumps": "Raccoglie automaticamente una zolletta di zucchero non appena è matura, per un guadagno garantito.",
+        "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra.",
+        "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie attivato.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto-Acquisto attivato.",
         "buyOff": "Auto-Acquisto disattivato.",
         "oneMindOn": "One Mind attivato.",
-        "oneMindOff": "One Mind disattivato."
+        "oneMindOff": "One Mind disattivato.",
+        "lumpsOn": "Auto Zollette di zucchero attivato.",
+        "lumpsOff": "Auto Zollette di zucchero disattivato.",
+        "conjureOn": "Auto Evocare dolci da forno attivato.",
+        "conjureOff": "Auto Evocare dolci da forno disattivato.",
+        "luckyReserveOn": "Riserva Fortunata attivata.",
+        "luckyReserveOff": "Riserva Fortunata disattivata."
     }
 }

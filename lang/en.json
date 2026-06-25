@@ -16,7 +16,10 @@
         "fortune": "Fortune",
         "dragon": "Dragon",
         "buy": "Auto Buy",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Sugar Lumps",
+        "conjure": "Conjure Baked Goods",
+        "luckyReserve": "Lucky Reserve"
     },
     "descriptions": {
         "golden": "Automatically clicks Golden Cookies and Reindeer as soon as they appear. Reindeer only appear during seasonal events.",
@@ -27,7 +30,10 @@
         "fortune": "Clicks fortune messages in the news ticker to collect their reward.",
         "dragon": "Automatically levels up the Krumblor dragon when resources allow.",
         "buy": "Buys the most profitable building based on CPS/price ratio, including synergy bonuses.",
-        "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution."
+        "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution.",
+        "lumps": "Harvests a sugar lump automatically once it is ripe, for a guaranteed gain.",
+        "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies.",
+        "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie enabled.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto Buy enabled.",
         "buyOff": "Auto Buy disabled.",
         "oneMindOn": "One Mind enabled.",
-        "oneMindOff": "One Mind disabled."
+        "oneMindOff": "One Mind disabled.",
+        "lumpsOn": "Auto Sugar Lumps enabled.",
+        "lumpsOff": "Auto Sugar Lumps disabled.",
+        "conjureOn": "Auto Conjure Baked Goods enabled.",
+        "conjureOff": "Auto Conjure Baked Goods disabled.",
+        "luckyReserveOn": "Lucky Reserve enabled.",
+        "luckyReserveOff": "Lucky Reserve disabled."
     }
 }

@@ -16,7 +16,10 @@
         "fortune": "Geluksbericht",
         "dragon": "Draak",
         "buy": "Auto-Aankoop",
-        "oneMind": "One Mind"
+        "oneMind": "One Mind",
+        "lumps": "Suikerklontjes",
+        "conjure": "Gebak oproepen",
+        "luckyReserve": "Geluksreserve"
     },
     "descriptions": {
         "golden": "Klikt automatisch op Golden Cookies en Rendieren zodra ze verschijnen. Rendieren verschijnen alleen tijdens seizoensevenementen.",
@@ -27,7 +30,10 @@
         "fortune": "Klikt op geluksberichten in de nieuwsticker om beloningen te verzamelen.",
         "dragon": "Verhoogt automatisch de draak Krumblor zodra de middelen het toelaten.",
         "buy": "Koopt het meest winstgevende gebouw op basis van de CPS/prijs-ratio, inclusief synergiesbonussen.",
-        "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid."
+        "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid.",
+        "lumps": "Oogst automatisch een suikerklontje zodra het rijp is, voor een gegarandeerde opbrengst.",
+        "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes.",
+        "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ingeschakeld.",
@@ -47,6 +53,12 @@
         "buyOn": "Auto-Aankoop ingeschakeld.",
         "buyOff": "Auto-Aankoop uitgeschakeld.",
         "oneMindOn": "One Mind ingeschakeld.",
-        "oneMindOff": "One Mind uitgeschakeld."
+        "oneMindOff": "One Mind uitgeschakeld.",
+        "lumpsOn": "Auto Suikerklontjes ingeschakeld.",
+        "lumpsOff": "Auto Suikerklontjes uitgeschakeld.",
+        "conjureOn": "Auto Gebak oproepen ingeschakeld.",
+        "conjureOff": "Auto Gebak oproepen uitgeschakeld.",
+        "luckyReserveOn": "Geluksreserve ingeschakeld.",
+        "luckyReserveOff": "Geluksreserve uitgeschakeld."
     }
 }
