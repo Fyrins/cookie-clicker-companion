@@ -16,6 +16,7 @@
         "spell": "Hechizo",
         "fortune": "Noticia Fortuna",
         "dragon": "Dragón",
+        "dragonSacrifice": "Sacrificio del Dragón",
         "buy": "Auto-Compra",
         "oneMind": "One Mind",
         "lumps": "Terrones de azúcar",
@@ -34,7 +35,8 @@
         "oneMind": "Permite a Auto-Compra adquirir la mejora 'One Mind' (ruta Elder Covenant). Usar con precaución.",
         "lumps": "Cosecha automáticamente un terrón de azúcar en cuanto está maduro, para una ganancia garantizada.",
         "conjure": "Lanza Convocar productos horneados cuando el Grimorio tiene suficiente magia, para galletas extra. Comparte magia con Force the Hand of Fate, evita activar ambos a la vez.",
-        "luckyReserve": "Mantiene una reserva de galletas (aproximadamente 6000× tu CPS) para que las galletas doradas '¡Suerte!' paguen al máximo. Auto-Compra gasta solo el excedente."
+        "luckyReserve": "Mantiene una reserva de galletas (aproximadamente 6000× tu CPS) para que las galletas doradas '¡Suerte!' paguen al máximo. Auto-Compra gasta solo el excedente.",
+        "dragonSacrifice": "Permite que la mejora automática del dragón sacrifique 100 edificios por nivel para entrenar por completo a Krumblor. Desactivado por defecto; solo aparece cuando Dragon está activo. Aviso: Auto Buy recomprará de inmediato los edificios sacrificados."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activado.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Convocar productos horneados activado.",
         "conjureOff": "Auto Convocar productos horneados desactivado.",
         "luckyReserveOn": "Reserva de Suerte activada.",
-        "luckyReserveOff": "Reserva de Suerte desactivada."
+        "luckyReserveOff": "Reserva de Suerte desactivada.",
+        "dragonSacrificeOn": "Sacrificio del Dragón activado.",
+        "dragonSacrificeOff": "Sacrificio del Dragón desactivado."
     }
 }

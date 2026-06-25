@@ -54,16 +54,17 @@ Game.registerMod("cookie clicker companion", {
 
     FEATURES: [
         { id: 'golden',       labelKey: 'golden',       section: 'clicks' },
-        { id: 'wrath',        labelKey: 'wrath',        section: 'clicks' },
+        { id: 'wrath',        labelKey: 'wrath',        section: 'clicks', unlocked: function() { return Game.elderWrath > 0; } },
         { id: 'bigcookie',    labelKey: 'bigCookie',    section: 'clicks' },
         { id: 'buy',          labelKey: 'buy',          section: 'auto'   },
-        { id: 'wrinklers',    labelKey: 'wrinklers',    section: 'auto'   },
-        { id: 'lumps',        labelKey: 'lumps',        section: 'auto'   },
-        { id: 'spell',        labelKey: 'spell',        section: 'spells' },
-        { id: 'conjure',      labelKey: 'conjure',      section: 'spells' },
-        { id: 'fortune',      labelKey: 'fortune',      section: 'auto'   },
-        { id: 'dragon',       labelKey: 'dragon',       section: 'auto'   },
-        { id: 'onemind',      labelKey: 'oneMind',      section: 'other'  },
+        { id: 'wrinklers',    labelKey: 'wrinklers',    section: 'auto',   unlocked: function() { return Game.elderWrath > 0; } },
+        { id: 'lumps',        labelKey: 'lumps',        section: 'auto',   unlocked: function() { return Game.canLumps(); } },
+        { id: 'fortune',      labelKey: 'fortune',      section: 'auto',   unlocked: function() { return Game.Has('Fortune cookies'); } },
+        { id: 'dragon',       labelKey: 'dragon',       section: 'auto',   unlocked: function() { return Game.Has('A crumbly egg'); } },
+        { id: 'dragonsacrifice', labelKey: 'dragonSacrifice', section: 'auto', unlocked: function() { var r = l('ccc-row-dragon'); return Game.Has('A crumbly egg') && r && r.classList.contains('on'); } },
+        { id: 'spell',        labelKey: 'spell',        section: 'spells', unlocked: function() { return Game.isMinigameReady(Game.Objects['Wizard tower']); } },
+        { id: 'conjure',      labelKey: 'conjure',      section: 'spells', unlocked: function() { return Game.isMinigameReady(Game.Objects['Wizard tower']); } },
+        { id: 'onemind',      labelKey: 'oneMind',      section: 'other',  unlocked: function() { return !!(Game.Upgrades['One mind'] && Game.Upgrades['One mind'].unlocked); } },
         { id: 'luckyreserve', labelKey: 'luckyReserve', section: 'other'  },
     ],
 
@@ -99,12 +100,13 @@ Game.registerMod("cookie clicker companion", {
                 sections: { clicks: 'Clicks', auto: 'Automation', spells: 'Spells', other: 'Other' },
                 labels: { golden:'Golden Cookie', wrath:'Wrath Cookie', bigCookie:'Big Cookie',
                     wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Spell', conjure:'Conjure Baked Goods',
-                    fortune:'Fortune', dragon:'Dragon', buy:'Auto Buy', oneMind:'One Mind',
-                    luckyReserve:'Lucky Reserve' },
+                    fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice', buy:'Auto Buy',
+                    oneMind:'One Mind', luckyReserve:'Lucky Reserve' },
                 descriptions: {}, notify: {
                     goldenOn:'', goldenOff:'', wrathOn:'', wrathOff:'', bigOn:'', bigOff:'',
                     wrinklOn:'', wrinklOff:'', lumpsOn:'', lumpsOff:'', spellOn:'', spellOff:'',
                     conjureOn:'', conjureOff:'', fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
+                    dragonSacrificeOn:'', dragonSacrificeOff:'',
                     buyOn:'', buyOff:'', oneMindOn:'', oneMindOff:'',
                     luckyReserveOn:'', luckyReserveOff:'',
                 },
@@ -230,10 +232,16 @@ Game.registerMod("cookie clicker companion", {
                         // mod never sacrifices the player's buildings; sacrifice levels stay
                         // a deliberate manual choice.
                         var next = Game.dragonLevels[Game.dragonLevel];
-                        if (next && typeof next.buy === 'function' && next.buy.toString().indexOf('sacrifice') === -1) {
+                        if (!next || typeof next.buy !== 'function') return;
+                        var isSacrifice = next.buy.toString().indexOf('sacrifice') !== -1;
+                        if (!isSacrifice || TOGGLES.dragonsacrifice.t.isActive()) {
                             Game.UpgradeDragon();
                         }
                     }, 500, 'dragonOn', 'dragonOff'),
+                },
+                dragonsacrifice: {
+                    configKey: 'autoDragonSacrifice',
+                    t: makeBoolToggle('dragonSacrificeOn', 'dragonSacrificeOff'),
                 },
                 buy: {
                     configKey: 'autoBuy',
@@ -325,7 +333,10 @@ Game.registerMod("cookie clicker companion", {
             // The 'check' hook fires every logic frame (30 fps); recomputing all ratios
             // and synergies that often is wasteful, so throttle to ~4 times per second.
             // Game.T is the frame counter. Store refreshes still update instantly below.
-            Game.registerHook('check', function() { if (Game.T % 8 === 0) MOD.updateRatios(MOD); });
+            Game.registerHook('check', function() {
+                if (Game.T % 8 === 0) MOD.updateRatios(MOD);
+                if (Game.T % 30 === 0) updateVisibility();
+            });
 
             var _origRefreshStore = Game.RefreshStore;
             Game.RefreshStore = function() { _origRefreshStore.apply(this, arguments); MOD.updateRatios(MOD); };
@@ -370,10 +381,12 @@ Game.registerMod("cookie clicker companion", {
                 if (si > 0) {
                     var sep = document.createElement('div');
                     sep.className = 'ccc-sep';
+                    sep.id        = 'ccc-sep-' + sect;
                     body.appendChild(sep);
                 }
                 var hdr = document.createElement('div');
                 hdr.className   = 'ccc-sec-hdr';
+                hdr.id          = 'ccc-sec-hdr-' + sect;
                 hdr.textContent = S.sections[sect];
                 body.appendChild(hdr);
 
@@ -464,6 +477,29 @@ Game.registerMod("cookie clicker companion", {
                     var row = l('ccc-row-' + id);
                     if (row) row.classList.toggle('on', states[id]);
                 }
+                updateVisibility();
+            }
+
+            // Hide each toggle whose game system is not unlocked yet, and hide a section
+            // header (and its separator) when all of its rows are hidden. Re-checked on
+            // every toggle change and periodically, so options appear the moment the game
+            // unlocks them (or when a dependent toggle is switched on).
+            function updateVisibility() {
+                var counts = { clicks: 0, auto: 0, spells: 0, other: 0 };
+                MOD.FEATURES.forEach(function(f) {
+                    var row = l('ccc-row-' + f.id);
+                    if (!row) return;
+                    var shown = f.unlocked ? f.unlocked() : true;
+                    row.style.display = shown ? '' : 'none';
+                    if (shown) counts[f.section]++;
+                });
+                ['clicks', 'auto', 'spells', 'other'].forEach(function(sect) {
+                    var hdr = l('ccc-sec-hdr-' + sect);
+                    var sep = l('ccc-sep-' + sect);
+                    var visible = counts[sect] > 0;
+                    if (hdr) hdr.style.display = visible ? '' : 'none';
+                    if (sep) sep.style.display = visible ? '' : 'none';
+                });
             }
 
             updateInfo();

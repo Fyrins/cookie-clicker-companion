@@ -16,6 +16,7 @@
         "spell": "Spreuk",
         "fortune": "Geluksbericht",
         "dragon": "Draak",
+        "dragonSacrifice": "Draakoffer",
         "buy": "Auto-Aankoop",
         "oneMind": "One Mind",
         "lumps": "Suikerklontjes",
@@ -34,7 +35,8 @@
         "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid.",
         "lumps": "Oogst automatisch een suikerklontje zodra het rijp is, voor een gegarandeerde opbrengst.",
         "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes. Deelt magie met Force the Hand of Fate, activeer niet beide tegelijk.",
-        "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit."
+        "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit.",
+        "dragonSacrifice": "Laat het automatisch leveln van de draak 100 gebouwen per niveau opofferen om Krumblor volledig te trainen. Standaard uit; verschijnt alleen als Dragon aanstaat. Let op: Auto Buy koopt de opgeofferde gebouwen meteen terug."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ingeschakeld.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Gebak oproepen ingeschakeld.",
         "conjureOff": "Auto Gebak oproepen uitgeschakeld.",
         "luckyReserveOn": "Geluksreserve ingeschakeld.",
-        "luckyReserveOff": "Geluksreserve uitgeschakeld."
+        "luckyReserveOff": "Geluksreserve uitgeschakeld.",
+        "dragonSacrificeOn": "Drakenoffer ingeschakeld.",
+        "dragonSacrificeOff": "Drakenoffer uitgeschakeld."
     }
 }

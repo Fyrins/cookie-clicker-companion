@@ -16,6 +16,7 @@
         "spell": "法术",
         "fortune": "财富消息",
         "dragon": "龙",
+        "dragonSacrifice": "龙献祭",
         "buy": "自动购买",
         "oneMind": "One Mind",
         "lumps": "糖块",
@@ -34,7 +35,8 @@
         "oneMind": "允许自动购买获取「One Mind」升级（Elder Covenant路线）。请谨慎使用。",
         "lumps": "糖块成熟时自动收获，保证获得固定收益。",
         "conjure": "当魔法书魔力充足时自动施放召唤烘焙食品，获取额外饼干。与「Force the Hand of Fate」共享魔力，请勿同时启用两者。",
-        "luckyReserve": "维持饼干储备（约为CPS的6000倍），使黄金「幸运！」饼干获得最大奖励。自动购买仅花费超出储备的部分。"
+        "luckyReserve": "维持饼干储备（约为CPS的6000倍），使黄金「幸运！」饼干获得最大奖励。自动购买仅花费超出储备的部分。",
+        "dragonSacrifice": "允许自动升级巨龙时每级献祭100个建筑，以完全培养Krumblor。默认关闭；仅在启用Dragon时显示。警告：自动购买会立即重新购买被献祭的建筑。"
     },
     "notify": {
         "goldenOn": "黄金饼干自动点击已启用。",
@@ -60,6 +62,8 @@
         "conjureOn": "自动召唤烘焙食品已启用。",
         "conjureOff": "自动召唤烘焙食品已禁用。",
         "luckyReserveOn": "幸运储备已启用。",
-        "luckyReserveOff": "幸运储备已禁用。"
+        "luckyReserveOff": "幸运储备已禁用。",
+        "dragonSacrificeOn": "已启用巨龙献祭。",
+        "dragonSacrificeOff": "已禁用巨龙献祭。"
     }
 }

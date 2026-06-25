@@ -16,6 +16,7 @@
         "spell": "Zauber",
         "fortune": "Glücksnachricht",
         "dragon": "Drache",
+        "dragonSacrifice": "Drachen-Opfer",
         "buy": "Auto-Kauf",
         "oneMind": "One Mind",
         "lumps": "Zuckerstücke",
@@ -34,7 +35,8 @@
         "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden.",
         "lumps": "Erntet automatisch ein Zuckerstück, sobald es reif ist, für einen garantierten Gewinn.",
         "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse. Teilt Magie mit Force the Hand of Fate – aktiviere nicht beide gleichzeitig.",
-        "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus."
+        "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus.",
+        "dragonSacrifice": "Erlaubt dem automatischen Drachen-Aufstieg, 100 Gebäude pro Stufe zu opfern, um Krumblor voll auszubilden. Standardmäßig aus; erscheint nur, wenn Dragon aktiv ist. Achtung: Auto Buy kauft die geopferten Gebäude sofort zurück."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie aktiviert.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Backwaren beschwören aktiviert.",
         "conjureOff": "Auto Backwaren beschwören deaktiviert.",
         "luckyReserveOn": "Glücks-Reserve aktiviert.",
-        "luckyReserveOff": "Glücks-Reserve deaktiviert."
+        "luckyReserveOff": "Glücks-Reserve deaktiviert.",
+        "dragonSacrificeOn": "Drachenopfer aktiviert.",
+        "dragonSacrificeOff": "Drachenopfer deaktiviert."
     }
 }

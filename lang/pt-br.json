@@ -16,6 +16,7 @@
         "spell": "Feitiço",
         "fortune": "Notícia Fortuna",
         "dragon": "Dragão",
+        "dragonSacrifice": "Sacrifício do Dragão",
         "buy": "Auto-Compra",
         "oneMind": "One Mind",
         "lumps": "Torrões de açúcar",
@@ -34,7 +35,8 @@
         "oneMind": "Permite à Auto-Compra adquirir a melhoria 'One Mind' (caminho Elder Covenant). Use com cuidado.",
         "lumps": "Coleta automaticamente um torrão de açúcar assim que estiver maduro, para um ganho garantido.",
         "conjure": "Lança Invocar produtos de confeitaria sempre que o Grimório tiver magia suficiente, para biscoitos extras. Compartilha magia com Force the Hand of Fate, evite ativar os dois ao mesmo tempo.",
-        "luckyReserve": "Mantém uma reserva de biscoitos (cerca de 6000× seu CPS) para que os Golden Cookies 'Sorte!' paguem o máximo. Auto-Compra gasta apenas o excedente."
+        "luckyReserve": "Mantém uma reserva de biscoitos (cerca de 6000× seu CPS) para que os Golden Cookies 'Sorte!' paguem o máximo. Auto-Compra gasta apenas o excedente.",
+        "dragonSacrifice": "Permite que o aprimoramento automático do dragão sacrifique 100 construções por nível para treinar Krumblor por completo. Desativado por padrão; aparece apenas quando Dragon está ativo. Aviso: o Auto Buy recomprará imediatamente as construções sacrificadas."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ativado.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Invocar produtos de confeitaria ativado.",
         "conjureOff": "Auto Invocar produtos de confeitaria desativado.",
         "luckyReserveOn": "Reserva da Sorte ativada.",
-        "luckyReserveOff": "Reserva da Sorte desativada."
+        "luckyReserveOff": "Reserva da Sorte desativada.",
+        "dragonSacrificeOn": "Sacrifício do Dragão ativado.",
+        "dragonSacrificeOff": "Sacrifício do Dragão desativado."
     }
 }

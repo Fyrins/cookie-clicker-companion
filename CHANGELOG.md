@@ -11,6 +11,14 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+### Added
+- Toggles whose game system is not unlocked yet (Dragon, Spells, Sugar Lumps,
+  Wrath/Wrinklers, Fortune, One Mind) are now hidden until the game unlocks them, and
+  reappear automatically. An empty panel section is hidden too.
+- **Dragon Sacrifice** toggle, shown only while Dragon is enabled: an opt-in that lets
+  the dragon auto-level pay the sacrifice levels (5-26) by sacrificing 100 buildings
+  each. Off by default, so the dragon never sacrifices buildings unless you choose to.
+
 ### Fixed
 - Dragon auto-level no longer sacrifices buildings. Krumblor levels 5-26 are paid by
   sacrificing 100 buildings each, which the game does silently with no confirmation;

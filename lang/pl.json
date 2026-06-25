@@ -16,6 +16,7 @@
         "spell": "Zaklęcie",
         "fortune": "Wiadomość Fortuny",
         "dragon": "Smok",
+        "dragonSacrifice": "Smocza Ofiara",
         "buy": "Auto-Zakup",
         "oneMind": "One Mind",
         "lumps": "Bryłki cukru",
@@ -34,7 +35,8 @@
         "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie.",
         "lumps": "Automatycznie zbiera bryłkę cukru, gdy tylko dojrzeje, dla gwarantowanego zysku.",
         "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek. Dzieli magię z Force the Hand of Fate – nie włączaj obu jednocześnie.",
-        "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę."
+        "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę.",
+        "dragonSacrifice": "Pozwala automatycznemu ulepszaniu smoka poświęcać 100 budynków na poziom, by w pełni wyszkolić Krumblora. Domyślnie wyłączone; pojawia się tylko gdy Dragon jest włączony. Uwaga: Auto Buy natychmiast odkupi poświęcone budynki."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie włączony.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Przywoływanie wypieków włączone.",
         "conjureOff": "Auto Przywoływanie wypieków wyłączone.",
         "luckyReserveOn": "Rezerwa Szczęścia włączona.",
-        "luckyReserveOff": "Rezerwa Szczęścia wyłączona."
+        "luckyReserveOff": "Rezerwa Szczęścia wyłączona.",
+        "dragonSacrificeOn": "Smocza ofiara włączona.",
+        "dragonSacrificeOff": "Smocza ofiara wyłączona."
     }
 }

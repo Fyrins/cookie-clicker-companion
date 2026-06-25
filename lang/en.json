@@ -16,6 +16,7 @@
         "spell": "Spell",
         "fortune": "Fortune",
         "dragon": "Dragon",
+        "dragonSacrifice": "Dragon Sacrifice",
         "buy": "Auto Buy",
         "oneMind": "One Mind",
         "lumps": "Sugar Lumps",
@@ -34,7 +35,8 @@
         "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution.",
         "lumps": "Harvests a sugar lump automatically once it is ripe, for a guaranteed gain.",
         "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies. Shares magic with Force the Hand of Fate, so avoid enabling both at once.",
-        "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus."
+        "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus.",
+        "dragonSacrifice": "Lets the dragon auto-level sacrifice 100 buildings per level to fully train Krumblor. Off by default; appears only while Dragon is on. Warning: Auto Buy will immediately rebuy the sacrificed buildings."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie enabled.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Conjure Baked Goods enabled.",
         "conjureOff": "Auto Conjure Baked Goods disabled.",
         "luckyReserveOn": "Lucky Reserve enabled.",
-        "luckyReserveOff": "Lucky Reserve disabled."
+        "luckyReserveOff": "Lucky Reserve disabled.",
+        "dragonSacrificeOn": "Dragon Sacrifice enabled.",
+        "dragonSacrificeOff": "Dragon Sacrifice disabled."
     }
 }

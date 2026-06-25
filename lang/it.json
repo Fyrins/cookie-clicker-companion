@@ -16,6 +16,7 @@
         "spell": "Incantesimo",
         "fortune": "Notizia Fortuna",
         "dragon": "Drago",
+        "dragonSacrifice": "Sacrificio del Drago",
         "buy": "Auto-Acquisto",
         "oneMind": "One Mind",
         "lumps": "Zollette di zucchero",
@@ -34,7 +35,8 @@
         "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela.",
         "lumps": "Raccoglie automaticamente una zolletta di zucchero non appena è matura, per un guadagno garantito.",
         "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra. Condivide la magia con Force the Hand of Fate, evita di attivarli entrambi insieme.",
-        "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus."
+        "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus.",
+        "dragonSacrifice": "Permette al potenziamento automatico del drago di sacrificare 100 edifici per livello per addestrare completamente Krumblor. Disattivato di default; appare solo quando Dragon è attivo. Attenzione: Auto Buy ricomprerà subito gli edifici sacrificati."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie attivato.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Evocare dolci da forno attivato.",
         "conjureOff": "Auto Evocare dolci da forno disattivato.",
         "luckyReserveOn": "Riserva Fortunata attivata.",
-        "luckyReserveOff": "Riserva Fortunata disattivata."
+        "luckyReserveOff": "Riserva Fortunata disattivata.",
+        "dragonSacrificeOn": "Sacrificio del Drago attivato.",
+        "dragonSacrificeOff": "Sacrificio del Drago disattivato."
     }
 }

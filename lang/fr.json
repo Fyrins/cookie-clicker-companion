@@ -16,6 +16,7 @@
         "spell": "Sort",
         "fortune": "Fortune",
         "dragon": "Dragon",
+        "dragonSacrifice": "Sacrifice du Dragon",
         "buy": "Auto Achat",
         "oneMind": "One Mind",
         "lumps": "Pépites de sucre",
@@ -34,7 +35,8 @@
         "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution.",
         "lumps": "Récolte automatiquement une pépite de sucre dès qu'elle est mûre, pour un gain garanti.",
         "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires. Partage la magie avec Force the Hand of Fate, évitez d'activer les deux en même temps.",
-        "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus."
+        "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus.",
+        "dragonSacrifice": "Autorise la montée automatique du dragon à sacrifier 100 bâtiments par niveau pour entraîner Krumblor à fond. Désactivé par défaut ; n'apparaît que si Dragon est actif. Attention : l'Achat auto rachètera aussitôt les bâtiments sacrifiés."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activé.",
@@ -60,6 +62,8 @@
         "conjureOn": "Auto Invoquer activé.",
         "conjureOff": "Auto Invoquer désactivé.",
         "luckyReserveOn": "Réserve Chanceuse activée.",
-        "luckyReserveOff": "Réserve Chanceuse désactivée."
+        "luckyReserveOff": "Réserve Chanceuse désactivée.",
+        "dragonSacrificeOn": "Sacrifice du Dragon activé.",
+        "dragonSacrificeOff": "Sacrifice du Dragon désactivé."
     }
 }
