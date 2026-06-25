@@ -63,6 +63,10 @@ The mod detects the game language automatically. If the language file is not fou
 - Cookie Clicker **2.031+** (Steam)
 - Works alongside other mods
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the version history. Downloads are on the [Releases](https://github.com/Fyrins/cookie-clicker-companion/releases) page.
+
 ## License
 
 MIT — see [LICENSE](LICENSE)
