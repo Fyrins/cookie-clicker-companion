@@ -39,7 +39,7 @@ The mod detects the game language automatically. If the language file is not fou
 ## Compatibility
 
 - Cookie Clicker **2.031+** (Steam)
-- Works alongside other mods, including [Price to CPS Ratio](https://steamcommunity.com/sharedfiles/filedetails/?id=2961804297) — if present, the auto-buy logic uses its enriched ratio
+- Works alongside other mods
 
 ## License
 
