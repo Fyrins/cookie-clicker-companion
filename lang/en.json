@@ -17,11 +17,12 @@
         "fortune": "Fortune",
         "dragon": "Dragon",
         "dragonSacrifice": "Dragon Sacrifice",
-        "buy": "Auto Buy",
         "oneMind": "One Mind",
         "lumps": "Sugar Lumps",
         "conjure": "Conjure Baked Goods",
-        "luckyReserve": "Lucky Reserve"
+        "luckyReserve": "Lucky Reserve",
+        "buyBuildings": "Auto Buy Buildings",
+        "buyUpgrades": "Auto Buy Upgrades"
     },
     "descriptions": {
         "golden": "Automatically clicks Golden Cookies and Reindeer as soon as they appear. Reindeer only appear during seasonal events.",
@@ -31,12 +32,13 @@
         "spell": "Casts Force the Hand of Fate automatically when the Grimoire is fully charged. Shares magic with Conjure Baked Goods, so avoid enabling both at once.",
         "fortune": "Clicks fortune messages in the news ticker to collect their reward.",
         "dragon": "Automatically levels up the Krumblor dragon when resources allow.",
-        "buy": "Buys the most profitable building based on CPS/price ratio, including synergy bonuses.",
         "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution.",
         "lumps": "Harvests a sugar lump automatically once it is ripe, for a guaranteed gain.",
         "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies. Shares magic with Force the Hand of Fate, so avoid enabling both at once.",
         "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus.",
-        "dragonSacrifice": "Lets the dragon auto-level sacrifice 100 buildings per level to fully train Krumblor. Off by default; appears only while Dragon is on. Warning: Auto Buy will immediately rebuy the sacrificed buildings."
+        "dragonSacrifice": "Lets the dragon auto-level sacrifice 100 buildings per level to fully train Krumblor. Off by default; appears only while Dragon is on. Warning: Auto Buy will immediately rebuy the sacrificed buildings.",
+        "buyBuildings": "Automatically buys the most profitable building (CPS/price ratio with synergies). If Auto Buy Upgrades is also on, it saves and waits while any eligible upgrade is still in the store.",
+        "buyUpgrades": "Automatically buys every affordable store upgrade, except the irreversible Grandmapocalypse ones. One Mind is bought only if its own toggle is on."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie enabled.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Fortune disabled.",
         "dragonOn": "Auto Dragon enabled.",
         "dragonOff": "Auto Dragon disabled.",
-        "buyOn": "Auto Buy enabled.",
-        "buyOff": "Auto Buy disabled.",
         "oneMindOn": "One Mind enabled.",
         "oneMindOff": "One Mind disabled.",
         "lumpsOn": "Auto Sugar Lumps enabled.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Lucky Reserve enabled.",
         "luckyReserveOff": "Lucky Reserve disabled.",
         "dragonSacrificeOn": "Dragon Sacrifice enabled.",
-        "dragonSacrificeOff": "Dragon Sacrifice disabled."
+        "dragonSacrificeOff": "Dragon Sacrifice disabled.",
+        "buyBuildingsOn": "Auto Buy Buildings enabled.",
+        "buyBuildingsOff": "Auto Buy Buildings disabled.",
+        "buyUpgradesOn": "Auto Buy Upgrades enabled.",
+        "buyUpgradesOff": "Auto Buy Upgrades disabled."
     }
 }

@@ -17,11 +17,12 @@
         "fortune": "Notícia Fortuna",
         "dragon": "Dragão",
         "dragonSacrifice": "Sacrifício do Dragão",
-        "buy": "Auto-Compra",
         "oneMind": "One Mind",
         "lumps": "Torrões de açúcar",
         "conjure": "Invocar produtos de confeitaria",
-        "luckyReserve": "Reserva da Sorte"
+        "luckyReserve": "Reserva da Sorte",
+        "buyBuildings": "Compra auto construções",
+        "buyUpgrades": "Compra auto melhorias"
     },
     "descriptions": {
         "golden": "Clica automaticamente nos Golden Cookies e Renas assim que aparecem. As Renas aparecem apenas durante eventos sazonais.",
@@ -31,12 +32,13 @@
         "spell": "Lança Force the Hand of Fate automaticamente quando o Grimório está completamente carregado. Compartilha magia com Conjure Baked Goods, evite ativar os dois ao mesmo tempo.",
         "fortune": "Clica nas mensagens de fortuna no ticker de notícias para coletar suas recompensas.",
         "dragon": "Aumenta automaticamente o nível do dragão Krumblor quando os recursos permitem.",
-        "buy": "Compra o edifício mais lucrativo com base na relação CPS/preço, incluindo bônus de sinergia.",
         "oneMind": "Permite à Auto-Compra adquirir a melhoria 'One Mind' (caminho Elder Covenant). Use com cuidado.",
         "lumps": "Coleta automaticamente um torrão de açúcar assim que estiver maduro, para um ganho garantido.",
         "conjure": "Lança Invocar produtos de confeitaria sempre que o Grimório tiver magia suficiente, para biscoitos extras. Compartilha magia com Force the Hand of Fate, evite ativar os dois ao mesmo tempo.",
         "luckyReserve": "Mantém uma reserva de biscoitos (cerca de 6000× seu CPS) para que os Golden Cookies 'Sorte!' paguem o máximo. Auto-Compra gasta apenas o excedente.",
-        "dragonSacrifice": "Permite que o aprimoramento automático do dragão sacrifique 100 construções por nível para treinar Krumblor por completo. Desativado por padrão; aparece apenas quando Dragon está ativo. Aviso: o Auto Buy recomprará imediatamente as construções sacrificadas."
+        "dragonSacrifice": "Permite que o aprimoramento automático do dragão sacrifique 100 construções por nível para treinar Krumblor por completo. Desativado por padrão; aparece apenas quando Dragon está ativo. Aviso: o Auto Buy recomprará imediatamente as construções sacrificadas.",
+        "buyBuildings": "Compra automaticamente a construção mais rentável (relação produção/preço com sinergias). Se a Compra auto melhorias também estiver ativa, ele economiza e espera enquanto houver uma melhoria elegível na loja.",
+        "buyUpgrades": "Compra automaticamente toda melhoria acessível da loja, exceto as irreversíveis do Vovópocalipse. One Mind só é comprado se o seu próprio botão estiver ativo."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ativado.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Notícia Fortuna desativada.",
         "dragonOn": "Auto Dragão ativado.",
         "dragonOff": "Auto Dragão desativado.",
-        "buyOn": "Auto-Compra ativada.",
-        "buyOff": "Auto-Compra desativada.",
         "oneMindOn": "One Mind ativado.",
         "oneMindOff": "One Mind desativado.",
         "lumpsOn": "Auto Torrões de açúcar ativado.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Reserva da Sorte ativada.",
         "luckyReserveOff": "Reserva da Sorte desativada.",
         "dragonSacrificeOn": "Sacrifício do Dragão ativado.",
-        "dragonSacrificeOff": "Sacrifício do Dragão desativado."
+        "dragonSacrificeOff": "Sacrifício do Dragão desativado.",
+        "buyBuildingsOn": "Compra auto construções ativado.",
+        "buyBuildingsOff": "Compra auto construções desativado.",
+        "buyUpgradesOn": "Compra auto melhorias ativado.",
+        "buyUpgradesOff": "Compra auto melhorias desativado."
     }
 }

@@ -17,11 +17,12 @@
         "fortune": "财富消息",
         "dragon": "龙",
         "dragonSacrifice": "龙献祭",
-        "buy": "自动购买",
         "oneMind": "One Mind",
         "lumps": "糖块",
         "conjure": "召唤烘焙食品",
-        "luckyReserve": "幸运储备"
+        "luckyReserve": "幸运储备",
+        "buyBuildings": "自动购买建筑",
+        "buyUpgrades": "自动购买升级"
     },
     "descriptions": {
         "golden": "黄金饼干和驯鹿出现时自动点击。驯鹿仅在季节性活动期间出现。",
@@ -31,12 +32,13 @@
         "spell": "当魔法书完全充能时自动施放命运之手。与「Conjure Baked Goods」共享魔力，请勿同时启用两者。",
         "fortune": "点击新闻滚动条中的财富消息以收取奖励。",
         "dragon": "当资源允许时自动提升龙克拉姆布洛的等级。",
-        "buy": "根据CPS/价格比（含协同加成）购买最有利可图的建筑。",
         "oneMind": "允许自动购买获取「One Mind」升级（Elder Covenant路线）。请谨慎使用。",
         "lumps": "糖块成熟时自动收获，保证获得固定收益。",
         "conjure": "当魔法书魔力充足时自动施放召唤烘焙食品，获取额外饼干。与「Force the Hand of Fate」共享魔力，请勿同时启用两者。",
         "luckyReserve": "维持饼干储备（约为CPS的6000倍），使黄金「幸运！」饼干获得最大奖励。自动购买仅花费超出储备的部分。",
-        "dragonSacrifice": "允许自动升级巨龙时每级献祭100个建筑，以完全培养Krumblor。默认关闭；仅在启用Dragon时显示。警告：自动购买会立即重新购买被献祭的建筑。"
+        "dragonSacrifice": "允许自动升级巨龙时每级献祭100个建筑，以完全培养Krumblor。默认关闭；仅在启用Dragon时显示。警告：自动购买会立即重新购买被献祭的建筑。",
+        "buyBuildings": "自动购买性价比最高的建筑（产量/价格比，含协同效应）。若同时启用自动购买升级，则只要商店中还有符合条件的升级，就会暂缓并攒够再买。",
+        "buyUpgrades": "自动购买商店中所有买得起的升级，但不含奶奶启示录的不可逆升级。One Mind 仅在其专属开关开启时才购买。"
     },
     "notify": {
         "goldenOn": "黄金饼干自动点击已启用。",
@@ -53,8 +55,6 @@
         "fortuneOff": "自动财富消息已禁用。",
         "dragonOn": "自动龙已启用。",
         "dragonOff": "自动龙已禁用。",
-        "buyOn": "自动购买已启用。",
-        "buyOff": "自动购买已禁用。",
         "oneMindOn": "One Mind 已启用。",
         "oneMindOff": "One Mind 已禁用。",
         "lumpsOn": "糖块自动收获已启用。",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "幸运储备已启用。",
         "luckyReserveOff": "幸运储备已禁用。",
         "dragonSacrificeOn": "已启用巨龙献祭。",
-        "dragonSacrificeOff": "已禁用巨龙献祭。"
+        "dragonSacrificeOff": "已禁用巨龙献祭。",
+        "buyBuildingsOn": "已启用自动购买建筑。",
+        "buyBuildingsOff": "已禁用自动购买建筑。",
+        "buyUpgradesOn": "已启用自动购买升级。",
+        "buyUpgradesOff": "已禁用自动购买升级。"
     }
 }

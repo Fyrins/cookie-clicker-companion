@@ -47,7 +47,7 @@ Game.registerMod("cookie clicker companion", {
 .ccc-actions{display:flex;gap:7px;padding:7px 13px 5px;border-top:1px solid #220f04;margin-top:2px}
 .ccc-btn{flex:1;padding:5px 0;background:transparent;border:1px solid #3a1a06;border-radius:5px;color:#6a4010;font-family:Merriweather,Georgia,serif;font-size:9px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;letter-spacing:.4px}
 .ccc-btn:hover{border-color:#d4963a;color:#d4963a;background:rgba(212,150,58,.07)}
-#ccc-tooltip{position:fixed;z-index:10000;background:#1a0a03;border:1px solid #6a4418;border-radius:5px;padding:7px 10px;font-family:Merriweather,Georgia,serif;font-size:9px;color:#c8a070;max-width:180px;line-height:1.5;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 16px rgba(0,0,0,.65)}
+#ccc-tooltip{position:fixed;z-index:10000;background:#1a0a03;border:1px solid #6a4418;border-radius:5px;padding:7px 10px;font-family:Merriweather,Georgia,serif;font-size:9px;color:#c8a070;max-width:180px;line-height:1.5;white-space:pre-line;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 16px rgba(0,0,0,.65)}
 .ccc-store-ratio{position:absolute;bottom:0;right:1px;font-family:Merriweather;font-size:7pt;font-weight:bold}
 .ccc-store-color{position:absolute;top:-3px;right:0;width:17px;height:20px;background:rgba(0,0,0,0);border:none;outline:none;opacity:.7}
 `,
@@ -56,7 +56,8 @@ Game.registerMod("cookie clicker companion", {
         { id: 'golden',       labelKey: 'golden',       section: 'clicks' },
         { id: 'wrath',        labelKey: 'wrath',        section: 'clicks', unlocked: function() { return Game.elderWrath > 0; } },
         { id: 'bigcookie',    labelKey: 'bigCookie',    section: 'clicks' },
-        { id: 'buy',          labelKey: 'buy',          section: 'auto'   },
+        { id: 'buybuildings', labelKey: 'buyBuildings', section: 'auto'   },
+        { id: 'buyupgrades',  labelKey: 'buyUpgrades',  section: 'auto'   },
         { id: 'wrinklers',    labelKey: 'wrinklers',    section: 'auto',   unlocked: function() { return Game.elderWrath > 0; } },
         { id: 'lumps',        labelKey: 'lumps',        section: 'auto',   unlocked: function() { return Game.canLumps(); } },
         { id: 'fortune',      labelKey: 'fortune',      section: 'auto',   unlocked: function() { return Game.Has('Fortune cookies'); } },
@@ -100,14 +101,16 @@ Game.registerMod("cookie clicker companion", {
                 sections: { clicks: 'Clicks', auto: 'Automation', spells: 'Spells', other: 'Other' },
                 labels: { golden:'Golden Cookie', wrath:'Wrath Cookie', bigCookie:'Big Cookie',
                     wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Spell', conjure:'Conjure Baked Goods',
-                    fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice', buy:'Auto Buy',
+                    fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice',
+                    buyBuildings:'Auto Buy Buildings', buyUpgrades:'Auto Buy Upgrades',
                     oneMind:'One Mind', luckyReserve:'Lucky Reserve' },
                 descriptions: {}, notify: {
                     goldenOn:'', goldenOff:'', wrathOn:'', wrathOff:'', bigOn:'', bigOff:'',
                     wrinklOn:'', wrinklOff:'', lumpsOn:'', lumpsOff:'', spellOn:'', spellOff:'',
                     conjureOn:'', conjureOff:'', fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
                     dragonSacrificeOn:'', dragonSacrificeOff:'',
-                    buyOn:'', buyOff:'', oneMindOn:'', oneMindOff:'',
+                    buyBuildingsOn:'', buyBuildingsOff:'', buyUpgradesOn:'', buyUpgradesOff:'',
+                    oneMindOn:'', oneMindOff:'',
                     luckyReserveOn:'', luckyReserveOff:'',
                 },
             };
@@ -150,6 +153,20 @@ Game.registerMod("cookie clicker companion", {
             }
 
             var cookieEl = l('bigCookie');
+
+            // An upgrade is eligible for auto-buy unless it is a game toggle, an
+            // irreversible Elder/Grandmapocalypse upgrade, or "One mind" without its toggle.
+            function upgradeEligible(upgrade) {
+                if (upgrade.pool === 'toggle') return false;
+                if (upgrade.name === 'Communal brainsweep' || upgrade.name === 'Elder Pact' ||
+                    upgrade.name === 'Elder Pledge' || upgrade.name === 'Elder Covenant' ||
+                    upgrade.name === 'Revoke Elder Covenant') return false;
+                if (upgrade.name === 'One mind') return TOGGLES.onemind.t.isActive();
+                return true;
+            }
+            function hasEligibleUpgrade() {
+                return Game.UpgradesInStore.some(upgradeEligible);
+            }
 
             // ── Toggle registry ───────────────────────────────────────────
 
@@ -243,13 +260,30 @@ Game.registerMod("cookie clicker companion", {
                     configKey: 'autoDragonSacrifice',
                     t: makeBoolToggle('dragonSacrificeOn', 'dragonSacrificeOff'),
                 },
-                buy: {
-                    configKey: 'autoBuy',
+                buyupgrades: {
+                    configKey: 'autoBuyUpgrades',
                     t: makeToggle(function() {
-                        // When the Lucky Reserve toggle is on, keep CPS*6000 in the bank so a
-                        // Golden "Lucky!" pays its full capped amount; spend only the surplus.
+                        // Lucky Reserve keeps CPS*6000 banked; only the surplus is spendable.
                         var spendable = Game.cookies - (TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
-                        // Phase 1 — find the building with the best profitability ratio.
+                        Game.UpgradesInStore.forEach(function(upgrade) {
+                            if (!upgradeEligible(upgrade)) return;
+                            var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
+                            if (price >= spendable) return;
+                            upgrade.buy();
+                            // "One mind" opens a confirmation prompt; auto-accept it.
+                            if (upgrade.name === 'One mind') l('promptOption0').dispatchEvent(clickEvent);
+                        });
+                    }, 500, 'buyUpgradesOn', 'buyUpgradesOff'),
+                },
+                buybuildings: {
+                    configKey: 'autoBuyBuildings',
+                    t: makeToggle(function() {
+                        var spendable = Game.cookies - (TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
+                        // Strict upgrade priority: while Auto Buy Upgrades is on and any
+                        // eligible upgrade is still in the store, save for it rather than
+                        // spend on a building.
+                        if (TOGGLES.buyupgrades.t.isActive() && hasEligibleUpgrade()) return;
+                        // Pick the building with the best profitability ratio.
                         var bestBuilding = null, bestRatio = 0;
                         for (var i in Game.Objects) {
                             var building = Game.Objects[i];
@@ -259,25 +293,8 @@ Game.registerMod("cookie clicker companion", {
                             if (!ratio || isNaN(ratio)) ratio = (building.cps(building) * Game.globalCpsMult / building.price) * 100;
                             if (ratio > bestRatio) { bestBuilding = building; bestRatio = ratio; }
                         }
-                        // Phase 2 — buy every affordable upgrade, skipping the irreversible
-                        // Elder / Grandmapocalypse ones. "One mind" is bought only when its
-                        // own toggle is active, and its confirmation prompt is auto-accepted.
-                        for (var i in Game.UpgradesInStore) {
-                            var upgrade      = Game.UpgradesInStore[i];
-                            var upgradePrice = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
-                            if (upgrade.pool === 'toggle' || upgradePrice >= spendable) continue;
-                            if (upgrade.name === 'Communal brainsweep' || upgrade.name === 'Elder Pact' ||
-                                upgrade.name === 'Elder Pledge'        || upgrade.name === 'Elder Covenant' ||
-                                upgrade.name === 'Revoke Elder Covenant') continue;
-                            if (upgrade.name === 'One mind' && TOGGLES.onemind.t.isActive()) {
-                                upgrade.buy(); l('promptOption0').dispatchEvent(clickEvent);
-                            } else {
-                                upgrade.buy();
-                            }
-                        }
-                        // Phase 3 — buy one unit of the best building if it is affordable.
                         if (bestBuilding && bestBuilding.price < spendable) bestBuilding.buy(1);
-                    }, 500, 'buyOn', 'buyOff'),
+                    }, 500, 'buyBuildingsOn', 'buyBuildingsOff'),
                 },
                 onemind: {
                     configKey: 'oneMind',
@@ -296,12 +313,6 @@ Game.registerMod("cookie clicker companion", {
                 (function(entry) {
                     MOD.activateFns[entry.configKey] = function() { entry.t.activate(); };
                 })(TOGGLES[id]);
-            }
-
-            function switchAll(val) {
-                for (var id in TOGGLES) {
-                    if (TOGGLES[id].t.isActive() !== val) TOGGLES[id].t.toggle();
-                }
             }
 
             function getStates() {
@@ -333,9 +344,11 @@ Game.registerMod("cookie clicker companion", {
             // The 'check' hook fires every logic frame (30 fps); recomputing all ratios
             // and synergies that often is wasteful, so throttle to ~4 times per second.
             // Game.T is the frame counter. Store refreshes still update instantly below.
+            var tooltipRefresh = null;
             Game.registerHook('check', function() {
                 if (Game.T % 8 === 0) MOD.updateRatios(MOD);
                 if (Game.T % 30 === 0) updateVisibility();
+                if (tooltipRefresh && Game.T % 8 === 0) tooltipRefresh();
             });
 
             var _origRefreshStore = Game.RefreshStore;
@@ -409,34 +422,26 @@ Game.registerMod("cookie clicker companion", {
 
                     var desc = S.descriptions[f.labelKey];
                     if (desc) {
+                        // Lucky Reserve shows the live reserved amount (CPS*6000) under its
+                        // description, refreshed while hovered so it tracks each purchase.
+                        var tipText = (f.id === 'luckyreserve')
+                            ? function() { return desc + '\n⮡ ' + Beautify(Math.round(Game.cookiesPs * 6000)); }
+                            : function() { return desc; };
                         row.addEventListener('mouseenter', function() {
                             var rect = row.getBoundingClientRect();
-                            tooltip.textContent   = desc;
+                            tooltip.textContent   = tipText();
                             tooltip.style.left    = (rect.right + 10) + 'px';
                             tooltip.style.top     = rect.top + 'px';
                             tooltip.style.opacity = '1';
+                            tooltipRefresh = (f.id === 'luckyreserve') ? function() { tooltip.textContent = tipText(); } : null;
                         });
-                        row.addEventListener('mouseleave', function() { tooltip.style.opacity = '0'; });
+                        row.addEventListener('mouseleave', function() {
+                            tooltip.style.opacity = '0';
+                            tooltipRefresh = null;
+                        });
                     }
                 });
             });
-
-            var actions = document.createElement('div');
-            actions.className = 'ccc-actions';
-
-            var btnOn = document.createElement('button');
-            btnOn.className   = 'ccc-btn';
-            btnOn.textContent = S.enableAll;
-            btnOn.addEventListener('click', function() { switchAll(true); });
-
-            var btnOff = document.createElement('button');
-            btnOff.className   = 'ccc-btn';
-            btnOff.textContent = S.disableAll;
-            btnOff.addEventListener('click', function() { switchAll(false); });
-
-            actions.appendChild(btnOn);
-            actions.appendChild(btnOff);
-            body.appendChild(actions);
 
             inner.appendChild(header);
             inner.appendChild(body);

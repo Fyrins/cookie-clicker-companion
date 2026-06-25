@@ -17,11 +17,12 @@
         "fortune": "Wiadomość Fortuny",
         "dragon": "Smok",
         "dragonSacrifice": "Smocza Ofiara",
-        "buy": "Auto-Zakup",
         "oneMind": "One Mind",
         "lumps": "Bryłki cukru",
         "conjure": "Przywoływanie wypieków",
-        "luckyReserve": "Rezerwa Szczęścia"
+        "luckyReserve": "Rezerwa Szczęścia",
+        "buyBuildings": "Auto-zakup budynków",
+        "buyUpgrades": "Auto-zakup ulepszeń"
     },
     "descriptions": {
         "golden": "Automatycznie klika Golden Cookies i Renifery, gdy tylko się pojawią. Renifery pojawiają się tylko podczas sezonowych wydarzeń.",
@@ -31,12 +32,13 @@
         "spell": "Automatycznie rzuca Force the Hand of Fate, gdy Grimuar jest w pełni naładowany. Dzieli magię z Conjure Baked Goods – nie włączaj obu jednocześnie.",
         "fortune": "Klika wiadomości fortuny w pasku newsów, zbierając ich nagrody.",
         "dragon": "Automatycznie podnosi poziom smoka Krumblora, gdy zasoby na to pozwalają.",
-        "buy": "Kupuje najbardziej dochodowy budynek na podstawie stosunku CPS/cena, z bonusami synergii.",
         "oneMind": "Pozwala Auto-Zakupowi kupić ulepszenie 'One Mind' (ścieżka Elder Covenant). Używaj ostrożnie.",
         "lumps": "Automatycznie zbiera bryłkę cukru, gdy tylko dojrzeje, dla gwarantowanego zysku.",
         "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek. Dzieli magię z Force the Hand of Fate – nie włączaj obu jednocześnie.",
         "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę.",
-        "dragonSacrifice": "Pozwala automatycznemu ulepszaniu smoka poświęcać 100 budynków na poziom, by w pełni wyszkolić Krumblora. Domyślnie wyłączone; pojawia się tylko gdy Dragon jest włączony. Uwaga: Auto Buy natychmiast odkupi poświęcone budynki."
+        "dragonSacrifice": "Pozwala automatycznemu ulepszaniu smoka poświęcać 100 budynków na poziom, by w pełni wyszkolić Krumblora. Domyślnie wyłączone; pojawia się tylko gdy Dragon jest włączony. Uwaga: Auto Buy natychmiast odkupi poświęcone budynki.",
+        "buyBuildings": "Automatycznie kupuje najbardziej opłacalny budynek (stosunek produkcji do ceny z synergiami). Jeśli włączony jest też Auto-zakup ulepszeń, oszczędza i czeka, dopóki w sklepie jest odpowiednie ulepszenie.",
+        "buyUpgrades": "Automatycznie kupuje każde dostępne ulepszenie ze sklepu, oprócz nieodwracalnych z Babciokalipsy. One Mind kupowane jest tylko, gdy włączony jest jego własny przełącznik."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie włączony.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Wiadomość Fortuny wyłączona.",
         "dragonOn": "Auto Smok włączony.",
         "dragonOff": "Auto Smok wyłączony.",
-        "buyOn": "Auto-Zakup włączony.",
-        "buyOff": "Auto-Zakup wyłączony.",
         "oneMindOn": "One Mind włączony.",
         "oneMindOff": "One Mind wyłączony.",
         "lumpsOn": "Auto Bryłki cukru włączone.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Rezerwa Szczęścia włączona.",
         "luckyReserveOff": "Rezerwa Szczęścia wyłączona.",
         "dragonSacrificeOn": "Smocza ofiara włączona.",
-        "dragonSacrificeOff": "Smocza ofiara wyłączona."
+        "dragonSacrificeOff": "Smocza ofiara wyłączona.",
+        "buyBuildingsOn": "Auto-zakup budynków włączone.",
+        "buyBuildingsOff": "Auto-zakup budynków wyłączone.",
+        "buyUpgradesOn": "Auto-zakup ulepszeń włączone.",
+        "buyUpgradesOff": "Auto-zakup ulepszeń wyłączone."
     }
 }

@@ -17,11 +17,12 @@
         "fortune": "Geluksbericht",
         "dragon": "Draak",
         "dragonSacrifice": "Draakoffer",
-        "buy": "Auto-Aankoop",
         "oneMind": "One Mind",
         "lumps": "Suikerklontjes",
         "conjure": "Gebak oproepen",
-        "luckyReserve": "Geluksreserve"
+        "luckyReserve": "Geluksreserve",
+        "buyBuildings": "Auto-koop gebouwen",
+        "buyUpgrades": "Auto-koop upgrades"
     },
     "descriptions": {
         "golden": "Klikt automatisch op Golden Cookies en Rendieren zodra ze verschijnen. Rendieren verschijnen alleen tijdens seizoensevenementen.",
@@ -31,12 +32,13 @@
         "spell": "Cast Force the Hand of Fate automatisch wanneer het Grimoire volledig is opgeladen. Deelt magie met Conjure Baked Goods, activeer niet beide tegelijk.",
         "fortune": "Klikt op geluksberichten in de nieuwsticker om beloningen te verzamelen.",
         "dragon": "Verhoogt automatisch de draak Krumblor zodra de middelen het toelaten.",
-        "buy": "Koopt het meest winstgevende gebouw op basis van de CPS/prijs-ratio, inclusief synergiesbonussen.",
         "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid.",
         "lumps": "Oogst automatisch een suikerklontje zodra het rijp is, voor een gegarandeerde opbrengst.",
         "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes. Deelt magie met Force the Hand of Fate, activeer niet beide tegelijk.",
         "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit.",
-        "dragonSacrifice": "Laat het automatisch leveln van de draak 100 gebouwen per niveau opofferen om Krumblor volledig te trainen. Standaard uit; verschijnt alleen als Dragon aanstaat. Let op: Auto Buy koopt de opgeofferde gebouwen meteen terug."
+        "dragonSacrifice": "Laat het automatisch leveln van de draak 100 gebouwen per niveau opofferen om Krumblor volledig te trainen. Standaard uit; verschijnt alleen als Dragon aanstaat. Let op: Auto Buy koopt de opgeofferde gebouwen meteen terug.",
+        "buyBuildings": "Koopt automatisch het meest winstgevende gebouw (productie/prijs-verhouding met synergieën). Als Auto-koop upgrades ook aanstaat, wacht en spaart het zolang er nog een geschikte upgrade in de winkel is.",
+        "buyUpgrades": "Koopt automatisch elke betaalbare winkelupgrade, behalve de onomkeerbare van de Grandmapocalyps. One Mind wordt alleen gekocht als de eigen schakelaar aanstaat."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ingeschakeld.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Geluksbericht uitgeschakeld.",
         "dragonOn": "Auto Draak ingeschakeld.",
         "dragonOff": "Auto Draak uitgeschakeld.",
-        "buyOn": "Auto-Aankoop ingeschakeld.",
-        "buyOff": "Auto-Aankoop uitgeschakeld.",
         "oneMindOn": "One Mind ingeschakeld.",
         "oneMindOff": "One Mind uitgeschakeld.",
         "lumpsOn": "Auto Suikerklontjes ingeschakeld.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Geluksreserve ingeschakeld.",
         "luckyReserveOff": "Geluksreserve uitgeschakeld.",
         "dragonSacrificeOn": "Drakenoffer ingeschakeld.",
-        "dragonSacrificeOff": "Drakenoffer uitgeschakeld."
+        "dragonSacrificeOff": "Drakenoffer uitgeschakeld.",
+        "buyBuildingsOn": "Auto-koop gebouwen ingeschakeld.",
+        "buyBuildingsOff": "Auto-koop gebouwen uitgeschakeld.",
+        "buyUpgradesOn": "Auto-koop upgrades ingeschakeld.",
+        "buyUpgradesOff": "Auto-koop upgrades uitgeschakeld."
     }
 }

@@ -17,11 +17,12 @@
         "fortune": "Zpráva Štěstí",
         "dragon": "Drak",
         "dragonSacrifice": "Drakova Oběť",
-        "buy": "Auto Nákup",
         "oneMind": "One Mind",
         "lumps": "Kousky cukru",
         "conjure": "Přivolat pečivo",
-        "luckyReserve": "Šťastná rezerva"
+        "luckyReserve": "Šťastná rezerva",
+        "buyBuildings": "Auto-nákup budov",
+        "buyUpgrades": "Auto-nákup vylepšení"
     },
     "descriptions": {
         "golden": "Automaticky kliká na Golden Cookies a Soby, jakmile se objeví. Sobi se objevují pouze během sezónních událostí.",
@@ -31,12 +32,13 @@
         "spell": "Automaticky sešle Force the Hand of Fate, když je Grimoár plně nabitý. Sdílí magii s Conjure Baked Goods – nepovol obě najednou.",
         "fortune": "Kliká na zprávy štěstí v běžícím textu a sbírá jejich odměny.",
         "dragon": "Automaticky zvyšuje úroveň draka Krumblora, jakmile to zdroje dovolí.",
-        "buy": "Kupuje nejziskovější budovu na základě poměru CPS/cena, včetně synergií.",
         "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně.",
         "lumps": "Automaticky sklidí kousek cukru, jakmile dozraje, pro zaručený zisk.",
         "conjure": "Sešle Přivolání pečiva, kdykoli má Grimoár dostatek magie, pro extra sušenky. Sdílí magii s Force the Hand of Fate – nepovol obě najednou.",
         "luckyReserve": "Udržuje zásobu sušenek (přibližně 6000× CPS), aby zlaté sušenky 'Štěstí!' vyplácely maximum. Auto Nákup utrácí pouze přebytek.",
-        "dragonSacrifice": "Umožní automatickému zvyšování úrovně draka obětovat 100 budov za úroveň pro plné vycvičení Krumblora. Ve výchozím stavu vypnuto; zobrazí se jen když je Dragon zapnutý. Pozor: Auto Buy ihned budovy zase koupí."
+        "dragonSacrifice": "Umožní automatickému zvyšování úrovně draka obětovat 100 budov za úroveň pro plné vycvičení Krumblora. Ve výchozím stavu vypnuto; zobrazí se jen když je Dragon zapnutý. Pozor: Auto Buy ihned budovy zase koupí.",
+        "buyBuildings": "Automaticky kupuje nejvýnosnější budovu (poměr produkce/cena se synergiemi). Pokud je zapnutý i Auto-nákup vylepšení, šetří a čeká, dokud je v obchodě vhodné vylepšení.",
+        "buyUpgrades": "Automaticky kupuje každé dostupné vylepšení z obchodu, kromě nevratných z Babičkopalypsy. One Mind se koupí jen když je zapnutý jeho vlastní přepínač."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie zapnuto.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Zpráva Štěstí vypnuto.",
         "dragonOn": "Auto Drak zapnuto.",
         "dragonOff": "Auto Drak vypnuto.",
-        "buyOn": "Auto Nákup zapnuto.",
-        "buyOff": "Auto Nákup vypnuto.",
         "oneMindOn": "One Mind zapnuto.",
         "oneMindOff": "One Mind vypnuto.",
         "lumpsOn": "Auto Kousky cukru zapnuto.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Šťastná rezerva zapnuta.",
         "luckyReserveOff": "Šťastná rezerva vypnuta.",
         "dragonSacrificeOn": "Dračí oběť zapnuta.",
-        "dragonSacrificeOff": "Dračí oběť vypnuta."
+        "dragonSacrificeOff": "Dračí oběť vypnuta.",
+        "buyBuildingsOn": "Auto-nákup budov zapnuto.",
+        "buyBuildingsOff": "Auto-nákup budov vypnuto.",
+        "buyUpgradesOn": "Auto-nákup vylepšení zapnuto.",
+        "buyUpgradesOff": "Auto-nákup vylepšení vypnuto."
     }
 }

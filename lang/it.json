@@ -17,11 +17,12 @@
         "fortune": "Notizia Fortuna",
         "dragon": "Drago",
         "dragonSacrifice": "Sacrificio del Drago",
-        "buy": "Auto-Acquisto",
         "oneMind": "One Mind",
         "lumps": "Zollette di zucchero",
         "conjure": "Evocare dolci da forno",
-        "luckyReserve": "Riserva Fortunata"
+        "luckyReserve": "Riserva Fortunata",
+        "buyBuildings": "Acquisto auto edifici",
+        "buyUpgrades": "Acquisto auto miglioramenti"
     },
     "descriptions": {
         "golden": "Clicca automaticamente i Golden Cookie e le Renne non appena appaiono. Le Renne compaiono solo durante gli eventi stagionali.",
@@ -31,12 +32,13 @@
         "spell": "Lancia Force the Hand of Fate automaticamente quando il Grimorio è completamente carico. Condivide la magia con Conjure Baked Goods, evita di attivarli entrambi insieme.",
         "fortune": "Clicca i messaggi di fortuna nel ticker delle notizie per raccogliere le ricompense.",
         "dragon": "Aumenta automaticamente il livello del drago Krumblor non appena le risorse lo consentono.",
-        "buy": "Acquista l'edificio più redditizio in base al rapporto CPS/prezzo, inclusi i bonus di sinergia.",
         "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela.",
         "lumps": "Raccoglie automaticamente una zolletta di zucchero non appena è matura, per un guadagno garantito.",
         "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra. Condivide la magia con Force the Hand of Fate, evita di attivarli entrambi insieme.",
         "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus.",
-        "dragonSacrifice": "Permette al potenziamento automatico del drago di sacrificare 100 edifici per livello per addestrare completamente Krumblor. Disattivato di default; appare solo quando Dragon è attivo. Attenzione: Auto Buy ricomprerà subito gli edifici sacrificati."
+        "dragonSacrifice": "Permette al potenziamento automatico del drago di sacrificare 100 edifici per livello per addestrare completamente Krumblor. Disattivato di default; appare solo quando Dragon è attivo. Attenzione: Auto Buy ricomprerà subito gli edifici sacrificati.",
+        "buyBuildings": "Compra automaticamente l'edificio più redditizio (rapporto produzione/prezzo con sinergie). Se è attivo anche l'Acquisto auto miglioramenti, risparmia e attende finché un miglioramento idoneo è ancora nel negozio.",
+        "buyUpgrades": "Compra automaticamente ogni miglioramento acquistabile del negozio, tranne quelli irreversibili della Nonnapocalisse. One Mind viene comprato solo se il suo interruttore è attivo."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie attivato.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Notizia Fortuna disattivata.",
         "dragonOn": "Auto Drago attivato.",
         "dragonOff": "Auto Drago disattivato.",
-        "buyOn": "Auto-Acquisto attivato.",
-        "buyOff": "Auto-Acquisto disattivato.",
         "oneMindOn": "One Mind attivato.",
         "oneMindOff": "One Mind disattivato.",
         "lumpsOn": "Auto Zollette di zucchero attivato.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Riserva Fortunata attivata.",
         "luckyReserveOff": "Riserva Fortunata disattivata.",
         "dragonSacrificeOn": "Sacrificio del Drago attivato.",
-        "dragonSacrificeOff": "Sacrificio del Drago disattivato."
+        "dragonSacrificeOff": "Sacrificio del Drago disattivato.",
+        "buyBuildingsOn": "Acquisto auto edifici attivato.",
+        "buyBuildingsOff": "Acquisto auto edifici disattivato.",
+        "buyUpgradesOn": "Acquisto auto miglioramenti attivato.",
+        "buyUpgradesOff": "Acquisto auto miglioramenti disattivato."
     }
 }

@@ -11,6 +11,22 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-06-25
+
+### Added
+- Auto Buy is now two independent toggles: **Auto Buy Buildings** and **Auto Buy
+  Upgrades**. When both are on, upgrades take strict priority: the mod will not buy a
+  building while any eligible upgrade is still in the store.
+
+### Changed
+- The Lucky Reserve tooltip now shows the amount currently reserved (CPS × 6000),
+  refreshed live while you hover it.
+- Removed the "Enable all" / "Disable all" buttons to keep full per-toggle control.
+
+### Fixed
+- "One mind" is no longer auto-bought unless its own toggle is on (the upgrade auto-buy
+  could previously trigger it).
+
 ## [1.3.0] - 2026-06-25
 
 ### Added
@@ -80,7 +96,8 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.4.0
 [1.3.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.3.0
 [1.2.1]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.1
 [1.2.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.0

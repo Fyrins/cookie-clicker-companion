@@ -17,11 +17,12 @@
         "fortune": "Fortune",
         "dragon": "Dragon",
         "dragonSacrifice": "Sacrifice du Dragon",
-        "buy": "Auto Achat",
         "oneMind": "One Mind",
         "lumps": "Pépites de sucre",
         "conjure": "Invoquer des produits de boulangerie",
-        "luckyReserve": "Réserve Chanceuse"
+        "luckyReserve": "Réserve Chanceuse",
+        "buyBuildings": "Achat auto bâtiments",
+        "buyUpgrades": "Achat auto améliorations"
     },
     "descriptions": {
         "golden": "Clique les Golden Cookies automatiquement dès leur apparition, ainsi que les rennes lors des événements saisonniers.",
@@ -31,12 +32,13 @@
         "spell": "Lance Force the Hand of Fate automatiquement quand le Grimoire est complètement rechargé. Partage la magie avec Conjure Baked Goods, évitez d'activer les deux en même temps.",
         "fortune": "Clique les messages de fortune dans le bandeau d'actualités pour en collecter la récompense.",
         "dragon": "Monte en niveau le dragon Krumblor automatiquement dès que les ressources le permettent.",
-        "buy": "Achète le bâtiment le plus rentable selon le ratio CPS/prix, synergies incluses.",
         "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution.",
         "lumps": "Récolte automatiquement une pépite de sucre dès qu'elle est mûre, pour un gain garanti.",
         "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires. Partage la magie avec Force the Hand of Fate, évitez d'activer les deux en même temps.",
         "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus.",
-        "dragonSacrifice": "Autorise la montée automatique du dragon à sacrifier 100 bâtiments par niveau pour entraîner Krumblor à fond. Désactivé par défaut ; n'apparaît que si Dragon est actif. Attention : l'Achat auto rachètera aussitôt les bâtiments sacrifiés."
+        "dragonSacrifice": "Autorise la montée automatique du dragon à sacrifier 100 bâtiments par niveau pour entraîner Krumblor à fond. Désactivé par défaut ; n'apparaît que si Dragon est actif. Attention : l'Achat auto rachètera aussitôt les bâtiments sacrifiés.",
+        "buyBuildings": "Achète automatiquement le bâtiment le plus rentable (ratio production/prix avec synergies). Si l'Achat auto améliorations est aussi actif, il patiente et économise tant qu'une amélioration éligible reste en magasin.",
+        "buyUpgrades": "Achète automatiquement toutes les améliorations abordables du magasin, sauf celles irréversibles de la Mamiepocalypse. One Mind n'est acheté que si son propre interrupteur est activé."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activé.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Fortune désactivé.",
         "dragonOn": "Auto Dragon activé.",
         "dragonOff": "Auto Dragon désactivé.",
-        "buyOn": "Auto Achat activé.",
-        "buyOff": "Auto Achat désactivé.",
         "oneMindOn": "One Mind activé.",
         "oneMindOff": "One Mind désactivé.",
         "lumpsOn": "Pépites de sucre automatiques activées.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Réserve Chanceuse activée.",
         "luckyReserveOff": "Réserve Chanceuse désactivée.",
         "dragonSacrificeOn": "Sacrifice du Dragon activé.",
-        "dragonSacrificeOff": "Sacrifice du Dragon désactivé."
+        "dragonSacrificeOff": "Sacrifice du Dragon désactivé.",
+        "buyBuildingsOn": "Achat auto bâtiments activé.",
+        "buyBuildingsOff": "Achat auto bâtiments désactivé.",
+        "buyUpgradesOn": "Achat auto améliorations activé.",
+        "buyUpgradesOff": "Achat auto améliorations désactivé."
     }
 }

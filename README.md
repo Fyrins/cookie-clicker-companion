@@ -17,7 +17,8 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | **Golden Cookie** | Auto-clicks golden cookies and reindeer as soon as they appear |
 | **Wrath Cookie** | Auto-clicks wrath cookies (red); appears during the Grandmapocalypse |
 | **Big Cookie** | Continuously clicks the main cookie at max speed |
-| **Auto Buy** | Buys the most profitable building (CPS/price ratio + synergies) and every affordable upgrade |
+| **Auto Buy Buildings** | Buys the most profitable building (CPS/price ratio + synergies) |
+| **Auto Buy Upgrades** | Buys every affordable store upgrade (excluding the irreversible Grandmapocalypse ones) |
 | **Wrinklers** | Pops all wrinklers once they all reach final stage, collecting their cookies |
 | **Sugar Lumps** | Harvests a sugar lump automatically once it is ripe, for a guaranteed gain |
 | **Spell** | Casts Force the Hand of Fate when the Grimoire is fully charged |

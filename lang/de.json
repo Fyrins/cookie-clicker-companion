@@ -17,11 +17,12 @@
         "fortune": "Glücksnachricht",
         "dragon": "Drache",
         "dragonSacrifice": "Drachen-Opfer",
-        "buy": "Auto-Kauf",
         "oneMind": "One Mind",
         "lumps": "Zuckerstücke",
         "conjure": "Backwaren beschwören",
-        "luckyReserve": "Glücks-Reserve"
+        "luckyReserve": "Glücks-Reserve",
+        "buyBuildings": "Auto-Kauf Gebäude",
+        "buyUpgrades": "Auto-Kauf Upgrades"
     },
     "descriptions": {
         "golden": "Klickt automatisch Golden Cookies und Rentiere, sobald sie erscheinen. Rentiere erscheinen nur während saisonaler Ereignisse.",
@@ -31,12 +32,13 @@
         "spell": "Wirkt Force the Hand of Fate automatisch, wenn das Grimoire vollständig aufgeladen ist. Teilt Magie mit Conjure Baked Goods – aktiviere nicht beide gleichzeitig.",
         "fortune": "Klickt Glücksnachrichten im Newsticker, um deren Belohnungen zu sammeln.",
         "dragon": "Steigert den Drachen Krumblor automatisch, sobald die Ressourcen es erlauben.",
-        "buy": "Kauft das profitabelste Gebäude basierend auf dem CPS/Preis-Verhältnis, einschließlich Synergieboni.",
         "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden.",
         "lumps": "Erntet automatisch ein Zuckerstück, sobald es reif ist, für einen garantierten Gewinn.",
         "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse. Teilt Magie mit Force the Hand of Fate – aktiviere nicht beide gleichzeitig.",
         "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus.",
-        "dragonSacrifice": "Erlaubt dem automatischen Drachen-Aufstieg, 100 Gebäude pro Stufe zu opfern, um Krumblor voll auszubilden. Standardmäßig aus; erscheint nur, wenn Dragon aktiv ist. Achtung: Auto Buy kauft die geopferten Gebäude sofort zurück."
+        "dragonSacrifice": "Erlaubt dem automatischen Drachen-Aufstieg, 100 Gebäude pro Stufe zu opfern, um Krumblor voll auszubilden. Standardmäßig aus; erscheint nur, wenn Dragon aktiv ist. Achtung: Auto Buy kauft die geopferten Gebäude sofort zurück.",
+        "buyBuildings": "Kauft automatisch das profitabelste Gebäude (Produktion/Preis-Verhältnis mit Synergien). Ist auch Auto-Kauf Upgrades aktiv, wartet und spart es, solange ein passendes Upgrade noch im Laden ist.",
+        "buyUpgrades": "Kauft automatisch jedes bezahlbare Laden-Upgrade, außer den unumkehrbaren der Großmama-Apokalypse. One Mind wird nur gekauft, wenn sein eigener Schalter an ist."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie aktiviert.",
@@ -53,8 +55,6 @@
         "fortuneOff": "Auto Glücksnachricht deaktiviert.",
         "dragonOn": "Auto Drache aktiviert.",
         "dragonOff": "Auto Drache deaktiviert.",
-        "buyOn": "Auto-Kauf aktiviert.",
-        "buyOff": "Auto-Kauf deaktiviert.",
         "oneMindOn": "One Mind aktiviert.",
         "oneMindOff": "One Mind deaktiviert.",
         "lumpsOn": "Auto Zuckerstücke aktiviert.",
@@ -64,6 +64,10 @@
         "luckyReserveOn": "Glücks-Reserve aktiviert.",
         "luckyReserveOff": "Glücks-Reserve deaktiviert.",
         "dragonSacrificeOn": "Drachenopfer aktiviert.",
-        "dragonSacrificeOff": "Drachenopfer deaktiviert."
+        "dragonSacrificeOff": "Drachenopfer deaktiviert.",
+        "buyBuildingsOn": "Auto-Kauf Gebäude aktiviert.",
+        "buyBuildingsOff": "Auto-Kauf Gebäude deaktiviert.",
+        "buyUpgradesOn": "Auto-Kauf Upgrades aktiviert.",
+        "buyUpgradesOff": "Auto-Kauf Upgrades deaktiviert."
     }
 }
