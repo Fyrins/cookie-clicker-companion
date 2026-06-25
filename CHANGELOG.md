@@ -11,6 +11,8 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-06-25
+
 ### Changed
 - The Spell and Conjure Baked Goods tooltips now warn that both spells draw from the
   same magic pool, so enabling them at the same time is counter-productive.
@@ -58,7 +60,8 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.1
 [1.2.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.0
 [1.1.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.0.0
