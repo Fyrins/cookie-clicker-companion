@@ -1,3 +1,22 @@
+/**
+ * Cookie Clicker Companion
+ *
+ * All-in-one automation mod: auto-click (golden / wrath / big cookie), profitability
+ * aware auto-buy, wrinkler collection, spell casting, fortune collection and dragon
+ * levelling. It automates only repetitive actions and never alters progression values,
+ * so achievements stay legitimate.
+ *
+ * Map of this file:
+ *   CSS / FEATURES   static config: the injected stylesheet and the feature catalogue
+ *   loadStrings      loads the localized UI text from lang/<code>.json
+ *   init             builds the panel, wires the toggles, hooks into the store
+ *   calculateRatio   the CPS/price + synergy profitability score for one building
+ *   updateRatios     paints the colour-coded ratios onto the store tiles
+ *   save / load      persists the enabled toggles and the ratio colours
+ *
+ * Runtime globals come from the game: `l(id)` is Cookie Clicker's getElementById
+ * helper and `Game.*` is its public API.
+ */
 Game.registerMod("cookie clicker companion", {
 
     values: new Array(20).fill(0),
@@ -68,6 +87,8 @@ Game.registerMod("cookie clicker companion", {
         setTimeout(function() {
 
             var lang = (typeof locId !== 'undefined' ? locId : (Game.language || 'EN')).toUpperCase();
+            // S = localized UI strings (labels, section titles, notifications). Tries the
+            // game language, then English, then the hard-coded English default below.
             var S    = MOD.loadStrings(lang) || MOD.loadStrings('EN');
             S = S || {
                 modEnabled: 'Cookie Clicker Companion loaded',
@@ -161,8 +182,9 @@ Game.registerMod("cookie clicker companion", {
                 spell: {
                     configKey: 'autoCastSpell',
                     t: makeToggle(function() {
-                        var mg = Game.ObjectsById[7].minigame;
-                        if (mg && mg.magic === mg.magicM) mg.castSpell(mg.spellsById[1]);
+                        // Cast "Force the Hand of Fate" once the Grimoire's magic is full.
+                        var grimoire = Game.ObjectsById[7].minigame;
+                        if (grimoire && grimoire.magic === grimoire.magicM) grimoire.castSpell(grimoire.spellsById[1]);
                     }, 500, 'spellOn', 'spellOff'),
                 },
                 fortune: {
@@ -185,27 +207,34 @@ Game.registerMod("cookie clicker companion", {
                 buy: {
                     configKey: 'autoBuy',
                     t: makeToggle(function() {
-                        var toBuy = null, maxRatio = 0;
+                        // Phase 1 — find the building with the best profitability ratio.
+                        var bestBuilding = null, bestRatio = 0;
                         for (var i in Game.Objects) {
-                            var obj   = Game.Objects[i];
-                            var ratio = MOD.calculateRatio(obj);
-                            if (!ratio || isNaN(ratio)) ratio = (obj.cps(obj) * Game.globalCpsMult / obj.price) * 100;
-                            if (ratio > maxRatio) { toBuy = obj; maxRatio = ratio; }
+                            var building = Game.Objects[i];
+                            var ratio    = MOD.calculateRatio(building);
+                            // calculateRatio returns 0 for unowned buildings; fall back to a
+                            // raw CPS/price estimate so the very first unit can still be bought.
+                            if (!ratio || isNaN(ratio)) ratio = (building.cps(building) * Game.globalCpsMult / building.price) * 100;
+                            if (ratio > bestRatio) { bestBuilding = building; bestRatio = ratio; }
                         }
+                        // Phase 2 — buy every affordable upgrade, skipping the irreversible
+                        // Elder / Grandmapocalypse ones. "One mind" is bought only when its
+                        // own toggle is active, and its confirmation prompt is auto-accepted.
                         for (var i in Game.UpgradesInStore) {
-                            var upg      = Game.UpgradesInStore[i];
-                            var upgPrice = upg.getPrice ? upg.getPrice() : upg.basePrice;
-                            if (upg.pool === 'toggle' || upgPrice >= Game.cookies) continue;
-                            if (upg.name === 'Communal brainsweep' || upg.name === 'Elder Pact' ||
-                                upg.name === 'Elder Pledge'        || upg.name === 'Elder Covenant' ||
-                                upg.name === 'Revoke Elder Covenant') continue;
-                            if (upg.name === 'One mind' && TOGGLES.onemind.t.isActive()) {
-                                upg.buy(); l('promptOption0').dispatchEvent(clickEvent);
+                            var upgrade      = Game.UpgradesInStore[i];
+                            var upgradePrice = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
+                            if (upgrade.pool === 'toggle' || upgradePrice >= Game.cookies) continue;
+                            if (upgrade.name === 'Communal brainsweep' || upgrade.name === 'Elder Pact' ||
+                                upgrade.name === 'Elder Pledge'        || upgrade.name === 'Elder Covenant' ||
+                                upgrade.name === 'Revoke Elder Covenant') continue;
+                            if (upgrade.name === 'One mind' && TOGGLES.onemind.t.isActive()) {
+                                upgrade.buy(); l('promptOption0').dispatchEvent(clickEvent);
                             } else {
-                                upg.buy();
+                                upgrade.buy();
                             }
                         }
-                        if (toBuy && toBuy.price < Game.cookies) toBuy.buy(1);
+                        // Phase 3 — buy one unit of the best building if it is affordable.
+                        if (bestBuilding && bestBuilding.price < Game.cookies) bestBuilding.buy(1);
                     }, 500, 'buyOn', 'buyOff'),
                 },
                 onemind: {
@@ -368,19 +397,19 @@ Game.registerMod("cookie clicker companion", {
                 tooltip.style.opacity = '0';
             });
 
-            // Drag
-            var isDragging = false, dragSX, dragSY, pSL, pST;
+            // Drag the panel by its header (clicks on the collapse button are ignored).
+            var isDragging = false, dragStartX, dragStartY, panelStartLeft, panelStartTop;
             header.addEventListener('mousedown', function(e) {
                 if (e.target === colBtn) return;
                 isDragging = true;
-                dragSX = e.clientX; dragSY = e.clientY;
-                pSL = panel.offsetLeft; pST = panel.offsetTop;
+                dragStartX = e.clientX; dragStartY = e.clientY;
+                panelStartLeft = panel.offsetLeft; panelStartTop = panel.offsetTop;
                 e.preventDefault();
             });
             document.addEventListener('mousemove', function(e) {
                 if (!isDragging) return;
-                panel.style.left   = Math.max(0, pSL + e.clientX - dragSX) + 'px';
-                panel.style.top    = Math.max(0, pST + e.clientY - dragSY) + 'px';
+                panel.style.left   = Math.max(0, panelStartLeft + e.clientX - dragStartX) + 'px';
+                panel.style.top    = Math.max(0, panelStartTop + e.clientY - dragStartY) + 'px';
                 panel.style.bottom = 'auto';
             });
             document.addEventListener('mouseup', function() { isDragging = false; });
@@ -408,69 +437,74 @@ Game.registerMod("cookie clicker companion", {
 
     // ── Ratio calculation (CPS/price + synergies) ──────────────────────
 
-    calculateRatio: function(me) {
-        if (!me.amount) return 0;
-        var ratio        = Number((((me.storedTotalCps / me.amount) * Game.globalCpsMult) / me.price * 100).toPrecision(3));
-        var synergiesWith = {};
-        var synergyBoost  = 0;
+    // Profitability score for one building: (CPS per owned unit × global multiplier)
+    // divided by the current price, ×100 and rounded to 3 significant figures, then
+    // scaled up by the building's active synergies. Higher means a better buy.
+    calculateRatio: function(building) {
+        if (!building.amount) return 0;
 
-        if (me.name === 'Grandma') {
+        // Extra raw CPS a synergy `partner` gains when a synergy `factor` is applied.
+        function partnerBoost(partner, factor) {
+            var partnerCps = partner.storedTotalCps * Game.globalCpsMult;
+            return partnerCps - partnerCps / (1 + factor);
+        }
+
+        var ratio        = Number((((building.storedTotalCps / building.amount) * Game.globalCpsMult) / building.price * 100).toPrecision(3));
+        var synergyBoost = 0;
+
+        if (building.name === 'Grandma') {
+            // Each owned grandma-synergy upgrade boosts its tied building.
             for (var i in Game.GrandmaSynergies) {
                 if (Game.Has(Game.GrandmaSynergies[i])) {
-                    var other = Game.Upgrades[Game.GrandmaSynergies[i]].buildingTie;
-                    var mult  = me.amount * 0.01 * (1 / (other.id - 1));
-                    var boost = (other.storedTotalCps * Game.globalCpsMult) - (other.storedTotalCps * Game.globalCpsMult) / (1 + mult);
-                    synergyBoost += boost;
-                    if (!synergiesWith[other.plural]) synergiesWith[other.plural] = 0;
-                    synergiesWith[other.plural] += mult;
+                    var partner = Game.Upgrades[Game.GrandmaSynergies[i]].buildingTie;
+                    synergyBoost += partnerBoost(partner, building.amount * 0.01 * (1 / (partner.id - 1)));
                 }
             }
-        } else if (me.name === 'Portal' && Game.Has('Elder Pact')) {
-            var other = Game.Objects['Grandma'];
-            var boost = (me.amount * 0.05 * other.amount) * Game.globalCpsMult;
-            synergyBoost += boost;
-            if (!synergiesWith[other.plural]) synergiesWith[other.plural] = 0;
-            synergiesWith[other.plural] += boost / (other.storedTotalCps * Game.globalCpsMult);
+        } else if (building.name === 'Portal' && Game.Has('Elder Pact')) {
+            // Elder Pact ties portals to the number of grandmas owned.
+            var grandmas = Game.Objects['Grandma'];
+            synergyBoost += (building.amount * 0.05 * grandmas.amount) * Game.globalCpsMult;
         }
 
-        for (var i in me.synergies) {
-            var it = me.synergies[i];
-            if (Game.Has(it.name)) {
-                var weight = 0.05;
-                var other  = it.buildingTie1;
-                if (me === it.buildingTie1) { weight = 0.001; other = it.buildingTie2; }
-                var boost = (other.storedTotalCps * Game.globalCpsMult) - (other.storedTotalCps * Game.globalCpsMult) / (1 + me.amount * weight);
-                synergyBoost += boost;
-                if (!synergiesWith[other.plural]) synergiesWith[other.plural] = 0;
-                synergiesWith[other.plural] += me.amount * weight;
+        // Generic building-to-building synergies (e.g. Bank/Temple pairs).
+        for (var i in building.synergies) {
+            var synergy = building.synergies[i];
+            if (Game.Has(synergy.name)) {
+                var isPrimary = (building === synergy.buildingTie1);
+                var partner   = isPrimary ? synergy.buildingTie2 : synergy.buildingTie1;
+                var weight    = isPrimary ? 0.001 : 0.05;
+                synergyBoost += partnerBoost(partner, building.amount * weight);
             }
         }
 
+        // Scale the base ratio by the synergies' share of total CPS.
         if (synergyBoost > 0) ratio = Number((ratio + (ratio * (synergyBoost / Game.cookiesPs))).toPrecision(3));
         return ratio;
     },
 
     // ── Ratio display update ──────────────────────────────────────────
 
-    updateRatios: function(M) {
+    updateRatios: function(mod) {
+        // First pass: compute every ratio and track the min/max for colour scaling.
         var min = Infinity, max = -Infinity;
-        for (var j in Game.Objects) {
-            var me    = Game.Objects[j];
-            var ratio = M.calculateRatio(me);
-            M.values[me.id] = ratio > 0 ? ratio : 0;
-            var el = l('ccc-ratio' + me.id);
+        for (var i in Game.Objects) {
+            var building = Game.Objects[i];
+            var ratio    = mod.calculateRatio(building);
+            mod.values[building.id] = ratio > 0 ? ratio : 0;
+            var el = l('ccc-ratio' + building.id);
             if (el && ratio > 0) {
                 el.textContent = ratio;
                 if (ratio < min) min = ratio;
                 if (ratio > max) max = ratio;
             }
         }
-        for (var j in Game.Objects) {
-            var me = Game.Objects[j];
-            var el = l('ccc-ratio' + me.id);
+        // Second pass: worst ratio = colors[0], best = colors[2], everything else colors[1].
+        for (var i in Game.Objects) {
+            var building = Game.Objects[i];
+            var el = l('ccc-ratio' + building.id);
             if (!el) continue;
-            var v = M.values[me.id];
-            el.style.color = v === min ? M.colors[0] : v === max ? M.colors[2] : M.colors[1];
+            var ratio = mod.values[building.id];
+            el.style.color = ratio === min ? mod.colors[0] : ratio === max ? mod.colors[2] : mod.colors[1];
         }
     },
 
