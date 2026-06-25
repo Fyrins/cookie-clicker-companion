@@ -11,6 +11,12 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+### Fixed
+- Dragon auto-level no longer sacrifices buildings. Krumblor levels 5-26 are paid by
+  sacrificing 100 buildings each, which the game does silently with no confirmation;
+  the mod now only levels the dragon when the next level is paid in cookies and leaves
+  the sacrifice levels to a deliberate manual choice.
+
 ### Changed
 - The two spells (Force the Hand of Fate, Conjure Baked Goods) now have their own
   "Spells" section in the panel, separate from "Automation".

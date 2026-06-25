@@ -223,12 +223,16 @@ Game.registerMod("cookie clicker companion", {
                 dragon: {
                     configKey: 'autoDragon',
                     t: makeToggle(function() {
-                        // Game.UpgradeDragon() is the game's own single-level-up routine:
-                        // it checks the next level's cost, pays it, plays the sound,
-                        // advances Game.dragonLevel and fires the "Here be dragon" win at
-                        // the final level (27). It is a no-op when the dragon is maxed out
-                        // or the next level is unaffordable, and it never touches auras.
-                        Game.UpgradeDragon();
+                        // Game.UpgradeDragon() levels Krumblor by paying the next level's
+                        // cost. IMPORTANT: levels 5-26 pay by SACRIFICING 100 buildings
+                        // each, and the routine does it silently with no confirmation.
+                        // We auto-level only when the next level is paid in cookies, so the
+                        // mod never sacrifices the player's buildings; sacrifice levels stay
+                        // a deliberate manual choice.
+                        var next = Game.dragonLevels[Game.dragonLevel];
+                        if (next && typeof next.buy === 'function' && next.buy.toString().indexOf('sacrifice') === -1) {
+                            Game.UpgradeDragon();
+                        }
                     }, 500, 'dragonOn', 'dragonOff'),
                 },
                 buy: {
