@@ -37,7 +37,7 @@
         "conjure": "Casts Conjure Baked Goods whenever the Grimoire has enough magic, for extra cookies. Shares magic with Force the Hand of Fate, so avoid enabling both at once.",
         "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum. Auto Buy spends only the surplus.",
         "dragonSacrifice": "Lets the dragon auto-level sacrifice 100 buildings per level to fully train Krumblor. Off by default; appears only while Dragon is on. Warning: Auto Buy will immediately rebuy the sacrificed buildings.",
-        "buyBuildings": "Automatically buys the most profitable building (CPS/price ratio with synergies). If Auto Buy Upgrades is also on, it saves and waits while any eligible upgrade is still in the store.",
+        "buyBuildings": "Automatically targets the single most profitable building: its CPS/price ratio with synergies, plus how close it is to its next tier milestone (which unlocks a ×2 upgrade). It saves up for that best building instead of spending on lesser ones, so it may pause while cookies accumulate. If Auto Buy Upgrades is also on, it waits while an affordable upgrade is still in the store.",
         "buyUpgrades": "Automatically buys every affordable store upgrade, except the irreversible Grandmapocalypse ones. One Mind is bought only if its own toggle is on."
     },
     "notify": {

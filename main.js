@@ -11,6 +11,7 @@
  *   loadStrings      loads the localized UI text from lang/<code>.json
  *   init             builds the panel, wires the toggles, hooks into the store
  *   calculateRatio   the CPS/price + synergy profitability score for one building
+ *   tierBundleRatio  amortised score for reaching the next tier threshold (×2 unlock)
  *   updateRatios     paints the colour-coded ratios onto the store tiles
  *   save / load      persists the enabled toggles and the ratio colours
  *
@@ -164,8 +165,16 @@ Game.registerMod("cookie clicker companion", {
                 if (upgrade.name === 'One mind') return TOGGLES.onemind.t.isActive();
                 return true;
             }
-            function hasEligibleUpgrade() {
-                return Game.UpgradesInStore.some(upgradeEligible);
+            // True when an eligible upgrade is BOTH in the store and affordable right
+            // now. Building auto-buy uses this (not mere presence) so the strict upgrade
+            // priority only defers buildings for upgrades we can actually buy this tick:
+            // an out-of-reach upgrade no longer freezes building (and milestone) progress.
+            function hasAffordableEligibleUpgrade(spendable) {
+                return Game.UpgradesInStore.some(function(upgrade) {
+                    if (!upgradeEligible(upgrade)) return false;
+                    var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
+                    return price < spendable;
+                });
             }
 
             // ── Toggle registry ───────────────────────────────────────────
@@ -279,15 +288,20 @@ Game.registerMod("cookie clicker companion", {
                     configKey: 'autoBuyBuildings',
                     t: makeToggle(function() {
                         var spendable = Game.cookies - (TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
-                        // Strict upgrade priority: while Auto Buy Upgrades is on and any
-                        // eligible upgrade is still in the store, save for it rather than
-                        // spend on a building.
-                        if (TOGGLES.buyupgrades.t.isActive() && hasEligibleUpgrade()) return;
-                        // Pick the building with the best profitability ratio.
+                        // Strict upgrade priority, but only for upgrades we can afford this
+                        // tick: defer to the upgrade auto-buy when an eligible upgrade is
+                        // actually purchasable now. An out-of-reach upgrade no longer freezes
+                        // building purchases (which would also stall milestone progress).
+                        if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return;
+                        // Target the single best building by ratio. calculateRatio already
+                        // factors milestone proximity (the amortised tier ×2 score), so this
+                        // is "best ratio, or closest to its next milestone". Buy it only once
+                        // affordable; otherwise wait and let cookies accumulate FOR it rather
+                        // than spending on lesser buildings.
                         var bestBuilding = null, bestRatio = 0;
                         for (var i in Game.Objects) {
                             var building = Game.Objects[i];
-                            var ratio    = MOD.calculateRatio(building);
+                            var ratio = MOD.calculateRatio(building);
                             // calculateRatio returns 0 for unowned buildings; fall back to a
                             // raw CPS/price estimate so the very first unit can still be bought.
                             if (!ratio || isNaN(ratio)) ratio = (building.cps(building) * Game.globalCpsMult / building.price) * 100;
@@ -561,7 +575,60 @@ Game.registerMod("cookie clicker companion", {
 
         // Scale the base ratio by the synergies' share of total CPS.
         if (synergyBoost > 0) ratio = Number((ratio + (ratio * (synergyBoost / Game.cookiesPs))).toPrecision(3));
-        return ratio;
+
+        // Take whichever is higher: buying one unit now, or committing to the
+        // next tier threshold (the ×2 unlock). See tierBundleRatio for the math.
+        return Math.max(ratio, this.tierBundleRatio(building));
+    },
+
+    // ── Threshold-aware amortisation (tier ×2 unlocks) ─────────────────
+    //
+    // The per-unit ratio above is myopic: it scores the *next single unit*
+    // and never sees the discrete ×2 jump a building gets when its count
+    // crosses a tier threshold (1, 5, 25, 50, 100, 150, … — Game.Tiers).
+    // This scores the whole "bundle": buy every unit up to the next
+    // threshold, then buy the ×2 tier upgrade. It self-regulates — far from a
+    // threshold the ×2 is spread over hundreds of costly units (bundle ≈ raw
+    // ratio), close to it the ×2 is reached cheaply (bundle ratio spikes), so
+    // taking max(perUnit, bundle) lets the auto-buy commit to a nearby palier
+    // only when it actually pays off. Returns 0 when no future tier exists.
+    tierBundleRatio: function(building) {
+        var owned = building.amount;
+        if (!owned) return 0;
+
+        // Nearest not-yet-unlocked tier upgrade, restricted to the numeric
+        // cookie tiers — the only ones that grant the ×2 building multiplier
+        // (synergy and fortune tiers are skipped).
+        var nextThreshold = Infinity, tierUpgrade = null;
+        for (var key in building.tieredUpgrades) {
+            var upgrade = building.tieredUpgrades[key];
+            var tierDef = Game.Tiers[upgrade.tier];
+            if (!tierDef || isNaN(Number(upgrade.tier))) continue; // numeric cookie tiers only
+            if (upgrade.unlocked) continue;                        // threshold already reached
+            if (tierDef.unlock <= owned) continue;                 // safety
+            if (tierDef.unlock < nextThreshold) {
+                nextThreshold = tierDef.unlock;
+                tierUpgrade   = upgrade;
+            }
+        }
+        if (!tierUpgrade) return 0;
+
+        // Cost to get there: the missing units (geometric ×1.15 sum from the
+        // current price) plus the tier upgrade itself.
+        var missingUnits  = nextThreshold - owned;
+        var buildingsCost = building.price * (Math.pow(1.15, missingUnits) - 1) / 0.15;
+        var upgradeCost   = tierUpgrade.getPrice ? tierUpgrade.getPrice() : tierUpgrade.basePrice;
+        var bundleCost    = buildingsCost + upgradeCost;
+        if (!(bundleCost > 0)) return 0;
+
+        // Gain: effective CPS grows proportionally to the count (owned →
+        // threshold), then doubles when the ×2 tier upgrade is bought.
+        var currentCps = building.storedTotalCps * Game.globalCpsMult;
+        var gain       = currentCps * (2 * nextThreshold / owned - 1);
+
+        // Same units as calculateRatio (effective CPS gain per cookie, ×100),
+        // so the two scores are directly comparable.
+        return Number((gain / bundleCost * 100).toPrecision(3));
     },
 
     // ── Ratio display update ──────────────────────────────────────────

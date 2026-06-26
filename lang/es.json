@@ -37,7 +37,7 @@
         "conjure": "Lanza Convocar productos horneados cuando el Grimorio tiene suficiente magia, para galletas extra. Comparte magia con Force the Hand of Fate, evita activar ambos a la vez.",
         "luckyReserve": "Mantiene una reserva de galletas (aproximadamente 6000× tu CPS) para que las galletas doradas '¡Suerte!' paguen al máximo. Auto-Compra gasta solo el excedente.",
         "dragonSacrifice": "Permite que la mejora automática del dragón sacrifique 100 edificios por nivel para entrenar por completo a Krumblor. Desactivado por defecto; solo aparece cuando Dragon está activo. Aviso: Auto Buy recomprará de inmediato los edificios sacrificados.",
-        "buyBuildings": "Compra automáticamente el edificio más rentable (relación producción/precio con sinergias). Si también está activa la Compra auto mejoras, ahorra y espera mientras quede una mejora válida en la tienda.",
+        "buyBuildings": "Apunta automáticamente al único edificio más rentable: su relación CPS/precio con sinergias, más lo cerca que está de su siguiente hito de rango (que desbloquea una mejora ×2). Ahorra para ese mejor edificio en lugar de gastar en los menos rentables, por lo que puede pausar mientras se acumulan las galletas. Si también está activa la Compra auto mejoras, espera mientras quede una mejora asequible en la tienda.",
         "buyUpgrades": "Compra automáticamente cada mejora asequible de la tienda, salvo las irreversibles del Abuelapocalipsis. One Mind solo se compra si su propio interruptor está activado."
     },
     "notify": {

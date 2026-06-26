@@ -17,8 +17,8 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | **Golden Cookie** | Auto-clicks golden cookies and reindeer as soon as they appear |
 | **Wrath Cookie** | Auto-clicks wrath cookies (red); appears during the Grandmapocalypse |
 | **Big Cookie** | Continuously clicks the main cookie at max speed |
-| **Auto Buy Buildings** | Buys the most profitable building (CPS/price ratio + synergies) |
-| **Auto Buy Upgrades** | Buys every affordable store upgrade (excluding the irreversible Grandmapocalypse ones) |
+| **Auto Buy Buildings** | Targets the most profitable building (CPS/price ratio, synergies, and how close it is to its next ×2 tier milestone), saving up for it rather than spending on lesser buildings |
+| **Auto Buy Upgrades** | Buys every affordable store upgrade (excluding the irreversible Grandmapocalypse ones); takes priority over buildings while an upgrade is affordable |
 | **Wrinklers** | Pops all wrinklers once they all reach final stage, collecting their cookies |
 | **Sugar Lumps** | Harvests a sugar lump automatically once it is ripe, for a guaranteed gain |
 | **Spell** | Casts Force the Hand of Fate when the Grimoire is fully charged |
@@ -31,7 +31,7 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 
 The panel is draggable and collapsible, and each feature toggles independently. Every toggle stays hidden until its in-game system is unlocked (the dragon, the Grimoire spells, sugar lumps, and so on) and appears automatically as you progress, so you only ever see what you can actually use. Settings are saved with your Cookie Clicker save file.
 
-A colour-coded CPS/price ratio is displayed on each building tile in the store to help identify the most profitable purchase at a glance.
+A colour-coded profitability score is displayed on each building tile in the store (CPS/price ratio plus how close the building is to its next ×2 tier milestone) to help identify the best purchase at a glance.
 
 <p align="center">
   <img src="docs/store-ratios.jpg" alt="Colour-coded CPS/price ratios in the building store" width="240">

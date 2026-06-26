@@ -37,7 +37,7 @@
         "conjure": "Rzuca Przywoływanie wypieków, gdy Grimuar ma wystarczająco dużo magii, dla dodatkowych ciastek. Dzieli magię z Force the Hand of Fate – nie włączaj obu jednocześnie.",
         "luckyReserve": "Utrzymuje rezerwę ciastek (około 6000× CPS), aby złote ciastka 'Szczęście!' wypłacały maksimum. Auto-Zakup wydaje tylko nadwyżkę.",
         "dragonSacrifice": "Pozwala automatycznemu ulepszaniu smoka poświęcać 100 budynków na poziom, by w pełni wyszkolić Krumblora. Domyślnie wyłączone; pojawia się tylko gdy Dragon jest włączony. Uwaga: Auto Buy natychmiast odkupi poświęcone budynki.",
-        "buyBuildings": "Automatycznie kupuje najbardziej opłacalny budynek (stosunek produkcji do ceny z synergiami). Jeśli włączony jest też Auto-zakup ulepszeń, oszczędza i czeka, dopóki w sklepie jest odpowiednie ulepszenie.",
+        "buyBuildings": "Automatycznie celuje w jeden, najbardziej opłacalny budynek: stosunek CPS/ceny z synergiami oraz to, jak blisko jest do kolejnego progu poziomu (który odblokowuje ulepszenie ×2). Oszczędza na ten najlepszy budynek zamiast wydawać na mniej opłacalne, więc może pauzować, gdy ciastka się gromadzą. Jeśli włączony jest też Auto-zakup ulepszeń, czeka, dopóki w sklepie jest dostępne ulepszenie.",
         "buyUpgrades": "Automatycznie kupuje każde dostępne ulepszenie ze sklepu, oprócz nieodwracalnych z Babciokalipsy. One Mind kupowane jest tylko, gdy włączony jest jego własny przełącznik."
     },
     "notify": {

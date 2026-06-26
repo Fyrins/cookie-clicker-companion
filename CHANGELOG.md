@@ -11,6 +11,28 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-06-26
+
+### Added
+- Threshold-aware profitability. The auto-buy and the store panel now also value how
+  close a building is to its next tier milestone (the ×2 upgrade unlocked at 1, 5, 25,
+  50, 100, 150, …). Each building is scored as the higher of its per-unit ratio and the
+  amortised cost of reaching that milestone plus its ×2 upgrade, so Auto Buy Buildings
+  commits to a nearby milestone when it pays off and ignores distant ones, where the ×2
+  would be diluted across too many costly units.
+
+### Changed
+- The Auto Buy Buildings tooltip was rewritten (in all 12 languages) to describe the
+  milestone-aware targeting and the fact that it saves up for the best building rather
+  than spending on lesser ones.
+
+### Fixed
+- Strict upgrade priority no longer freezes building purchases for unaffordable
+  upgrades. Buildings are now deferred only when an eligible upgrade is purchasable
+  *this tick*; an out-of-reach upgrade in the store used to halt all building buys
+  (and therefore milestone progress) while cookies sat idle saving for it. This was
+  the real cause behind Auto Buy Buildings appearing to stall completely.
+
 ## [1.4.0] - 2026-06-25
 
 ### Added

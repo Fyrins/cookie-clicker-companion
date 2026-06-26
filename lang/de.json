@@ -37,7 +37,7 @@
         "conjure": "Beschwört Backwaren, sobald das Grimoire genug Magie hat, für extra Kekse. Teilt Magie mit Force the Hand of Fate – aktiviere nicht beide gleichzeitig.",
         "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen. Auto-Kauf gibt nur den Überschuss aus.",
         "dragonSacrifice": "Erlaubt dem automatischen Drachen-Aufstieg, 100 Gebäude pro Stufe zu opfern, um Krumblor voll auszubilden. Standardmäßig aus; erscheint nur, wenn Dragon aktiv ist. Achtung: Auto Buy kauft die geopferten Gebäude sofort zurück.",
-        "buyBuildings": "Kauft automatisch das profitabelste Gebäude (Produktion/Preis-Verhältnis mit Synergien). Ist auch Auto-Kauf Upgrades aktiv, wartet und spart es, solange ein passendes Upgrade noch im Laden ist.",
+        "buyBuildings": "Zielt automatisch auf das einzige profitabelste Gebäude: sein CPS/Preis-Verhältnis mit Synergien, plus wie nah es am nächsten Stufenmeilenstein ist (der ein ×2-Upgrade freischaltet). Es spart für dieses beste Gebäude statt das Geld für schlechtere auszugeben und kann daher pausieren, während Kekse angehäuft werden. Ist auch Auto-Kauf Upgrades aktiv, wartet es, solange ein bezahlbares Upgrade noch im Laden ist.",
         "buyUpgrades": "Kauft automatisch jedes bezahlbare Laden-Upgrade, außer den unumkehrbaren der Großmama-Apokalypse. One Mind wird nur gekauft, wenn sein eigener Schalter an ist."
     },
     "notify": {

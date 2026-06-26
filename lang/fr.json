@@ -37,7 +37,7 @@
         "conjure": "Lance Invoquer des produits de boulangerie dès que le Grimoire dispose d'assez de magie, pour obtenir des cookies supplémentaires. Partage la magie avec Force the Hand of Fate, évitez d'activer les deux en même temps.",
         "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum. L'Auto Achat ne dépense que le surplus.",
         "dragonSacrifice": "Autorise la montée automatique du dragon à sacrifier 100 bâtiments par niveau pour entraîner Krumblor à fond. Désactivé par défaut ; n'apparaît que si Dragon est actif. Attention : l'Achat auto rachètera aussitôt les bâtiments sacrifiés.",
-        "buyBuildings": "Achète automatiquement le bâtiment le plus rentable (ratio production/prix avec synergies). Si l'Achat auto améliorations est aussi actif, il patiente et économise tant qu'une amélioration éligible reste en magasin.",
+        "buyBuildings": "Cible automatiquement le bâtiment le plus rentable : son ratio CPS/prix avec synergies, plus la proximité du prochain palier (qui débloque une amélioration ×2). Il économise pour ce meilleur bâtiment plutôt que de dépenser sur des moins rentables, et peut donc marquer une pause le temps d'accumuler des cookies. Si l'Achat auto améliorations est aussi actif, il patiente tant qu'une amélioration abordable reste en magasin.",
         "buyUpgrades": "Achète automatiquement toutes les améliorations abordables du magasin, sauf celles irréversibles de la Mamiepocalypse. One Mind n'est acheté que si son propre interrupteur est activé."
     },
     "notify": {

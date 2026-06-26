@@ -37,7 +37,7 @@
         "conjure": "Roept gebak op wanneer het Grimoire voldoende magie heeft, voor extra koekjes. Deelt magie met Force the Hand of Fate, activeer niet beide tegelijk.",
         "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen. Auto-Aankoop geeft alleen het surplus uit.",
         "dragonSacrifice": "Laat het automatisch leveln van de draak 100 gebouwen per niveau opofferen om Krumblor volledig te trainen. Standaard uit; verschijnt alleen als Dragon aanstaat. Let op: Auto Buy koopt de opgeofferde gebouwen meteen terug.",
-        "buyBuildings": "Koopt automatisch het meest winstgevende gebouw (productie/prijs-verhouding met synergieën). Als Auto-koop upgrades ook aanstaat, wacht en spaart het zolang er nog een geschikte upgrade in de winkel is.",
+        "buyBuildings": "Richt zich automatisch op het meest winstgevende gebouw: zijn CPS/prijs-verhouding met synergieën, plus hoe dicht het bij zijn volgende tier-mijlpaal staat (die een ×2-upgrade ontgrendelt). Het spaart voor dat beste gebouw in plaats van te besteden aan minder winstgevende, en kan dus pauzeren terwijl koekjes zich ophopen. Als Auto-koop upgrades ook aanstaat, wacht het zolang er nog een betaalbare upgrade in de winkel is.",
         "buyUpgrades": "Koopt automatisch elke betaalbare winkelupgrade, behalve de onomkeerbare van de Grandmapocalyps. One Mind wordt alleen gekocht als de eigen schakelaar aanstaat."
     },
     "notify": {

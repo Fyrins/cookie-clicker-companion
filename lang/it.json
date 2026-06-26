@@ -37,7 +37,7 @@
         "conjure": "Lancia Evocare dolci da forno ogni volta che il Grimorio ha abbastanza magia, per biscotti extra. Condivide la magia con Force the Hand of Fate, evita di attivarli entrambi insieme.",
         "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo. Auto-Acquisto spende solo il surplus.",
         "dragonSacrifice": "Permette al potenziamento automatico del drago di sacrificare 100 edifici per livello per addestrare completamente Krumblor. Disattivato di default; appare solo quando Dragon è attivo. Attenzione: Auto Buy ricomprerà subito gli edifici sacrificati.",
-        "buyBuildings": "Compra automaticamente l'edificio più redditizio (rapporto produzione/prezzo con sinergie). Se è attivo anche l'Acquisto auto miglioramenti, risparmia e attende finché un miglioramento idoneo è ancora nel negozio.",
+        "buyBuildings": "Punta automaticamente all'unico edificio più redditizio: il suo rapporto CPS/prezzo con sinergie, più quanto è vicino alla prossima soglia di livello (che sblocca un miglioramento ×2). Risparmia per quell'edificio migliore invece di spendere per quelli meno redditizi, quindi può mettere in pausa mentre i biscotti si accumulano. Se è attivo anche l'Acquisto auto miglioramenti, attende finché un miglioramento acquistabile è ancora nel negozio.",
         "buyUpgrades": "Compra automaticamente ogni miglioramento acquistabile del negozio, tranne quelli irreversibili della Nonnapocalisse. One Mind viene comprato solo se il suo interruttore è attivo."
     },
     "notify": {
