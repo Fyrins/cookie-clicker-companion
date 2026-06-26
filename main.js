@@ -186,7 +186,7 @@ Game.registerMod("cookie clicker companion", {
                         Game.shimmers.forEach(function(s) {
                             if ((s.type === 'golden' && s.wrath === 0) || s.type === 'reindeer') s.pop();
                         });
-                    }, 500, 'goldenOn', 'goldenOff'),
+                    }, 1000, 'goldenOn', 'goldenOff'),
                 },
                 wrath: {
                     configKey: 'autoClickWrathCookie',
@@ -194,7 +194,7 @@ Game.registerMod("cookie clicker companion", {
                         Game.shimmers.forEach(function(s) {
                             if (s.type === 'golden' && s.wrath === 1) s.pop();
                         });
-                    }, 500, 'wrathOn', 'wrathOff'),
+                    }, 1000, 'wrathOn', 'wrathOff'),
                 },
                 bigcookie: {
                     configKey: 'autoClickBigCookie',
@@ -210,7 +210,7 @@ Game.registerMod("cookie clicker companion", {
                             if (Game.wrinklers[i].phase !== 2) return;
                         }
                         Game.CollectWrinklers();
-                    }, 500, 'wrinklOn', 'wrinklOff'),
+                    }, 1000, 'wrinklOn', 'wrinklOff'),
                 },
                 lumps: {
                     configKey: 'autoLumps',
@@ -221,7 +221,7 @@ Game.registerMod("cookie clicker companion", {
                         if (Game.canLumps() && (Date.now() - Game.lumpT) >= Game.lumpRipeAge) {
                             Game.clickLump();
                         }
-                    }, 500, 'lumpsOn', 'lumpsOff'),
+                    }, 1000, 'lumpsOn', 'lumpsOff'),
                 },
                 spell: {
                     configKey: 'autoCastSpell',
@@ -229,7 +229,7 @@ Game.registerMod("cookie clicker companion", {
                         // Cast "Force the Hand of Fate" once the Grimoire's magic is full.
                         var grimoire = Game.ObjectsById[7].minigame;
                         if (grimoire && grimoire.magic === grimoire.magicM) grimoire.castSpell(grimoire.spellsById[1]);
-                    }, 500, 'spellOn', 'spellOff'),
+                    }, 1000, 'spellOn', 'spellOff'),
                 },
                 conjure: {
                     configKey: 'autoConjure',
@@ -240,13 +240,13 @@ Game.registerMod("cookie clicker companion", {
                             var spell = grimoire.spells['conjure baked goods'];
                             if (grimoire.magic >= grimoire.getSpellCost(spell)) grimoire.castSpell(spell);
                         }
-                    }, 500, 'conjureOn', 'conjureOff'),
+                    }, 1000, 'conjureOn', 'conjureOff'),
                 },
                 fortune: {
                     configKey: 'autoFortuneNews',
                     t: makeToggle(function() {
                         if (Game.TickerEffect && Game.TickerEffect.type === 'fortune') Game.tickerL.dispatchEvent(clickEvent);
-                    }, 500, 'fortuneOn', 'fortuneOff'),
+                    }, 1000, 'fortuneOn', 'fortuneOff'),
                 },
                 dragon: {
                     configKey: 'autoDragon',
@@ -263,7 +263,7 @@ Game.registerMod("cookie clicker companion", {
                         if (!isSacrifice || TOGGLES.dragonsacrifice.t.isActive()) {
                             Game.UpgradeDragon();
                         }
-                    }, 500, 'dragonOn', 'dragonOff'),
+                    }, 1000, 'dragonOn', 'dragonOff'),
                 },
                 dragonsacrifice: {
                     configKey: 'autoDragonSacrifice',
@@ -282,7 +282,7 @@ Game.registerMod("cookie clicker companion", {
                             // "One mind" opens a confirmation prompt; auto-accept it.
                             if (upgrade.name === 'One mind') l('promptOption0').dispatchEvent(clickEvent);
                         });
-                    }, 500, 'buyUpgradesOn', 'buyUpgradesOff'),
+                    }, 1000, 'buyUpgradesOn', 'buyUpgradesOff'),
                 },
                 buybuildings: {
                     configKey: 'autoBuyBuildings',
@@ -308,7 +308,7 @@ Game.registerMod("cookie clicker companion", {
                             if (ratio > bestRatio) { bestBuilding = building; bestRatio = ratio; }
                         }
                         if (bestBuilding && bestBuilding.price < spendable) bestBuilding.buy(1);
-                    }, 500, 'buyBuildingsOn', 'buyBuildingsOff'),
+                    }, 1000, 'buyBuildingsOn', 'buyBuildingsOff'),
                 },
                 onemind: {
                     configKey: 'oneMind',
