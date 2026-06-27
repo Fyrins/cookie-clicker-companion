@@ -64,10 +64,15 @@ Game.registerMod("cookie clicker companion", {
         { id: 'fortune',      labelKey: 'fortune',      section: 'auto',   unlocked: function() { return Game.Has('Fortune cookies'); } },
         { id: 'dragon',       labelKey: 'dragon',       section: 'auto',   unlocked: function() { return Game.Has('A crumbly egg'); } },
         { id: 'dragonsacrifice', labelKey: 'dragonSacrifice', section: 'auto', unlocked: function() { var r = l('ccc-row-dragon'); return Game.Has('A crumbly egg') && r && r.classList.contains('on'); } },
-        { id: 'spell',        labelKey: 'spell',        section: 'spells', unlocked: function() { return Game.isMinigameReady(Game.Objects['Wizard tower']); } },
-        { id: 'conjure',      labelKey: 'conjure',      section: 'spells', unlocked: function() { return Game.isMinigameReady(Game.Objects['Wizard tower']); } },
+        { id: 'dragonaura',   labelKey: 'dragonAura',   section: 'auto',   unlocked: function() { return Game.Has('A crumbly egg') && Game.dragonLevel >= 19; } },
+        { id: 'spell',        labelKey: 'spell',        section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Wizard tower']); } },
+        { id: 'market',       labelKey: 'market',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Bank']); } },
+        { id: 'office',       labelKey: 'office',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Bank']); } },
+        { id: 'garden',       labelKey: 'garden',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Farm']); } },
+        { id: 'pantheon',     labelKey: 'pantheon',     section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Temple']); } },
         { id: 'onemind',      labelKey: 'oneMind',      section: 'other',  unlocked: function() { return !!(Game.Upgrades['One mind'] && Game.Upgrades['One mind'].unlocked); } },
         { id: 'luckyreserve', labelKey: 'luckyReserve', section: 'other'  },
+        { id: 'devlog',       labelKey: 'devLog',       section: 'other'  }, // DEV ONLY — hidden unless DEV_MODE/devActive()
     ],
 
     loadStrings: function(langCode) {
@@ -99,17 +104,19 @@ Game.registerMod("cookie clicker companion", {
             S = S || {
                 modEnabled: 'Cookie Clicker Companion loaded',
                 enableAll: '+ Enable all', disableAll: '- Disable all',
-                sections: { clicks: 'Clicks', auto: 'Automation', spells: 'Spells', other: 'Other' },
+                sections: { clicks: 'Clicks', auto: 'Automation', minigame: 'Minigames', other: 'Other' },
                 labels: { golden:'Golden Cookie', wrath:'Wrath Cookie', bigCookie:'Big Cookie',
-                    wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Spell', conjure:'Conjure Baked Goods',
-                    fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice',
+                    wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Force the Hand of Fate',
+                    fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice', dragonAura:'Dragon Aura',
+                    market:'Stock Market', office:'Market Offices', garden:'Garden', pantheon:'Pantheon',
                     buyBuildings:'Auto Buy Buildings', buyUpgrades:'Auto Buy Upgrades',
                     oneMind:'One Mind', luckyReserve:'Lucky Reserve' },
                 descriptions: {}, notify: {
                     goldenOn:'', goldenOff:'', wrathOn:'', wrathOff:'', bigOn:'', bigOff:'',
                     wrinklOn:'', wrinklOff:'', lumpsOn:'', lumpsOff:'', spellOn:'', spellOff:'',
-                    conjureOn:'', conjureOff:'', fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
-                    dragonSacrificeOn:'', dragonSacrificeOff:'',
+                    fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
+                    dragonSacrificeOn:'', dragonSacrificeOff:'', dragonAuraOn:'', dragonAuraOff:'',
+                    marketOn:'', marketOff:'', officeOn:'', officeOff:'', gardenOn:'', gardenOff:'', pantheonOn:'', pantheonOff:'',
                     buyBuildingsOn:'', buyBuildingsOff:'', buyUpgradesOn:'', buyUpgradesOff:'',
                     oneMindOn:'', oneMindOff:'',
                     luckyReserveOn:'', luckyReserveOff:'',
@@ -155,6 +162,103 @@ Game.registerMod("cookie clicker companion", {
 
             var cookieEl = l('bigCookie');
 
+            // ── Dev mode (tuning diagnostics) — OFF in the repo/release ───────────
+            // Flip DEV_MODE to true to enable the tuning telemetry: the "🔧 Dev Log" panel
+            // toggle, per-action logging, a periodic SNAPSHOT, and the copy-paste export. The
+            // committed default is false, so all of this stays completely inert in the released
+            // mod. The in-game toggle and localStorage 'cccDev' = '1' also enable it without
+            // editing this file.
+            var DEV_MODE = false;
+            function devActive() {
+                if (DEV_MODE) return true;
+                var t = TOGGLES && TOGGLES.devlog && TOGGLES.devlog.t;
+                if (t && t.isActive()) return true;
+                try { return typeof localStorage !== 'undefined' && localStorage.getItem('cccDev') === '1'; } catch (e) { return false; }
+            }
+            // Robust Node fs accessor (NW.js / Electron expose it differently, or not at all).
+            function getFs() {
+                try { if (typeof require === 'function') return require('fs'); } catch (e) {}
+                try { if (typeof window !== 'undefined' && window.require) return window.require('fs'); } catch (e) {}
+                try { if (typeof nw !== 'undefined' && nw.require) return nw.require('fs'); } catch (e) {}
+                return null;
+            }
+            function devLogPath() {
+                var dir = ((Game.mods['cookie clicker companion'] || {}).dir || '').replace(/\/$/, '');
+                return (dir ? dir : '.') + '/ccc-devlog.txt';
+            }
+            // Dev diagnostic logger — inert unless dev mode is on. Appends to ccc-devlog.txt in
+            // the mod folder (when Node's fs is available), with window.cccDevLog and the devtools
+            // console as fallbacks.
+            function devLog(msg) {
+                if (!devActive()) return;
+                var line = '[' + new Date().toISOString() + '] ' + msg;
+                window.cccDevLog = window.cccDevLog || [];
+                window.cccDevLog.push(line);
+                try { console.log('[CCC] ' + msg); } catch (e) {}
+                try { var fs = getFs(); if (fs) fs.appendFileSync(devLogPath(), line + '\n'); } catch (e) {}
+            }
+            // One-shot diagnostic shown via an in-game notification (no console needed): reports
+            // whether Node fs is reachable, the resolved mod dir, and the result of a test write.
+            function devSelfTest() {
+                var fs  = getFs();
+                var dir = (Game.mods['cookie clicker companion'] || {}).dir || '(none)';
+                var msg = 'fs=' + (fs ? 'OK' : 'MISSING') + '<br>dir=' + dir;
+                if (fs) {
+                    try { fs.appendFileSync(devLogPath(), '[selftest ' + new Date().toISOString() + '] dir=' + dir + '\n'); msg += '<br>WROTE ' + devLogPath(); }
+                    catch (e) { msg += '<br>WRITE ERR: ' + (e && e.message ? e.message : e); }
+                }
+                Game.Notify('Dev Log self-test', msg, [16, 5]);
+                try { console.log('[CCC selftest] ' + msg); } catch (e) {}
+            }
+            // One-time rich context of the current run — logged once at session start so a log
+            // can be read standalone (which ascension/season/minigames/dragon state it came from).
+            function devContext() {
+                var mg = [];
+                ['Bank', 'Temple', 'Wizard tower', 'Farm'].forEach(function(n) {
+                    if (Game.Objects[n] && Game.isMinigameReady(Game.Objects[n])) mg.push(n);
+                });
+                var upg = 0; for (var u in Game.Upgrades) if (Game.Upgrades[u].bought) upg++;
+                devLog('CONTEXT ccVersion=' + Game.version + ' season=' + (Game.season || 'none')
+                    + ' ascensions=' + Game.resets + ' prestige=' + Math.floor(Game.prestige)
+                    + ' heavenlyChips=' + Math.floor(Game.heavenlyChips) + ' dragonLevel=' + Game.dragonLevel
+                    + ' dragonAura=' + Game.dragonAura + '/' + Game.dragonAura2
+                    + ' wrinklersMax=' + Game.getWrinklersMax() + ' upgradesBought=' + upg
+                    + ' minigames=[' + mg.join(',') + ']');
+            }
+            // Periodic state snapshot for tuning — called about once a minute from the check hook.
+            MOD._mktStarvedTicks = 0;
+            function devSnapshot() {
+                var on = [];
+                for (var id in TOGGLES) if (TOGGLES[id].t.isActive()) on.push(id);
+                var bldgs = 0;
+                for (var b in Game.Objects) bldgs += Game.Objects[b].amount;
+                var bank = Game.Objects['Bank'], mkt = bank && bank.minigame;
+                // Diagnostics: WHY each automation is (in)active.
+                var spend = Game.cookies - (TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
+                var bb = null, brat = 0;
+                for (var i in Game.Objects) {
+                    var ob = Game.Objects[i], r = MOD.calculateRatio(ob);
+                    if (!r || isNaN(r)) r = (ob.cps(ob) * Game.globalCpsMult / ob.price) * 100;
+                    if (r > brat) { brat = r; bb = ob; }
+                }
+                var bbStr = bb ? (bb.name + '@' + Beautify(bb.price) + (bb.price < spend ? '(aff)' : '(wait)')) : '-';
+                var wt = Game.Objects['Wizard tower'], gr = wt && wt.minigame;
+                var magicStr = gr ? (Math.floor(gr.magic) + '/' + Math.floor(gr.magicM)) : 'n/a';
+                var stock = 0; if (mkt) for (var s = 0; s < mkt.goodsById.length; s++) stock += mkt.goodsById[s].stock;
+                var brokerStr = mkt ? (mkt.brokers + '/' + mkt.getMaxBrokers()) : 'n/a';
+                devLog('SNAP t=' + Math.round(Game.T / Game.fps / 60) + 'm'
+                    + ' bank=' + Beautify(Game.cookies) + ' cps=' + Beautify(Game.cookiesPs)
+                    + ' rawcps=' + Beautify(Game.cookiesPsRawHighest) + ' earned=' + Beautify(Game.cookiesEarned)
+                    + ' presti=' + Math.floor(Game.prestige) + ' resets=' + Game.resets
+                    + ' bldgs=' + bldgs + ' lumps=' + Game.lumps + ' wrath=' + Game.elderWrath
+                    + ' buffs=' + Object.keys(Game.buffs).length
+                    + ' spend=' + Beautify(spend) + ' bestBldg=' + bbStr
+                    + ' magic=' + magicStr
+                    + ' mktProfit=' + (mkt ? Beautify(mkt.profit) : 'n/a') + ' mktStock=' + stock
+                    + ' brokers=' + brokerStr + ' mktStarved=' + MOD._mktStarvedTicks
+                    + ' on=[' + on.join(',') + ']');
+            }
+
             // An upgrade is eligible for auto-buy unless it is a game toggle, an
             // irreversible Elder/Grandmapocalypse upgrade, or "One mind" without its toggle.
             function upgradeEligible(upgrade) {
@@ -175,6 +279,33 @@ Game.registerMod("cookie clicker companion", {
                     var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
                     return price < spendable;
                 });
+            }
+            // True when the building/upgrade auto-buy is about to spend cookies this tick: an
+            // eligible upgrade is affordable, or the single best-ratio building (the one Auto Buy
+            // Buildings actually targets) is affordable. The Stock Market uses this to stand down,
+            // so CPS-growing purchases always win the shared cookie pool over stock trading.
+            function autoBuyWillSpend(spendable) {
+                if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return true;
+                if (TOGGLES.buybuildings.t.isActive()) {
+                    // Mirror the building auto-buy's actual decision so the market only stands down
+                    // when a building purchase really happens this tick.
+                    var best = null, bestRatio = 0, affExists = false;
+                    for (var i in Game.Objects) {
+                        var b = Game.Objects[i];
+                        var r = MOD.calculateRatio(b);
+                        if (!r || isNaN(r)) r = (b.cps(b) * Game.globalCpsMult / b.price) * 100;
+                        if (r > bestRatio) { bestRatio = r; best = b; }
+                        if (b.price < spendable) affExists = true;
+                    }
+                    if (best) {
+                        if (best.price < spendable) return true;  // buys the global best
+                        if (best.amount === 0) return false;      // SAVING for a new building unlock:
+                                                                  // nothing is bought, so the market is
+                                                                  // free to put the idle surplus to work
+                        if (affExists) return true;               // buys the best affordable instead
+                    }
+                }
+                return false;
             }
 
             // ── Toggle registry ───────────────────────────────────────────
@@ -226,21 +357,162 @@ Game.registerMod("cookie clicker companion", {
                 spell: {
                     configKey: 'autoCastSpell',
                     t: makeToggle(function() {
-                        // Cast "Force the Hand of Fate" once the Grimoire's magic is full.
+                        // Safe-cast "Force the Hand of Fate". The spell's outcome is seeded by
+                        // Game.seed + '/' + spellsCastTotal (see minigameGrimoire castSpell), so we
+                        // can simulate the win/fail draw locally BEFORE committing: re-seed exactly
+                        // as the game does, peek the first roll using the game's own getFailChance,
+                        // then restore the RNG. No side effect on future draws (pure "scrying").
                         var grimoire = Game.ObjectsById[7].minigame;
-                        if (grimoire && grimoire.magic === grimoire.magicM) grimoire.castSpell(grimoire.spellsById[1]);
+                        if (!grimoire || grimoire.magic !== grimoire.magicM) return; // wait for full magic
+                        var spell = grimoire.spellsById[1]; // Force the Hand of Fate
+                        var failChance = grimoire.getFailChance(spell);
+                        Math.seedrandom(Game.seed + '/' + grimoire.spellsCastTotal);
+                        var willWin = Math.random() < (1 - failChance);
+                        Math.seedrandom();
+                        if (willWin) {
+                            devLog('GOLDEN predicted -> cast FtHoF (failChance=' + failChance.toFixed(3) + ', N=' + grimoire.spellsCastTotal + ')');
+                            grimoire.castSpell(spell); // predicted golden cookie: cast it
+                        } else {
+                            // Predicted backfire (wrath). The seed only changes when the spell-cast
+                            // counter advances, so staying put would loop on the same losing draw
+                            // forever. Burn one cheap Conjure Baked Goods to reshuffle fate (and bank
+                            // some cookies) instead of casting the doomed FtHoF.
+                            var skip = grimoire.spells['conjure baked goods'];
+                            if (skip && grimoire.magic >= grimoire.getSpellCost(skip)) {
+                                devLog('BACKFIRE predicted -> skip FtHoF, cast Conjure (failChance=' + failChance.toFixed(3) + ', N=' + grimoire.spellsCastTotal + ')');
+                                grimoire.castSpell(skip);
+                            } else {
+                                devLog('BACKFIRE predicted -> skip, no mana for Conjure (failChance=' + failChance.toFixed(3) + ', N=' + grimoire.spellsCastTotal + ')');
+                            }
+                        }
                     }, 1000, 'spellOn', 'spellOff'),
                 },
-                conjure: {
-                    configKey: 'autoConjure',
+                market: {
+                    configKey: 'autoMarket',
                     t: makeToggle(function() {
-                        // Cast "Conjure Baked Goods" whenever enough magic is available.
-                        var grimoire = Game.ObjectsById[7].minigame;
-                        if (grimoire) {
-                            var spell = grimoire.spells['conjure baked goods'];
-                            if (grimoire.magic >= grimoire.getSpellCost(spell)) grimoire.castSpell(spell);
+                        // Conservative trading on the Bank minigame: buy below the resting (mean)
+                        // price during an uptrend, take profit on a downturn once the price beats
+                        // our buy-in. Each good's `mode` is the game's trend signal (1 slow rise,
+                        // 3 fast rise, 2 slow fall, 4 fast fall). Future prices are not predictable,
+                        // so we lean on the trend + mean-reversion, never all-in.
+                        var m = Game.Objects['Bank'].minigame;
+                        if (!m || !Game.isMinigameReady(Game.Objects['Bank'])) return;
+                        var reserve   = TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0;
+                        var spendable = Game.cookies - reserve; // never touch the Lucky reserve
+                        var overhead  = 1 + 0.01 * (20 * Math.pow(0.95, m.brokers));
+                        // Buildings and upgrades come first: only invest cookies the auto-buy is not
+                        // about to spend this tick. Selling is always allowed (it only adds cookies).
+                        var canInvest = spendable > 0 && !autoBuyWillSpend(spendable);
+                        if (!canInvest && devActive()) MOD._mktStarvedTicks++; // track buildings-first deferrals
+                        // Hire a broker (one per tick) when affordable from the investable surplus:
+                        // each broker shaves 5% off the buy overhead. Same priority as stocks, so it
+                        // never outranks buildings/upgrades and never dips into the Lucky Reserve.
+                        if (canInvest && m.brokers < m.getMaxBrokers()) {
+                            var brokerPrice = m.getBrokerPrice();
+                            if (brokerPrice <= spendable && Game.cookies >= brokerPrice) {
+                                Game.Spend(brokerPrice);
+                                m.brokers += 1;
+                                devLog('MKT broker hired -> ' + m.brokers + ' (cost=' + Beautify(brokerPrice) + ')');
+                            }
                         }
-                    }, 1000, 'conjureOn', 'conjureOff'),
+                        m.goodsById.forEach(function(good) {
+                            if (!good.active) return;
+                            var resting = m.getRestingVal(good.id);
+                            // Sell the whole stock on a downturn once it is worth more than we paid.
+                            // Selling is never gated by the Lucky Reserve or the auto-buy priority:
+                            // it only adds cookies, so taking profit always runs.
+                            if (good.stock > 0 && good.last === 0 && (good.mode === 2 || good.mode === 4) && good.val > good.prev) {
+                                var soldQty = good.stock;
+                                m.sellGood(good.id, 10000);
+                                devLog('MKT sell ' + good.name + ' mode=' + good.mode + ' val=' + good.val.toFixed(2) + ' prev=' + good.prev.toFixed(2) + ' qty=' + soldQty + ' total=' + Beautify(m.profit));
+                                return;
+                            }
+                            // Buy cheap during a rise, but only with the surplus the auto-buy will
+                            // not use this tick (CPS-growing purchases keep priority).
+                            if (good.last === 0 && (good.mode === 1 || good.mode === 3) && good.val < resting * 0.9 && canInvest) {
+                                var costPerUnit = Game.cookiesPsRawHighest * good.val * overhead;
+                                if (costPerUnit <= 0) return;
+                                var n = Math.floor((spendable * 0.25) / costPerUnit);
+                                if (n > 0 && m.buyGood(good.id, n)) {
+                                    devLog('MKT buy ' + good.name + ' mode=' + good.mode + ' val=' + good.val.toFixed(2) + ' rest=' + resting + ' qty=' + n + ' cost=' + Beautify(costPerUnit * n));
+                                }
+                            }
+                        });
+                    }, 1000, 'marketOn', 'marketOff'),
+                },
+                office: {
+                    configKey: 'autoOffice',
+                    t: makeToggle(function() {
+                        // Upgrade the Bank's offices for more stock storage. Each level sacrifices
+                        // CURSORS (always the Cursor building) and requires the Cursor building to
+                        // reach a sugar-lump level (cost = [cursorsToSacrifice, requiredCursorLevel]).
+                        // The sugar-lump gate means this never fires until you have levelled Cursors,
+                        // so it stays a deliberate, self-limiting upgrade.
+                        var m = Game.Objects['Bank'].minigame;
+                        if (!m || !Game.isMinigameReady(Game.Objects['Bank'])) return;
+                        if (m.officeLevel >= m.offices.length - 1) return; // already fully upgraded
+                        var office = m.offices[m.officeLevel], cursor = Game.Objects['Cursor'];
+                        if (office.cost && cursor.amount >= office.cost[0] && cursor.level >= office.cost[1]) {
+                            cursor.sacrifice(office.cost[0]);
+                            m.officeLevel += 1;
+                            devLog('OFFICE upgraded -> level ' + m.officeLevel + ' (sacrificed ' + office.cost[0] + ' cursors)');
+                        }
+                    }, 1000, 'officeOn', 'officeOff'),
+                },
+                garden: {
+                    configKey: 'autoGarden',
+                    t: makeToggle(function() {
+                        // Harvest mature plants near the end of their life (age >= 90 of 100) so
+                        // their value is banked, then replant the same species. The 10-point margin
+                        // absorbs a big age tick (and the speed-up from an adjacent immortal
+                        // Elderwort) so plants are not lost unharvested. Immortal plants never die,
+                        // so they are left untouched. WARNING: this destroys whatever is growing —
+                        // not for players running mutation gardens (mutations are pure RNG anyway).
+                        var m = Game.Objects['Farm'].minigame;
+                        if (!m || !Game.isMinigameReady(Game.Objects['Farm'])) return;
+                        for (var y = 0; y < 6; y++) {
+                            for (var x = 0; x < 6; x++) {
+                                var tile = m.plot[y][x];
+                                if (tile[0] < 1) continue; // empty plot
+                                var plant = m.plantsById[tile[0] - 1];
+                                if (!plant || plant.immortal) continue;
+                                if (tile[1] < plant.mature || tile[1] < 90) continue; // mature & near death only
+                                var seed = tile[0] - 1, age = tile[1], pname = plant.name;
+                                if (m.harvest(x, y, 1)) {
+                                    var replant = m.canPlant(m.plantsById[seed]);
+                                    if (replant) m.useTool(seed, x, y);
+                                    devLog('GARDEN harvest ' + pname + ' @' + x + ',' + y + ' age=' + age + (replant ? ' +replant' : ''));
+                                }
+                            }
+                        }
+                    }, 1000, 'gardenOn', 'gardenOff'),
+                },
+                pantheon: {
+                    configKey: 'autoPantheon',
+                    t: makeToggle(function() {
+                        // Set-and-forget idle line-up: Mokalsium (mother) in diamond, Jeremy
+                        // (industry) in ruby. The jade slot is left EMPTY on purpose: the only
+                        // strong idle god for it, Holobore, un-slots itself (and drains every swap)
+                        // the instant a golden cookie is clicked — which our auto-clicker does
+                        // constantly — and every other candidate carries a net CpS malus. An empty
+                        // slot is guaranteed never-negative. slotGod() alone does not spend a swap
+                        // (that happens in the UI's dropGod), so we pay one real swap per assignment
+                        // to stay legitimate, one god per tick. Once placed, the guards make this a
+                        // no-op. Swaps recharge slowly (1h/4h/16h), so it takes a couple of ticks.
+                        var m = Game.Objects['Temple'].minigame;
+                        if (!m || !Game.isMinigameReady(Game.Objects['Temple'])) return;
+                        if (m.swaps <= 0) return; // out of swaps: wait for the recharge
+                        var plan = [['mother', 0], ['industry', 1]];
+                        for (var i = 0; i < plan.length; i++) {
+                            var god  = m.gods[plan[i][0]];
+                            var slot = plan[i][1];
+                            if (!god || m.slot[slot] === god.id) continue; // missing god or already placed
+                            m.useSwap(1);          // pay the swap, mirroring dropGod
+                            m.slotGod(god, slot);
+                            devLog('PANTHEON ' + plan[i][0] + '@slot' + slot + ' swaps=' + m.swaps);
+                            return;                // one swap per tick
+                        }
+                    }, 1000, 'pantheonOn', 'pantheonOff'),
                 },
                 fortune: {
                     configKey: 'autoFortuneNews',
@@ -269,6 +541,25 @@ Game.registerMod("cookie clicker companion", {
                     configKey: 'autoDragonSacrifice',
                     t: makeBoolToggle('dragonSacrificeOn', 'dragonSacrificeOff'),
                 },
+                dragonaura: {
+                    configKey: 'autoDragonAura',
+                    t: makeToggle(function() {
+                        // Keep the primary aura on Radiant Appetite (id 15, ×2 total production),
+                        // the consensus idle aura. It is selectable from dragon level 19 (id+4).
+                        // Switching an aura legitimately SACRIFICES the highest-level building you
+                        // own — the exact cost the in-game menu charges — so we pay it and do this
+                        // only ONCE: the guard below makes it a no-op as soon as it is in place.
+                        var target = 15; // Radiant Appetite
+                        if (Game.dragonLevel < target + 4) return; // not selectable yet
+                        if (Game.dragonAura === target) return;     // already set: nothing to do
+                        var highest = 0;
+                        for (var i in Game.Objects) { if (Game.Objects[i].amount > 0) highest = Game.Objects[i]; }
+                        if (highest !== 0) highest.sacrifice(1); // pay the real switching cost
+                        Game.dragonAura = target;
+                        Game.recalculateGains = 1;
+                        devLog('DRAGON aura set Radiant Appetite (sacrificed ' + (highest !== 0 ? highest.name : 'none') + ')');
+                    }, 1000, 'dragonAuraOn', 'dragonAuraOff'),
+                },
                 buyupgrades: {
                     configKey: 'autoBuyUpgrades',
                     t: makeToggle(function() {
@@ -278,6 +569,7 @@ Game.registerMod("cookie clicker companion", {
                             if (!upgradeEligible(upgrade)) return;
                             var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
                             if (price >= spendable) return;
+                            devLog('BUY upg ' + upgrade.name + ' price=' + Beautify(price));
                             upgrade.buy();
                             // "One mind" opens a confirmation prompt; auto-accept it.
                             if (upgrade.name === 'One mind') l('promptOption0').dispatchEvent(clickEvent);
@@ -293,21 +585,37 @@ Game.registerMod("cookie clicker companion", {
                         // actually purchasable now. An out-of-reach upgrade no longer freezes
                         // building purchases (which would also stall milestone progress).
                         if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return;
-                        // Target the single best building by ratio. calculateRatio already
-                        // factors milestone proximity (the amortised tier ×2 score), so this
-                        // is "best ratio, or closest to its next milestone". Buy it only once
-                        // affordable; otherwise wait and let cookies accumulate FOR it rather
-                        // than spending on lesser buildings.
-                        var bestBuilding = null, bestRatio = 0;
+                        // Score the highest-ratio building overall AND the highest-ratio one we can
+                        // afford right now. calculateRatio already factors milestone proximity (the
+                        // amortised tier ×2 score). Decision:
+                        //   - overall best affordable        -> buy it.
+                        //   - overall best NOT affordable and it is a NEW building (amount 0)
+                        //                                     -> save for it (the unlock of a new
+                        //                                        building + its upgrade line is worth
+                        //                                        waiting for — deliberate).
+                        //   - overall best NOT affordable but already owned
+                        //                                     -> don't stall; buy the best affordable
+                        //                                        building so CPS keeps growing.
+                        var best = null, bestRatio = 0, aff = null, affRatio = 0;
                         for (var i in Game.Objects) {
                             var building = Game.Objects[i];
                             var ratio = MOD.calculateRatio(building);
                             // calculateRatio returns 0 for unowned buildings; fall back to a
-                            // raw CPS/price estimate so the very first unit can still be bought.
+                            // raw CPS/price estimate so the very first unit can still be scored.
                             if (!ratio || isNaN(ratio)) ratio = (building.cps(building) * Game.globalCpsMult / building.price) * 100;
-                            if (ratio > bestRatio) { bestBuilding = building; bestRatio = ratio; }
+                            if (ratio > bestRatio) { best = building; bestRatio = ratio; }
+                            if (building.price < spendable && ratio > affRatio) { aff = building; affRatio = ratio; }
                         }
-                        if (bestBuilding && bestBuilding.price < spendable) bestBuilding.buy(1);
+                        if (!best) return;
+                        if (best.price < spendable) {
+                            devLog('BUY bldg ' + best.name + ' #' + (best.amount + 1) + ' price=' + Beautify(best.price) + ' ratio=' + Number(bestRatio).toPrecision(3) + ' (best)');
+                            best.buy(1);
+                        } else if (best.amount === 0) {
+                            return; // new building unlock: deliberately save for it
+                        } else if (aff) {
+                            devLog('BUY bldg ' + aff.name + ' #' + (aff.amount + 1) + ' price=' + Beautify(aff.price) + ' ratio=' + Number(affRatio).toPrecision(3) + ' (affordable; ' + best.name + '@' + Beautify(best.price) + ' deferred — already owned)');
+                            aff.buy(1);
+                        }
                     }, 1000, 'buyBuildingsOn', 'buyBuildingsOff'),
                 },
                 onemind: {
@@ -317,6 +625,23 @@ Game.registerMod("cookie clicker companion", {
                 luckyreserve: {
                     configKey: 'luckyReserve',
                     t: makeBoolToggle('luckyReserveOn', 'luckyReserveOff'),
+                },
+                // DEV ONLY — toggles the tuning telemetry (ccc-devlog.txt). Inert unless DEV_MODE.
+                devlog: {
+                    configKey: 'devLog',
+                    t: (function() {
+                        var active = false;
+                        return {
+                            toggle: function() {
+                                active = !active;
+                                Game.Notify('🔧 Dev Log ' + (active ? 'ON' : 'OFF'), active ? 'Writing ccc-devlog.txt' : '', [16, 5], 3);
+                                if (active) { devSelfTest(); window.cccDevLog = []; devLog('=== SESSION START ==='); devContext(); devSnapshot(); }
+                                updateInfo();
+                            },
+                            activate: function() { if (!active) this.toggle(); },
+                            isActive: function() { return active; },
+                        };
+                    })(),
                 },
             };
 
@@ -363,6 +688,7 @@ Game.registerMod("cookie clicker companion", {
                 if (Game.T % 8 === 0) MOD.updateRatios(MOD);
                 if (Game.T % 30 === 0) updateVisibility();
                 if (tooltipRefresh && Game.T % 8 === 0) tooltipRefresh();
+                if (Game.T % (Game.fps * 60) === 0 && devActive()) devSnapshot(); // ~once a minute
             });
 
             var _origRefreshStore = Game.RefreshStore;
@@ -404,7 +730,7 @@ Game.registerMod("cookie clicker companion", {
             tooltip.id  = 'ccc-tooltip';
             document.body.appendChild(tooltip);
 
-            ['clicks', 'auto', 'spells', 'other'].forEach(function(sect, si) {
+            ['clicks', 'auto', 'minigame', 'other'].forEach(function(sect, si) {
                 if (si > 0) {
                     var sep = document.createElement('div');
                     sep.className = 'ccc-sep';
@@ -424,7 +750,7 @@ Game.registerMod("cookie clicker companion", {
 
                     var lblEl = document.createElement('span');
                     lblEl.className   = 'ccc-row-lbl';
-                    lblEl.textContent = S.labels[f.labelKey];
+                    lblEl.textContent = (f.id === 'devlog') ? '🔧 Dev Log' : S.labels[f.labelKey];
 
                     row.appendChild(lblEl);
                     row.appendChild(document.createElement('div')).className = 'ccc-tog';
@@ -455,6 +781,30 @@ Game.registerMod("cookie clicker companion", {
                         });
                     }
                 });
+            });
+
+            // DEV ONLY — dev-log export button (copy-paste channel; fs is unavailable on Steam).
+            // Hidden unless dev mode is on (toggled in updateInfo). Remove before release.
+            var devActions = document.createElement('div');
+            devActions.className = 'ccc-actions';
+            devActions.id        = 'ccc-dev-actions';
+            devActions.style.display = 'none';
+            var exportBtn = document.createElement('button');
+            exportBtn.className   = 'ccc-btn';
+            exportBtn.id          = 'ccc-export-log';
+            exportBtn.textContent = '🔧 Export Dev Log';
+            devActions.appendChild(exportBtn);
+            body.appendChild(devActions);
+            exportBtn.addEventListener('click', function() {
+                devSnapshot(); devLog('=== EXPORT ==='); // capture the end state right before exporting
+                var log  = window.cccDevLog || [];
+                var text = log.length ? log.join('\n') : '(dev log empty — enable the Dev Log toggle and play a bit)';
+                Game.Prompt('<h3>Companion Dev Log</h3>'
+                    + '<div class="block" style="font-size:11px;">' + log.length + ' lines. Select all (Cmd/Ctrl+A), copy, and paste it back.</div>'
+                    + '<textarea id="ccc-log-area" style="width:96%;height:280px;font-size:10px;" readonly>'
+                    + text.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</textarea>',
+                    [['Close', 'Game.ClosePrompt();']]);
+                var ta = l('ccc-log-area'); if (ta) { ta.focus(); ta.select(); }
             });
 
             inner.appendChild(header);
@@ -496,6 +846,7 @@ Game.registerMod("cookie clicker companion", {
                     var row = l('ccc-row-' + id);
                     if (row) row.classList.toggle('on', states[id]);
                 }
+                var da = l('ccc-dev-actions'); if (da) da.style.display = devActive() ? '' : 'none'; // DEV ONLY
                 updateVisibility();
             }
 
@@ -504,15 +855,16 @@ Game.registerMod("cookie clicker companion", {
             // every toggle change and periodically, so options appear the moment the game
             // unlocks them (or when a dependent toggle is switched on).
             function updateVisibility() {
-                var counts = { clicks: 0, auto: 0, spells: 0, other: 0 };
+                var counts = { clicks: 0, auto: 0, minigame: 0, other: 0 };
                 MOD.FEATURES.forEach(function(f) {
                     var row = l('ccc-row-' + f.id);
                     if (!row) return;
                     var shown = f.unlocked ? f.unlocked() : true;
+                    if (f.id === 'devlog') shown = devActive(); // DEV ONLY — hidden unless dev mode is on
                     row.style.display = shown ? '' : 'none';
                     if (shown) counts[f.section]++;
                 });
-                ['clicks', 'auto', 'spells', 'other'].forEach(function(sect) {
+                ['clicks', 'auto', 'minigame', 'other'].forEach(function(sect) {
                     var hdr = l('ccc-sec-hdr-' + sect);
                     var sep = l('ccc-sep-' + sect);
                     var visible = counts[sect] > 0;
@@ -539,10 +891,13 @@ Game.registerMod("cookie clicker companion", {
     calculateRatio: function(building) {
         if (!building.amount) return 0;
 
-        // Extra raw CPS a synergy `partner` gains when a synergy `factor` is applied.
-        function partnerBoost(partner, factor) {
-            var partnerCps = partner.storedTotalCps * Game.globalCpsMult;
-            return partnerCps - partnerCps / (1 + factor);
+        // Marginal raw CPS a synergy `partner` gains from ONE more unit of this building.
+        // The synergy factor is linear in the building count, so the per-unit gain is just
+        // partnerCps × perUnitWeight (the derivative). The previous version returned the
+        // synergy's TOTAL boost over all owned units, which over-weighted buildings the more
+        // you owned and skewed cross-type comparisons.
+        function partnerMarginalCps(partner, perUnitWeight) {
+            return partner.storedTotalCps * Game.globalCpsMult * perUnitWeight;
         }
 
         var ratio        = Number((((building.storedTotalCps / building.amount) * Game.globalCpsMult) / building.price * 100).toPrecision(3));
@@ -553,13 +908,13 @@ Game.registerMod("cookie clicker companion", {
             for (var i in Game.GrandmaSynergies) {
                 if (Game.Has(Game.GrandmaSynergies[i])) {
                     var partner = Game.Upgrades[Game.GrandmaSynergies[i]].buildingTie;
-                    synergyBoost += partnerBoost(partner, building.amount * 0.01 * (1 / (partner.id - 1)));
+                    synergyBoost += partnerMarginalCps(partner, 0.01 * (1 / (partner.id - 1)));
                 }
             }
         } else if (building.name === 'Portal' && Game.Has('Elder Pact')) {
-            // Elder Pact ties portals to the number of grandmas owned.
+            // Elder Pact ties portals to the number of grandmas owned (marginal per portal).
             var grandmas = Game.Objects['Grandma'];
-            synergyBoost += (building.amount * 0.05 * grandmas.amount) * Game.globalCpsMult;
+            synergyBoost += (0.05 * grandmas.amount) * Game.globalCpsMult;
         }
 
         // Generic building-to-building synergies (e.g. Bank/Temple pairs).
@@ -569,12 +924,13 @@ Game.registerMod("cookie clicker companion", {
                 var isPrimary = (building === synergy.buildingTie1);
                 var partner   = isPrimary ? synergy.buildingTie2 : synergy.buildingTie1;
                 var weight    = isPrimary ? 0.001 : 0.05;
-                synergyBoost += partnerBoost(partner, building.amount * weight);
+                synergyBoost += partnerMarginalCps(partner, weight);
             }
         }
 
-        // Scale the base ratio by the synergies' share of total CPS.
-        if (synergyBoost > 0) ratio = Number((ratio + (ratio * (synergyBoost / Game.cookiesPs))).toPrecision(3));
+        // Scale the base ratio by the synergies' share of total CPS (guard the start of a run
+        // where cookiesPs is still 0).
+        if (synergyBoost > 0 && Game.cookiesPs > 0) ratio = Number((ratio + (ratio * (synergyBoost / Game.cookiesPs))).toPrecision(3));
 
         // Take whichever is higher: buying one unit now, or committing to the
         // next tier threshold (the ×2 unlock). See tierBundleRatio for the math.

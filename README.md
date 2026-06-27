@@ -21,11 +21,15 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | **Auto Buy Upgrades** | Buys every affordable store upgrade (excluding the irreversible Grandmapocalypse ones); takes priority over buildings while an upgrade is affordable |
 | **Wrinklers** | Pops all wrinklers once they all reach final stage, collecting their cookies |
 | **Sugar Lumps** | Harvests a sugar lump automatically once it is ripe, for a guaranteed gain |
-| **Spell** | Casts Force the Hand of Fate when the Grimoire is fully charged |
-| **Conjure Baked Goods** | Casts Conjure Baked Goods whenever enough Grimoire magic is available |
+| **Spell** | Safe-casts Force the Hand of Fate: predicts the outcome from the game seed and only casts when a golden cookie is guaranteed, skipping predicted backfires (on a predicted backfire it casts a cheap Conjure instead, to reshuffle the draw) |
 | **Fortune** | Clicks fortune messages in the news ticker to collect rewards |
 | **Dragon** | Levels up Krumblor automatically, using only cookie-paid levels by default |
 | **Dragon Sacrifice** | Opt-in (shown while Dragon is on): also levels the sacrifice levels, which cost buildings |
+| **Dragon Aura** | Opt-in: sets the primary aura to Radiant Appetite (×2 CPS) at dragon level 19, paying the real building-sacrifice cost once |
+| **Stock Market** | Trades the Bank minigame: buys below the mean price on an uptrend, sells on a downturn above your buy-in, and hires brokers to cut fees. Building and upgrade purchases keep priority — it only invests the leftover surplus above the Lucky Reserve |
+| **Market Offices** | Opt-in: upgrades the Bank's offices for more stock storage (bigger trades) by sacrificing cursors, gated behind the Cursor building's sugar-lump level |
+| **Garden** | Harvests mature plants just before they wither and replants them, for passive farm income (leaves immortal plants alone) |
+| **Pantheon** | Slots a set-and-forget idle line-up (Mokalsium + Jeremy), spending real worship swaps |
 | **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Grandmapocalypse path) |
 | **Lucky Reserve** | Keeps about CPS × 6000 banked so Golden "Lucky!" cookies pay their maximum |
 
@@ -86,11 +90,41 @@ facts below (all verified against the game's source):
   permanently rules out *Neverclick* and *True Neverclick*; the auto-buy rules out
   *Hardcore*. The mod also resets the click-speed counter, so it will not grant
   *Uncanny clicker*.
+- **Minigame achievements unlock on their own.** The Stock Market, Garden and spell
+  automations trigger the *real* in-game actions, so the game legitimately grants their
+  achievements (*Buy buy buy*, *Liquid assets*, *Botany enthusiast*, *A wizard is you*,
+  …) without you doing the work — same situation as the auto-buy and its building
+  achievements. The Stock Market's profits are real cookies the game itself credits.
+- **The Pantheon and Dragon Aura pay their real costs.** Rather than bypassing them, the
+  mod deliberately spends a real worship swap to slot a god, and sacrifices your highest
+  building to switch an aura — exactly what the in-game menus charge. No free shortcuts.
+- **Force the Hand of Fate uses RNG foreknowledge.** Its safe-cast reads the game's
+  public seed to predict the outcome and only casts on a win (this is "scrying", a known
+  community technique — the [FtHoF Planner](https://joseph3079.github.io/FtHoF-Planner-v5/)
+  is a public tool that does the same). The game neither forbids nor detects it, and
+  nothing is injected, but it is foreknowledge — disclosed here in full.
 - **Not for leaderboards or records.** Competitive and vanilla play forbid third-party
   automation. Use this for a relaxed or idle playthrough, not for a ranked run.
 
 In short: it keeps your save legitimate to the game, but it does the playing for you.
 Use it because it is convenient, not to claim achievements you did not earn.
+
+## Credits & resources
+
+The automation logic is informed by the Cookie Clicker community's strategy resources.
+The [External Resources hub](https://cookieclicker.wiki.gg/wiki/External_Resources) on the
+wiki indexes most of them. The ones that directly shaped this mod's features:
+
+- **[FtHoF Planner](https://joseph3079.github.io/FtHoF-Planner-v5/)** — outcome prediction
+  for Force the Hand of Fate, the basis for the Spell safe-cast.
+- **[Building/Upgrade Calculator](https://coderpatsy.bitbucket.io/cookies/cookies.html)** —
+  purchase-efficiency reference behind the Auto Buy profitability score.
+- **[Pantheon Setups](https://cookieclicker.wiki.gg/wiki/Pantheon#Setups)** — the idle
+  god line-up used by the Pantheon toggle.
+- **[Garden minigame guide](https://docs.google.com/document/d/1ahOem9Lsg83gAdAMo6Cujxgcrr4c2JA9Fy8qEzw8E2I/)** —
+  plant timing and harvest strategy behind the Garden toggle.
+
+These are third-party resources, not affiliated with this mod or with Cookie Clicker.
 
 ## Changelog
 

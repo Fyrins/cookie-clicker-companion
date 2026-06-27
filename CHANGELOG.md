@@ -11,6 +11,59 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-06-27
+
+### Added
+- New **Minigames** panel section with three automations:
+  - **Stock Market** — trades the Bank minigame: buys a stock below its mean price on an
+    uptrend and sells the whole stock on a downturn once it beats your buy-in. Building and
+    upgrade auto-buy keep priority over the shared cookie pool, so the market only invests
+    the leftover surplus above the Lucky Reserve.
+  - **Garden** — harvests mature plants just before they wither and replants the same
+    species for passive farm income; immortal plants are left untouched.
+  - **Pantheon** — slots a set-and-forget idle line-up (Mokalsium in diamond, Jeremy in
+    ruby) by spending real worship swaps. The jade slot is deliberately left empty: the
+    only strong idle god for it, Holobore, un-slots itself and drains every swap the
+    instant a golden cookie is clicked — which the auto-clicker does constantly.
+- **Dragon Aura** toggle (opt-in): sets the primary aura to Radiant Appetite (×2 cookie
+  production) once it is selectable at dragon level 19, paying the real building-sacrifice
+  cost once, exactly as the in-game menu does.
+- **Market Offices** toggle (opt-in): upgrades the Bank's offices for more stock storage
+  (bigger trades) by sacrificing cursors, gated behind the Cursor building's sugar-lump level.
+- The Stock Market now also hires **brokers** from the surplus to cut its trading overhead.
+
+### Changed
+- **Auto Buy Buildings keeps growing instead of stalling.** When the top-ratio building is one
+  you already own but can't afford yet, it now buys the best *affordable* building so your CPS
+  keeps rising; it only saves up when the top target is a brand-new building unlock (worth the
+  wait for the new building and its upgrade line).
+- The **Lucky Reserve** tooltip now states it is a deliberate savings mode that pauses buying
+  until the reserve is reached, not a passive bonus.
+- **Force the Hand of Fate is now safe-cast.** The Spell toggle predicts the outcome from
+  the game's seed (the same "scrying" the community FtHoF Planner uses) and only casts when
+  a golden cookie is guaranteed, skipping predicted backfires (wrath cookies). On a
+  predicted backfire it burns one cheap Conjure to advance the seed instead of stalling.
+- Tooltips and notifications updated in all 12 languages for the new toggles and the
+  changed spell behaviour.
+- README: documented the new features, expanded the "Is this cheating?" disclaimer
+  (minigame achievements unlock on their own, the Pantheon and Dragon Aura pay their real
+  costs, and Force the Hand of Fate uses RNG foreknowledge), and added a Credits &
+  resources section linking the community sources that informed these features.
+
+### Removed
+- Removed the standalone **Conjure Baked Goods** toggle. Now that Force the Hand of Fate is
+  a risk-free safe-cast, it already casts Conjure on predicted backfires, so a separate
+  Conjure toggle was redundant. Conjure is still available through the game's own Grimoire.
+
+### Fixed
+- Auto-buy synergy scoring used the synergy's *total* boost across all owned units, which
+  over-weighted a building the more of it you owned and skewed comparisons between building
+  types. It now uses the correct marginal (per-unit) synergy gain. Added a guard against a
+  divide-by-zero when CPS is still 0 at the very start of a run.
+- The Stock Market's "buildings first" deferral now mirrors the auto-buy's real decision, so
+  it no longer drains the cookie bank while the auto-buy is buying affordable buildings. While
+  saving for a brand-new building it puts the idle surplus to work instead of hoarding it.
+
 ## [1.5.0] - 2026-06-26
 
 ### Added
@@ -118,7 +171,9 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.6.0
+[1.5.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.5.0
 [1.4.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.4.0
 [1.3.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.3.0
 [1.2.1]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.2.1
