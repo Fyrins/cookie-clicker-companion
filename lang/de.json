@@ -6,7 +6,8 @@
         "clicks": "Klicks",
         "auto": "Automatisierung",
         "minigame": "Minispiele",
-        "other": "Sonstiges"
+        "other": "Sonstiges",
+        "strategy": "Strategie"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Börsenmarkt",
         "office": "Börsenbüros",
         "garden": "Garten",
+        "cloverGarden": "Goldener-Klee-Garten",
         "pantheon": "Pantheon",
         "oneMind": "One Mind",
         "lumps": "Zuckerstücke",
@@ -40,13 +42,15 @@
         "market": "Handelt für dich auf dem Börsenmarkt der Bank: kauft eine Aktie unterhalb ihres Durchschnittspreises, wenn sie im Aufwärtstrend ist, verkauft den gesamten Bestand bei einem Abwärtstrend, sobald er über dem Einstiegspreis liegt, und stellt Broker ein, um die Handelsgebühren zu senken. Gebäude und Upgrades behalten Priorität, daher investiert es nur den Überschuss über der Glücks-Reserve; Verkaufen ist immer erlaubt und Gewinne zählen zu den verdienten Keksen. Investieren ist mit Risiken verbunden: vergangene Kekse sind keine Garantie für künftige Kekse. Handle verantwortungsbewusst.",
         "office": "Verbessert die Büros der Bank für mehr Aktienlagerung, damit der Markt größere Positionen halten und größere Trades verbuchen kann. Jedes Upgrade opfert Cursor und erfordert, dass das Cursor-Gebäude eine Zuckerstück-Stufe erreicht, daher wird es erst ausgelöst, sobald du deine Cursor aufgestuft hast. Opt-in.",
         "garden": "Erntet reife Gartenpflanzen kurz vor dem Verwelken und pflanzt dieselbe Art wieder ein, für passives Farmgeld. Unsterbliche Pflanzen bleiben unberührt. Warnung: Das zerstört alles, was gerade wächst – nicht verwenden, während Mutationen gezüchtet werden.",
+        "cloverGarden": "Füllt den gesamten Garten mit Goldenem Klee und hält ihn gepflegt, für einen dauerhaften Bonus auf die Häufigkeit goldener Kekse (+3 % pro reifem Feld). Benötigt das Upgrade Turbo-charged soil (kostenloses Pflanzen) und den freigeschalteten Goldenen-Klee-Samen — andernfalls bleibt der Schalter verborgen und es werden keine Kekse ausgegeben. Verwende Clay-Erde für +25 % Effekt. ACHTUNG: Es erntet und ersetzt deine anderen (nicht unsterblichen) Pflanzen, um das Beet umzuwandeln — nicht verwenden, wenn du Mutationen züchtest.",
         "pantheon": "Belegt das Pantheon des Tempels automatisch mit einer festgelegten Idle-Aufstellung. Es verbraucht echte Gebetsslot-Wechsel (die sich langsam aufladen), einen pro Tick, und lässt das Pantheon danach in Ruhe.",
         "oneMind": "Erlaubt Auto-Kauf, das Upgrade 'One Mind' zu kaufen (Elder-Covenant-Pfad). Mit Vorsicht verwenden.",
         "lumps": "Erntet automatisch ein Zuckerstück, sobald es reif ist, für einen garantierten Gewinn.",
         "luckyReserve": "Hält eine Keks-Reserve (ca. 6000× CPS), damit Goldene 'Glück!'-Kekse ihr Maximum auszahlen – ein bewusster Sparmodus. Solange deine Bank unter der Reserve liegt, hört der Mod auf zu kaufen (Gebäude, Upgrades, Aktien), bis sie erreicht ist, und gibt dann nur den Überschuss darüber aus. Am besten einschalten, um auf ein Glück zu sparen, nicht während einer Wachstumsphase.",
         "dragonSacrifice": "Erlaubt dem automatischen Drachen-Aufstieg, 100 Gebäude pro Stufe zu opfern, um Krumblor voll auszubilden. Standardmäßig aus; erscheint nur, wenn Dragon aktiv ist. Achtung: Auto Buy kauft die geopferten Gebäude sofort zurück.",
         "buyBuildings": "Zielt automatisch auf das einzige profitabelste Gebäude: sein CPS/Preis-Verhältnis mit Synergien, plus wie nah es am nächsten Stufenmeilenstein ist (der ein ×2-Upgrade freischaltet). Es spart für dieses beste Gebäude statt das Geld für schlechtere auszugeben und kann daher pausieren, während Kekse angehäuft werden. Ist auch Auto-Kauf Upgrades aktiv, wartet es, solange ein bezahlbares Upgrade noch im Laden ist.",
-        "buyUpgrades": "Kauft automatisch jedes bezahlbare Laden-Upgrade, außer den unumkehrbaren der Großmama-Apokalypse. One Mind wird nur gekauft, wenn sein eigener Schalter an ist."
+        "buyUpgrades": "Kauft automatisch jedes bezahlbare Laden-Upgrade, außer den unumkehrbaren der Großmama-Apokalypse. One Mind wird nur gekauft, wenn sein eigener Schalter an ist.",
+        "strategy": "Voreinstellungs-Selektor, der die Strategie-Schalter auf einmal konfiguriert. Grind: reines CPS-Wachstum — kauft Gebäude und Upgrades, kein Börsenmarkt oder Reserve. Investor: maximales Einkommen — Glücks-Reserve, aggressiver Börsenmarkt, Büros, Broker und Pantheon. Manual: unabhängige Schalter, ändert nichts. Das manuelle Bearbeiten eines Schalters setzt den Selektor auf Manual zurück."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie aktiviert.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Börsenbüros deaktiviert.",
         "gardenOn": "Auto Garten aktiviert.",
         "gardenOff": "Auto Garten deaktiviert.",
+        "cloverGardenOn": "Goldener-Klee-Garten aktiviert.",
+        "cloverGardenOff": "Goldener-Klee-Garten deaktiviert.",
         "pantheonOn": "Auto Pantheon aktiviert.",
         "pantheonOff": "Auto Pantheon deaktiviert.",
         "oneMindOn": "One Mind aktiviert.",

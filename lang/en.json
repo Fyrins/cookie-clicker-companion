@@ -6,7 +6,8 @@
         "clicks": "Clicks",
         "auto": "Automation",
         "minigame": "Minigames",
-        "other": "Other"
+        "other": "Other",
+        "strategy": "Strategy"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Stock Market",
         "office": "Market Offices",
         "garden": "Garden",
+        "cloverGarden": "Golden Clover Garden",
         "pantheon": "Pantheon",
         "oneMind": "One Mind",
         "lumps": "Sugar Lumps",
@@ -40,13 +42,15 @@
         "market": "Trades the Bank's stock market for you: buys a stock below its mean price while it trends up, sells the whole stock on a downturn once it beats your buy-in, and hires brokers to cut trading fees. Buildings and upgrades keep priority, so it only invests the surplus above the Lucky Reserve; selling is always allowed and profits count toward cookies earned. Investing carries risks: past cookies are no guarantee of future cookies. Trade responsibly.",
         "office": "Upgrades the Bank's offices for more stock storage, so the market can hold bigger positions and bank bigger trades. Each upgrade sacrifices cursors and requires the Cursor building to reach a sugar-lump level, so it only ever triggers once you have levelled your Cursors. Opt-in.",
         "garden": "Harvests mature garden plants just before they wither and replants the same species, for passive farm income. Immortal plants are left untouched. Warning: this destroys whatever is growing, so do not use it while breeding mutations.",
+        "cloverGarden": "Fills the whole garden with Golden clover and keeps it maintained, for a large permanent boost to golden cookie frequency (+3% per mature tile). Requires the Turbo-charged soil upgrade (free planting) and the Golden clover seed unlocked — the toggle stays hidden otherwise, and it never spends cookies. Use Clay soil for +25% effect. WARNING: it harvests and replaces your other (non-immortal) plants to convert the plot — don't use it on a garden you're cross-breeding.",
         "pantheon": "Slots a set-and-forget idle line-up in the Temple's pantheon. It spends real worship swaps (which recharge slowly), one per tick, then leaves the pantheon alone.",
         "oneMind": "Allows Auto Buy to purchase the 'One Mind' upgrade (Elder Covenant path). Use with caution.",
         "lumps": "Harvests a sugar lump automatically once it is ripe, for a guaranteed gain.",
         "luckyReserve": "Keeps a cookie reserve (about 6000x your CPS) so Golden 'Lucky!' cookies pay their maximum — a deliberate savings mode. While your bank is below the reserve, the mod stops buying (buildings, upgrades, stocks) until it is reached, then spends only the surplus above it. Best turned on to save up for a Lucky, not during a growth phase.",
         "dragonSacrifice": "Lets the dragon auto-level sacrifice 100 buildings per level to fully train Krumblor. Off by default; appears only while Dragon is on. Warning: Auto Buy will immediately rebuy the sacrificed buildings.",
         "buyBuildings": "Automatically targets the single most profitable building: its CPS/price ratio with synergies, plus how close it is to its next tier milestone (which unlocks a ×2 upgrade). It saves up for that best building instead of spending on lesser ones, so it may pause while cookies accumulate. If Auto Buy Upgrades is also on, it waits while an affordable upgrade is still in the store.",
-        "buyUpgrades": "Automatically buys every affordable store upgrade, except the irreversible Grandmapocalypse ones. One Mind is bought only if its own toggle is on."
+        "buyUpgrades": "Automatically buys every affordable store upgrade, except the irreversible Grandmapocalypse ones. One Mind is bought only if its own toggle is on.",
+        "strategy": "Preset selector that configures the strategy toggles in one move. Grind: pure CPS growth — buys buildings and upgrades, no Stock Market or reserve. Investor: max income — Lucky Reserve, aggressive Stock Market, offices, brokers and Pantheon. Manual: independent toggles, changes nothing. Editing a toggle by hand switches the selector back to Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie enabled.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Market Offices disabled.",
         "gardenOn": "Auto Garden enabled.",
         "gardenOff": "Auto Garden disabled.",
+        "cloverGardenOn": "Golden Clover Garden on.",
+        "cloverGardenOff": "Golden Clover Garden off.",
         "pantheonOn": "Auto Pantheon enabled.",
         "pantheonOff": "Auto Pantheon disabled.",
         "oneMindOn": "One Mind enabled.",

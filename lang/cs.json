@@ -6,7 +6,8 @@
         "clicks": "Kliknutí",
         "auto": "Automatizace",
         "minigame": "Minihry",
-        "other": "Ostatní"
+        "other": "Ostatní",
+        "strategy": "Strategie"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Burza",
         "office": "Kanceláře burzy",
         "garden": "Zahrada",
+        "cloverGarden": "Zahrada Zlatého jetele",
         "pantheon": "Pantheon",
         "oneMind": "One Mind",
         "lumps": "Kousky cukru",
@@ -40,13 +42,15 @@
         "market": "Obchoduje za vás na Bankovní burze: nakupuje akcie pod průměrnou cenou, když rostou, prodává celý podíl při poklesu, jakmile překoná vaši nákupní cenu, a najímá makléře, aby snížil obchodní poplatky. Budovy a vylepšení mají přednost, takže investuje pouze přebytek nad Šťastnou rezervou; prodej je vždy povolen a zisky se počítají k vydělaným sušenkám. Investování s sebou nese rizika: minulé sušenky nejsou zárukou budoucích sušenek. Obchodujte zodpovědně.",
         "office": "Vylepšuje kanceláře Banky pro větší úložiště akcií, takže trh může držet větší pozice a zaúčtovat větší obchody. Každé vylepšení obětuje kurzory a vyžaduje, aby budova Kurzor dosáhla úrovně cukrové kostky, takže se spustí až poté, co své Kurzory vylepšíte. Opt-in.",
         "garden": "Sklízí zralé zahradní rostliny těsně před uvadnutím a znovu zasadí stejný druh, pro pasivní příjem z farmy. Nesmrtelné rostliny jsou ponechány beze změny. Varování: tím se zničí vše, co roste — nepoužívejte jej při šlechtění mutací.",
+        "cloverGarden": "Zaplní celou zahradu Zlatým jetelem a udržuje ji, pro velký trvalý bonus k četnosti zlatých sušenek (+3 % za každou zralou dlaždici). Vyžaduje vylepšení Turbo-charged soil (bezplatné sázení) a odemčené semeno Zlatého jetele — jinak zůstane přepínač skrytý a nikdy neutratí žádné sušenky. Použijte Clay půdu pro +25% efekt. VAROVÁNÍ: sklízí a nahrazuje ostatní (nesmrtelné) rostliny, aby přeměnil záhon — nepoužívejte na zahradu, kde křížíte mutace.",
         "pantheon": "Automaticky obsadí Panteon Chrámu nastavenou idle sestavou. Spotřebovává skutečné výměny modliteb (které se pomalu dobíjejí), jednu za tik, a poté Panteon nechá na pokoji.",
         "oneMind": "Povoluje Auto Nákupu zakoupit vylepšení 'One Mind' (cesta Elder Covenant). Používejte opatrně.",
         "lumps": "Automaticky sklidí kousek cukru, jakmile dozraje, pro zaručený zisk.",
         "luckyReserve": "Udržuje zásobu sušenek (přibližně 6000× CPS), aby zlaté sušenky 'Štěstí!' vyplácely maximum — záměrný spořicí režim. Dokud je vaše banka pod rezervou, mod přestane nakupovat (budovy, vylepšení, akcie), dokud jí není dosaženo, a poté utrácí pouze přebytek nad ní. Nejlepší je jej zapnout, když si šetříte na Štěstí, ne během fáze růstu.",
         "dragonSacrifice": "Umožní automatickému zvyšování úrovně draka obětovat 100 budov za úroveň pro plné vycvičení Krumblora. Ve výchozím stavu vypnuto; zobrazí se jen když je Dragon zapnutý. Pozor: Auto Buy ihned budovy zase koupí.",
         "buyBuildings": "Automaticky cílí na jediný nejvýnosnější typ budovy: zvažuje poměr CPS/cena se synergiemi i blízkost k dalšímu vývojovému milníku (který odemkne vylepšení ×2). Šetří na tuto nejlepší budovu místo utrácení za méně výhodné, takže může dočasně pozastavit nákupy, dokud se sušenky hromadí. Pokud je zapnutý i Auto-nákup vylepšení, čeká, dokud je v obchodě dostupné vylepšení.",
-        "buyUpgrades": "Automaticky kupuje každé dostupné vylepšení z obchodu, kromě nevratných z Babičkopalypsy. One Mind se koupí jen když je zapnutý jeho vlastní přepínač."
+        "buyUpgrades": "Automaticky kupuje každé dostupné vylepšení z obchodu, kromě nevratných z Babičkopalypsy. One Mind se koupí jen když je zapnutý jeho vlastní přepínač.",
+        "strategy": "Selektor předvoleb, který nastaví přepínače strategie najednou. Grind: čistý růst CPS — nakupuje budovy a vylepšení, bez burzy ani rezervy. Investor: maximální příjem — Šťastná rezerva, agresivní burza, kanceláře, makléři a Pantheon. Manual: nezávislé přepínače, nic nemění. Ruční úprava přepínače vrátí selektor zpět na Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie zapnuto.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Kanceláře burzy vypnuty.",
         "gardenOn": "Auto Zahrada zapnuta.",
         "gardenOff": "Auto Zahrada vypnuta.",
+        "cloverGardenOn": "Zahrada Zlatého jetele zapnuta.",
+        "cloverGardenOff": "Zahrada Zlatého jetele vypnuta.",
         "pantheonOn": "Auto Pantheon zapnut.",
         "pantheonOff": "Auto Pantheon vypnut.",
         "oneMindOn": "One Mind zapnuto.",

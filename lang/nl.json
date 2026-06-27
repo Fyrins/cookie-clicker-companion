@@ -6,7 +6,8 @@
         "clicks": "Klikken",
         "auto": "Automatisering",
         "minigame": "Minigames",
-        "other": "Overige"
+        "other": "Overige",
+        "strategy": "Strategie"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Aandelenmarkt",
         "office": "Beurskantoren",
         "garden": "Tuin",
+        "cloverGarden": "Gouden Klavertuin",
         "pantheon": "Pantheon",
         "oneMind": "One Mind",
         "lumps": "Suikerklontjes",
@@ -40,13 +42,15 @@
         "market": "Handelt de aandelenmarkt van de Bank voor je: koopt een aandeel onder de gemiddelde prijs terwijl het stijgt, verkoopt het gehele aandeel bij een neergang zodra het je aankoopprijs overtreft, en huurt makelaars in om de transactiekosten te verlagen. Gebouwen en upgrades houden prioriteit, dus het investeert alleen het surplus boven de Geluksreserve; verkopen mag altijd en winsten tellen mee als verdiende koekjes. Investeren brengt risico's met zich mee: koekjes uit het verleden bieden geen garantie voor koekjes in de toekomst. Beleg verantwoord.",
         "office": "Verbetert de kantoren van de Bank voor meer aandelenopslag, zodat de markt grotere posities kan aanhouden en grotere transacties kan boeken. Elke upgrade offert cursors op en vereist dat het Cursor-gebouw een suikerklontjesniveau bereikt, dus het wordt pas geactiveerd zodra je je Cursors hebt geüpgraded. Opt-in.",
         "garden": "Oogst rijpe tuinplanten net voordat ze verwelken en herplant dezelfde soort, voor passief boerderij-inkomen. Onsterfelijke planten worden met rust gelaten. Waarschuwing: dit vernietigt alles wat er groeit, dus gebruik het niet terwijl je mutaties kweekt.",
+        "cloverGarden": "Vult de hele tuin met Gouden Klaver en houdt deze onderhouden, voor een grote permanente bonus op de frequentie van gouden koekjes (+3% per rijpe tegel). Vereist het upgrade Turbo-charged soil (gratis planten) en het vrijgeschalten Gouden Klaver-zaad — anders blijft de schakelaar verborgen en worden er nooit koekjes uitgegeven. Gebruik Clay-grond voor +25% effect. LET OP: het oogst en vervangt je andere (niet-onsterfelijke) planten om het perceel om te zetten — gebruik het niet in een tuin waar je kruisingen kweekt.",
         "pantheon": "Plaatst automatisch een vaste idle-opstelling in het pantheon van de Tempel. Het verbruikt echte aanbiddingswissels (die langzaam opladen), één per tick, en laat het pantheon daarna met rust.",
         "oneMind": "Staat Auto-Aankoop toe om het upgrade 'One Mind' te kopen (Elder Covenant-pad). Gebruik met voorzichtigheid.",
         "lumps": "Oogst automatisch een suikerklontje zodra het rijp is, voor een gegarandeerde opbrengst.",
         "luckyReserve": "Houdt een koekjesreserve aan (ca. 6000× CPS), zodat Gouden 'Geluk!'-koekjes hun maximum uitbetalen — een bewuste spaarmodus. Zolang je bank onder de reserve zit, stopt de mod met kopen (gebouwen, upgrades, aandelen) totdat deze bereikt is, en geeft daarna alleen het surplus erboven uit. Het beste aan te zetten om te sparen voor een Geluk, niet tijdens een groeifase.",
         "dragonSacrifice": "Laat het automatisch levelen van de draak 100 gebouwen per niveau opofferen om Krumblor volledig te trainen. Standaard uit; verschijnt alleen als Dragon aanstaat. Let op: Auto Buy koopt de opgeofferde gebouwen meteen terug.",
         "buyBuildings": "Richt zich automatisch op het meest winstgevende gebouw: zijn CPS/prijs-verhouding met synergieën, plus hoe dicht het bij zijn volgende tier-mijlpaal staat (die een ×2-upgrade ontgrendelt). Het spaart voor dat beste gebouw in plaats van te besteden aan minder winstgevende, en kan dus pauzeren terwijl koekjes zich ophopen. Als Auto-koop upgrades ook aanstaat, wacht het zolang er nog een betaalbare upgrade in de winkel is.",
-        "buyUpgrades": "Koopt automatisch elke betaalbare winkelupgrade, behalve de onomkeerbare van de Grandmapocalyps. One Mind wordt alleen gekocht als de eigen schakelaar aanstaat."
+        "buyUpgrades": "Koopt automatisch elke betaalbare winkelupgrade, behalve de onomkeerbare van de Grandmapocalyps. One Mind wordt alleen gekocht als de eigen schakelaar aanstaat.",
+        "strategy": "Voorinstellingskiezer die de strategie-schakelaars in één keer configureert. Grind: puur CPS-groei — koopt gebouwen en upgrades, geen Aandelenmarkt of reserve. Investor: maximaal inkomen — Geluksreserve, agressieve Aandelenmarkt, kantoren, makelaars en Pantheon. Manual: onafhankelijke schakelaars, verandert niets. Een schakelaar handmatig aanpassen zet de kiezer terug op Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ingeschakeld.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Beurskantoren uitgeschakeld.",
         "gardenOn": "Auto Tuin ingeschakeld.",
         "gardenOff": "Auto Tuin uitgeschakeld.",
+        "cloverGardenOn": "Gouden Klavertuin ingeschakeld.",
+        "cloverGardenOff": "Gouden Klavertuin uitgeschakeld.",
         "pantheonOn": "Auto Pantheon ingeschakeld.",
         "pantheonOff": "Auto Pantheon uitgeschakeld.",
         "oneMindOn": "One Mind ingeschakeld.",

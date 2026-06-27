@@ -6,7 +6,8 @@
         "clicks": "Clics",
         "auto": "Automatización",
         "minigame": "Minijuegos",
-        "other": "Otros"
+        "other": "Otros",
+        "strategy": "Estrategia"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Mercado de Valores",
         "office": "Oficinas del Mercado",
         "garden": "Jardín",
+        "cloverGarden": "Jardín de Trébol dorado",
         "pantheon": "Panteón",
         "oneMind": "One Mind",
         "lumps": "Terrones de azúcar",
@@ -40,13 +42,15 @@
         "market": "Gestiona el mercado de valores del Banco por ti: compra una acción por debajo de su precio medio cuando sube, vende toda la posición en una bajada en cuanto supere el precio de compra y contrata corredores para reducir las comisiones de operación. Los edificios y las mejoras mantienen la prioridad, así que solo invierte el excedente por encima de la Reserva de Suerte; vender siempre está permitido y los beneficios cuentan como galletas ganadas. Invertir conlleva riesgos: las galletas pasadas no garantizan galletas futuras. Invierte con responsabilidad.",
         "office": "Mejora las oficinas del Banco para más almacenamiento de acciones, de modo que el mercado pueda mantener posiciones más grandes y registrar operaciones más grandes. Cada mejora sacrifica cursores y requiere que el edificio Cursor alcance un nivel de terrón de azúcar, por lo que solo se activa una vez que has subido de nivel tus Cursores. Opt-in.",
         "garden": "Cosecha las plantas maduras del jardín justo antes de que se marchiten y replanta la misma especie, para ingresos pasivos de la granja. Las plantas inmortales se dejan intactas. Aviso: esto destruye lo que esté creciendo, así que no lo uses mientras estés cultivando mutaciones.",
+        "cloverGarden": "Llena todo el jardín de Trébol dorado y lo mantiene, para un gran bono permanente a la frecuencia de las galletas doradas (+3% por baldosa madura). Requiere la mejora Turbo-charged soil (siembra gratuita) y la semilla de Trébol dorado desbloqueada — el interruptor permanece oculto en caso contrario y nunca gasta galletas. Usa el suelo Clay para +25% de efecto. ADVERTENCIA: cosecha y reemplaza tus otras plantas (no inmortales) para convertir la parcela — no lo uses en un jardín donde estés cultivando mutaciones.",
         "pantheon": "Coloca automáticamente una formación idle fija en el panteón del Templo. Gasta intercambios de adoración reales (que se recargan lentamente), uno por tick, y luego deja el panteón en paz.",
         "oneMind": "Permite a Auto-Compra adquirir la mejora 'One Mind' (ruta Elder Covenant). Usar con precaución.",
         "lumps": "Cosecha automáticamente un terrón de azúcar en cuanto está maduro, para una ganancia garantizada.",
         "luckyReserve": "Mantiene una reserva de galletas (aproximadamente 6000× tu CPS) para que las galletas doradas '¡Suerte!' paguen al máximo: un modo de ahorro deliberado. Mientras tu banco está por debajo de la reserva, el mod deja de comprar (edificios, mejoras, acciones) hasta alcanzarla, y luego gasta solo el excedente por encima de ella. Mejor activarla para ahorrar de cara a una Suerte, no durante una fase de crecimiento.",
         "dragonSacrifice": "Permite que la mejora automática del dragón sacrifique 100 edificios por nivel para entrenar por completo a Krumblor. Desactivado por defecto; solo aparece cuando Dragon está activo. Aviso: Auto Buy recomprará de inmediato los edificios sacrificados.",
         "buyBuildings": "Apunta automáticamente al único edificio más rentable: su relación CPS/precio con sinergias, más lo cerca que está de su siguiente hito de rango (que desbloquea una mejora ×2). Ahorra para ese mejor edificio en lugar de gastar en los menos rentables, por lo que puede pausar mientras se acumulan las galletas. Si también está activa la Compra auto mejoras, espera mientras quede una mejora asequible en la tienda.",
-        "buyUpgrades": "Compra automáticamente cada mejora asequible de la tienda, salvo las irreversibles del Abuelapocalipsis. One Mind solo se compra si su propio interruptor está activado."
+        "buyUpgrades": "Compra automáticamente cada mejora asequible de la tienda, salvo las irreversibles del Abuelapocalipsis. One Mind solo se compra si su propio interruptor está activado.",
+        "strategy": "Selector de preajustes que configura los interruptores de estrategia de una sola vez. Grind: crecimiento de CPS puro — compra edificios y mejoras, sin Mercado de Valores ni reserva. Investor: ingresos máximos — Reserva de Suerte, Mercado de Valores agresivo, oficinas, corredores y Panteón. Manual: interruptores independientes, no cambia nada. Editar un interruptor manualmente devuelve el selector a Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activado.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Oficinas del Mercado desactivado.",
         "gardenOn": "Auto Jardín activado.",
         "gardenOff": "Auto Jardín desactivado.",
+        "cloverGardenOn": "Jardín de Trébol dorado activado.",
+        "cloverGardenOff": "Jardín de Trébol dorado desactivado.",
         "pantheonOn": "Auto Panteón activado.",
         "pantheonOff": "Auto Panteón desactivado.",
         "oneMindOn": "One Mind activado.",

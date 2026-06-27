@@ -6,7 +6,8 @@
         "clicks": "Click",
         "auto": "Automazione",
         "minigame": "Minigiochi",
-        "other": "Altro"
+        "other": "Altro",
+        "strategy": "Strategia"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Mercato Azionario",
         "office": "Uffici di Borsa",
         "garden": "Giardino",
+        "cloverGarden": "Giardino di Trifoglio dorato",
         "pantheon": "Pantheon",
         "oneMind": "One Mind",
         "lumps": "Zollette di zucchero",
@@ -40,13 +42,15 @@
         "market": "Gestisce per te il mercato azionario della Banca: acquista un'azione al di sotto del suo prezzo medio mentre è in rialzo, vende l'intero pacchetto al ribasso non appena supera il prezzo di acquisto e assume broker per ridurre le commissioni di negoziazione. Edifici e miglioramenti mantengono la priorità, quindi investe solo il surplus sopra la Riserva Fortunata; vendere è sempre consentito e i profitti contano verso i biscotti guadagnati. Investire comporta dei rischi: i biscotti passati non sono garanzia di biscotti futuri. Investi responsabilmente.",
         "office": "Migliora gli uffici della Banca per più spazio di archiviazione delle azioni, così il mercato può mantenere posizioni più grandi e registrare scambi più grandi. Ogni miglioramento sacrifica i cursori e richiede che l'edificio Cursore raggiunga un livello di zolletta di zucchero, quindi si attiva solo dopo aver potenziato i tuoi Cursori. Opt-in.",
         "garden": "Raccoglie le piante del giardino mature appena prima che avvizziscano e ripiantina la stessa specie, per un reddito passivo dalla fattoria. Le piante immortali vengono lasciate intatte. Attenzione: questo distrugge ciò che sta crescendo, quindi non usarlo durante l'allevamento di mutazioni.",
+        "cloverGarden": "Riempie tutto il giardino di Trifoglio dorato e lo mantiene, per un grande bonus permanente alla frequenza dei golden cookie (+3% per tessera matura). Richiede il potenziamento Turbo-charged soil (piantumazione gratuita) e il seme di Trifoglio dorato sbloccato — altrimenti il toggle rimane nascosto e non spende mai biscotti. Usa il terreno Clay per +25% di effetto. ATTENZIONE: raccoglie e sostituisce le altre piante (non immortali) per convertire la parcella — non usarlo su un giardino in cui stai facendo incroci.",
         "pantheon": "Inserisce automaticamente una formazione idle fissa nel pantheon del Tempio. Utilizza veri scambi di venerazione (che si ricaricano lentamente), uno per tick, poi lascia in pace il pantheon.",
         "oneMind": "Consente all'Auto-Acquisto di comprare il potenziamento 'One Mind' (percorso Elder Covenant). Usare con cautela.",
         "lumps": "Raccoglie automaticamente una zolletta di zucchero non appena è matura, per un guadagno garantito.",
         "luckyReserve": "Mantiene una riserva di biscotti (circa 6000× CPS) in modo che i Golden Cookie 'Fortunato!' paghino il massimo — una modalità di risparmio deliberata. Finché la tua banca è sotto la riserva, il mod smette di comprare (edifici, miglioramenti, azioni) finché non viene raggiunta, poi spende solo il surplus al di sopra. Meglio attivarla per risparmiare in vista di un Fortunato, non durante una fase di crescita.",
         "dragonSacrifice": "Permette al potenziamento automatico del drago di sacrificare 100 edifici per livello per addestrare completamente Krumblor. Disattivato di default; appare solo quando Dragon è attivo. Attenzione: Auto Buy ricomprerà subito gli edifici sacrificati.",
         "buyBuildings": "Punta automaticamente all'unico edificio più redditizio: il suo rapporto CPS/prezzo con sinergie, più quanto è vicino alla prossima soglia di livello (che sblocca un miglioramento ×2). Risparmia per quell'edificio migliore invece di spendere per quelli meno redditizi, quindi può mettere in pausa mentre i biscotti si accumulano. Se è attivo anche l'Acquisto auto miglioramenti, attende finché un miglioramento acquistabile è ancora nel negozio.",
-        "buyUpgrades": "Compra automaticamente ogni miglioramento acquistabile del negozio, tranne quelli irreversibili della Nonnapocalisse. One Mind viene comprato solo se il suo interruttore è attivo."
+        "buyUpgrades": "Compra automaticamente ogni miglioramento acquistabile del negozio, tranne quelli irreversibili della Nonnapocalisse. One Mind viene comprato solo se il suo interruttore è attivo.",
+        "strategy": "Selettore di preimpostazioni che configura i toggle di strategia in un solo gesto. Grind: crescita CPS pura — acquista edifici e miglioramenti, senza Mercato Azionario né riserva. Investor: reddito massimo — Riserva Fortunata, Mercato Azionario aggressivo, uffici, broker e Pantheon. Manual: toggle indipendenti, non cambia nulla. Modificare un toggle manualmente riporta il selettore su Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie attivato.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Uffici di Borsa disattivato.",
         "gardenOn": "Auto Giardino attivato.",
         "gardenOff": "Auto Giardino disattivato.",
+        "cloverGardenOn": "Giardino di Trifoglio dorato attivato.",
+        "cloverGardenOff": "Giardino di Trifoglio dorato disattivato.",
         "pantheonOn": "Auto Pantheon attivato.",
         "pantheonOff": "Auto Pantheon disattivato.",
         "oneMindOn": "One Mind attivato.",

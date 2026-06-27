@@ -6,7 +6,8 @@
         "clicks": "Clics",
         "auto": "Automatisation",
         "minigame": "Mini-jeux",
-        "other": "Autres"
+        "other": "Autres",
+        "strategy": "Stratégie"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Bourse",
         "office": "Bureaux de la Bourse",
         "garden": "Jardin",
+        "cloverGarden": "Jardin de Trèfle doré",
         "pantheon": "Panthéon",
         "oneMind": "One Mind",
         "lumps": "Pépites de sucre",
@@ -40,13 +42,15 @@
         "market": "Trade la bourse de la Banque à votre place : achète une action sous son prix moyen quand elle monte, revend tout le stock en cas de retournement dès qu'elle dépasse votre prix d'achat, et engage des courtiers pour réduire les frais. Les bâtiments et améliorations restent prioritaires : elle n'investit que le surplus au-dessus de la Réserve Chanceuse ; la vente est toujours autorisée et les profits comptent dans les cookies gagnés. Investir comporte des risques : les cookies passés ne préjugent pas des cookies futurs. Tradez avec modération.",
         "office": "Améliore les bureaux de la Banque pour plus de stockage d'actions : la Bourse peut tenir des positions plus grosses et encaisser de plus gros trades. Chaque niveau sacrifie des curseurs et exige un niveau de sucre sur le bâtiment Curseur, donc ne se déclenche qu'une fois vos Curseurs montés en niveau. Optionnel.",
         "garden": "Récolte les plantes mûres du jardin juste avant qu'elles ne fanent et replante la même espèce, pour un revenu passif de la ferme. Les plantes immortelles sont laissées intactes. Attention : cela détruit ce qui pousse, ne pas utiliser pendant l'élevage de mutations.",
+        "cloverGarden": "Remplit tout le jardin de Trèfle doré et l'entretient, pour un large bonus permanent à la fréquence des cookies dorés (+3 % par case mûre). Nécessite l'amélioration Turbo-charged soil (plantation gratuite) et la graine de Trèfle doré débloquée — le toggle reste masqué sinon, et il ne dépense jamais de cookies. Utilisez le sol Argile pour +25 % d'effet. ATTENTION : il récolte et remplace vos autres plantes (non immortelles) pour convertir la parcelle — ne l'utilisez pas sur un jardin en cours de croisement.",
         "pantheon": "Place une configuration idle « à oublier » dans le panthéon du Temple. Dépense de vrais échanges de culte (qui se rechargent lentement), un par tick, puis ne touche plus à rien.",
         "oneMind": "Autorise l'Auto Achat à acheter l'amélioration 'One Mind' (voie Elder Covenant). À utiliser avec précaution.",
         "lumps": "Récolte automatiquement une pépite de sucre dès qu'elle est mûre, pour un gain garanti.",
         "luckyReserve": "Maintient une réserve de cookies (environ 6000× votre CPS) pour que les cookies dorés 'Chanceux !' rapportent leur maximum — un mode épargne délibéré. Tant que votre bank est sous la réserve, le mod arrête d'acheter (bâtiments, améliorations, actions) jusqu'à l'atteindre, puis ne dépense que le surplus au-dessus. À activer pour épargner en vue d'un Lucky, pas pendant une phase de croissance.",
         "dragonSacrifice": "Autorise la montée automatique du dragon à sacrifier 100 bâtiments par niveau pour entraîner Krumblor à fond. Désactivé par défaut ; n'apparaît que si Dragon est actif. Attention : l'Achat auto rachètera aussitôt les bâtiments sacrifiés.",
         "buyBuildings": "Cible automatiquement le bâtiment le plus rentable : son ratio CPS/prix avec synergies, plus la proximité du prochain palier (qui débloque une amélioration ×2). Il économise pour ce meilleur bâtiment plutôt que de dépenser sur des moins rentables, et peut donc marquer une pause le temps d'accumuler des cookies. Si l'Achat auto améliorations est aussi actif, il patiente tant qu'une amélioration abordable reste en magasin.",
-        "buyUpgrades": "Achète automatiquement toutes les améliorations abordables du magasin, sauf celles irréversibles de la Mamiepocalypse. One Mind n'est acheté que si son propre interrupteur est activé."
+        "buyUpgrades": "Achète automatiquement toutes les améliorations abordables du magasin, sauf celles irréversibles de la Mamiepocalypse. One Mind n'est acheté que si son propre interrupteur est activé.",
+        "strategy": "Sélecteur de préréglages qui configure les bascules de stratégie en une seule action. Grind : croissance CPS pure — achète bâtiments et améliorations, sans Bourse ni réserve. Investor : revenu max — Réserve Chanceuse, Bourse agressive, bureaux, courtiers et Panthéon. Manual : bascules indépendantes, ne change rien. Modifier une bascule à la main remet le sélecteur sur Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie activé.",
@@ -71,6 +75,8 @@
         "officeOff": "Bureaux auto désactivés.",
         "gardenOn": "Jardin auto activé.",
         "gardenOff": "Jardin auto désactivé.",
+        "cloverGardenOn": "Jardin de Trèfle doré activé.",
+        "cloverGardenOff": "Jardin de Trèfle doré désactivé.",
         "pantheonOn": "Panthéon auto activé.",
         "pantheonOff": "Panthéon auto désactivé.",
         "oneMindOn": "One Mind activé.",

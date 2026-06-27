@@ -14,6 +14,7 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 
 | Feature | Description |
 |---|---|
+| **Strategy modes** | A **Grind / Investor / Manual** preset selector at the top of the panel sets the strategic toggles (auto-buy, Lucky Reserve, Stock Market, offices, dragon aura, Pantheon) in one click. Presets stay fully overridable — editing a toggle by hand reverts the selector to Manual. See [Strategy modes](#strategy-modes) |
 | **Golden Cookie** | Auto-clicks golden cookies and reindeer as soon as they appear |
 | **Wrath Cookie** | Auto-clicks wrath cookies (red); appears during the Grandmapocalypse |
 | **Big Cookie** | Continuously clicks the main cookie at max speed |
@@ -29,6 +30,7 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | **Stock Market** | Trades the Bank minigame: buys below the mean price on an uptrend, sells on a downturn above your buy-in, and hires brokers to cut fees. Building and upgrade purchases keep priority — it only invests the leftover surplus above the Lucky Reserve |
 | **Market Offices** | Opt-in: upgrades the Bank's offices for more stock storage (bigger trades) by sacrificing cursors, gated behind the Cursor building's sugar-lump level |
 | **Garden** | Harvests mature plants just before they wither and replants them, for passive farm income (leaves immortal plants alone) |
+| **Golden Clover Garden** | Opt-in: fills the Garden with Golden clover and maintains it for a large permanent boost to golden cookie frequency. Requires the Turbo-charged soil upgrade (free planting) and Golden clover unlocked; never spends cookies, and the basic Garden toggle defers to it |
 | **Pantheon** | Slots a set-and-forget idle line-up (Mokalsium + Jeremy), spending real worship swaps |
 | **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Grandmapocalypse path) |
 | **Lucky Reserve** | Keeps about CPS × 6000 banked so Golden "Lucky!" cookies pay their maximum |
@@ -40,6 +42,25 @@ A colour-coded profitability score is displayed on each building tile in the sto
 <p align="center">
   <img src="docs/store-ratios.jpg" alt="Colour-coded CPS/price ratios in the building store" width="240">
 </p>
+
+## Strategy modes
+
+Most toggles can be left independent, but two coherent play styles pull cookies in opposite
+directions: spending everything on **buildings** (CPS growth) versus diverting cookies into
+**investment** (Stock Market, Lucky Reserve, golden-cookie payouts). The selector at the top
+of the panel resolves this with three presets:
+
+- **Grind** — pure CPS growth. Auto-buys buildings and upgrades and sets the Radiant Appetite
+  dragon aura; the Stock Market, offices and Lucky Reserve stay off so every cookie funds
+  growth.
+- **Investor** — maximum income. Adds the Lucky Reserve, an aggressive Stock Market (offices
+  and brokers included) and the idle Pantheon line-up on top of the auto-buy.
+- **Manual** — every toggle independent; the preset changes nothing (the classic behaviour).
+
+The modes are presets, not locks: after picking one you can still flip any toggle by hand,
+and doing so on a strategic toggle drops the selector back to Manual. The chosen mode is
+saved with your game. The three mode names are shown in English in every language; the
+selector caption and its tooltip are translated.
 
 ## Installation
 
@@ -129,6 +150,24 @@ These are third-party resources, not affiliated with this mod or with Cookie Cli
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for the version history. Downloads are on the [Releases](https://github.com/Fyrins/cookie-clicker-companion/releases) page.
+
+## Development
+
+The mod ships as a single `main.js`, but that file is **generated** — the source lives under
+`src/` (one module per concern, one file per toggle under `src/toggles/`) and is bundled into
+`main.js` by [esbuild](https://esbuild.github.io/). If you just want to play, download the
+release; you don't need to build anything.
+
+To work on the source:
+
+```bash
+npm install      # one-time: fetch esbuild
+npm run build    # bundle src/ -> main.js
+npm run watch    # rebuild automatically on save
+```
+
+Edit the files under `src/`, never `main.js` directly (it is overwritten by the build). The
+generated `main.js` is committed so the mod stays drop-in installable.
 
 ## License
 

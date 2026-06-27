@@ -11,6 +11,47 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-06-27
+
+### Added
+- **Strategy modes** — a preset selector at the top of the panel configures the strategic
+  toggles in one move, resolving the tug-of-war between CPS growth and investment:
+  - **Grind** (pure CPS growth): auto-buys buildings and upgrades and sets the Radiant
+    Appetite dragon aura, while keeping the Stock Market, offices and Lucky Reserve off so
+    every cookie funds growth.
+  - **Investor** (max income): adds the Lucky Reserve, an aggressive Stock Market (with
+    offices and brokers) and the idle Pantheon line-up on top of the auto-buy.
+  - **Manual**: the previous behaviour — every toggle independent, the preset touches
+    nothing.
+
+  The modes are presets, not locks: after applying one, every toggle stays adjustable by
+  hand, and editing a strategic toggle drops the selector back to Manual. The active mode is
+  saved with your Cookie Clicker save (old saves load as Manual). The mode names are shown
+  in English in every language; the selector caption and tooltip are localized.
+- **Golden Clover Garden** toggle (opt-in): fills and maintains the Garden with Golden clover
+  for a large permanent boost to golden cookie frequency (+3% per mature tile) — potentially
+  the mod's biggest passive income lever, since golden cookies dominate income. It requires
+  the Turbo-charged soil upgrade (free planting) and the Golden clover seed unlocked, never
+  spends cookies, and stays hidden until both are available. The basic Garden toggle defers
+  to it so the two never conflict. Use Clay soil for an extra +25%.
+
+### Changed
+- **Auto Buy Buildings now has a patience floor.** Instead of always buying the best
+  *affordable* building, it skips one whose profitability is below 5% of the best available
+  and lets the bank build toward a worthwhile purchase instead — so cookies are no longer
+  frittered on near-worthless cheap buildings while a far better one is only a tick or two
+  away. The Stock Market's buildings-first deferral mirrors this decision exactly.
+- The Stock Market now trades according to the active mode: **Investor** uses an aggressive
+  profile (buys closer to the mean price, takes larger positions and takes profit sooner),
+  while Manual and Grind keep the conservative v1.6.0 profile — so turning the market on
+  outside Investor behaves exactly as before.
+- The Stock Market's take-profit is now anchored to the buy-in price (sell once the price
+  clears the purchase price by a margin), with a downturn safeguard above a minimum gain,
+  instead of waiting for a falling trend. The Bank minigame ticks only once a minute and its
+  trends last tens of minutes to hours, so this reliably realises gains over long idle play
+  rather than letting positions sit unsold.
+- Added the strategy selector caption and tooltip in all 12 languages.
+
 ## [1.6.0] - 2026-06-27
 
 ### Added
@@ -171,7 +212,8 @@ First public release.
   altered (no resource hacking); see the README's "Is this cheating?" section for how
   automation affects achievements.
 
-[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/Fyrins/cookie-clicker-companion/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v2.0.0
 [1.6.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.6.0
 [1.5.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.5.0
 [1.4.0]: https://github.com/Fyrins/cookie-clicker-companion/releases/tag/v1.4.0

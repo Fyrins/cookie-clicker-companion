@@ -6,7 +6,8 @@
         "clicks": "Cliques",
         "auto": "Automação",
         "minigame": "Minijogos",
-        "other": "Outros"
+        "other": "Outros",
+        "strategy": "Estratégia"
     },
     "labels": {
         "golden": "Golden Cookie",
@@ -21,6 +22,7 @@
         "market": "Mercado de Ações",
         "office": "Escritórios da Bolsa",
         "garden": "Jardim",
+        "cloverGarden": "Jardim de Trevo dourado",
         "pantheon": "Panteão",
         "oneMind": "One Mind",
         "lumps": "Torrões de açúcar",
@@ -40,13 +42,15 @@
         "market": "Negocia o mercado de ações do Banco por você: compra uma ação abaixo do seu preço médio enquanto está em alta, vende todo o estoque em uma queda assim que supera o preço de compra e contrata corretores para reduzir as taxas de negociação. Construções e melhorias mantêm prioridade, então ele só investe o excedente acima da Reserva da Sorte; vender é sempre permitido e os lucros contam como biscoitos ganhos. Investir envolve riscos: biscoitos passados não são garantia de biscoitos futuros. Negocie com responsabilidade.",
         "office": "Melhora os escritórios do Banco para mais armazenamento de ações, para que o mercado possa manter posições maiores e registrar negociações maiores. Cada melhoria sacrifica cursores e exige que a construção Cursor alcance um nível de torrão de açúcar, portanto só é acionada depois que você sobe o nível dos seus Cursores. Opt-in.",
         "garden": "Colhe plantas maduras do jardim pouco antes de murcharem e replanta a mesma espécie, para renda passiva da fazenda. Plantas imortais são deixadas intactas. Aviso: isso destrói o que estiver crescendo, portanto não use enquanto estiver cultivando mutações.",
+        "cloverGarden": "Preenche todo o jardim com Trevo dourado e o mantém cultivado, para um grande bônus permanente na frequência dos cookies dourados (+3% por bloco maduro). Requer o upgrade Turbo-charged soil (plantio gratuito) e a semente de Trevo dourado desbloqueada — o botão permanece oculto caso contrário e nunca gasta biscoitos. Use o solo Clay para +25% de efeito. ATENÇÃO: colhe e substitui suas outras plantas (não imortais) para converter o canteiro — não use em um jardim onde esteja fazendo cruzamentos.",
         "pantheon": "Preenche automaticamente uma formação idle fixa no panteão do Templo. Gasta trocas de adoração reais (que recarregam lentamente), uma por tick, e então deixa o panteão em paz.",
         "oneMind": "Permite à Auto-Compra adquirir a melhoria 'One Mind' (caminho Elder Covenant). Use com cuidado.",
         "lumps": "Coleta automaticamente um torrão de açúcar assim que estiver maduro, para um ganho garantido.",
         "luckyReserve": "Mantém uma reserva de biscoitos (cerca de 6000× seu CPS) para que os Golden Cookies 'Sorte!' paguem o máximo — um modo de poupança deliberado. Enquanto seu banco estiver abaixo da reserva, o mod para de comprar (construções, melhorias, ações) até alcançá-la, e então gasta apenas o excedente acima dela. Melhor ativar para juntar para uma Sorte, não durante uma fase de crescimento.",
         "dragonSacrifice": "Permite que o aprimoramento automático do dragão sacrifique 100 construções por nível para treinar Krumblor por completo. Desativado por padrão; aparece apenas quando Dragon está ativo. Aviso: o Auto Buy recomprará imediatamente as construções sacrificadas.",
         "buyBuildings": "Mira automaticamente na única construção mais rentável: sua relação CPS/preço com sinergias, mais o quão próxima está do próximo marco de nível (que desbloqueia uma melhoria ×2). Economiza para essa melhor construção em vez de gastar nas menos rentáveis, podendo pausar enquanto os biscoitos se acumulam. Se a Compra auto melhorias também estiver ativa, ele espera enquanto houver uma melhoria acessível na loja.",
-        "buyUpgrades": "Compra automaticamente toda melhoria acessível da loja, exceto as irreversíveis do Vovópocalipse. One Mind só é comprado se o seu próprio botão estiver ativo."
+        "buyUpgrades": "Compra automaticamente toda melhoria acessível da loja, exceto as irreversíveis do Vovópocalipse. One Mind só é comprado se o seu próprio botão estiver ativo.",
+        "strategy": "Seletor de predefinições que configura os interruptores de estratégia de uma vez. Grind: crescimento puro de CPS — compra construções e melhorias, sem Mercado de Ações nem reserva. Investor: renda máxima — Reserva da Sorte, Mercado de Ações agressivo, escritórios, corretores e Panteão. Manual: interruptores independentes, não muda nada. Editar um interruptor manualmente retorna o seletor para Manual."
     },
     "notify": {
         "goldenOn": "Auto Golden Cookie ativado.",
@@ -71,6 +75,8 @@
         "officeOff": "Auto Escritórios da Bolsa desativado.",
         "gardenOn": "Auto Jardim ativado.",
         "gardenOff": "Auto Jardim desativado.",
+        "cloverGardenOn": "Jardim de Trevo dourado ativado.",
+        "cloverGardenOff": "Jardim de Trevo dourado desativado.",
         "pantheonOn": "Auto Panteão ativado.",
         "pantheonOff": "Auto Panteão desativado.",
         "oneMindOn": "One Mind ativado.",
