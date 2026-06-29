@@ -2,7 +2,12 @@ export default function createBuybuildings(ctx) {
     return {
         configKey: 'autoBuyBuildings',
         t: ctx.makeToggle(function() {
-            var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
+            // Lucky Reserve = rawCpS × 6000 (≈100 min of steady-state CpS, the bank needed
+            // to cap a Lucky golden). Use the RAW highest CpS, never Game.cookiesPs: the
+            // buffed value septuples during a Frenzy, which would balloon the reserve past
+            // the whole bank and FREEZE every purchase for the buff's duration (observed:
+            // 15 min of frozen building growth with a 32-quadrillion idle bank).
+            var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6000 : 0);
             // Strict upgrade priority, but only for upgrades we can afford this
             // tick: defer to the upgrade auto-buy when an eligible upgrade is
             // actually purchasable now. An out-of-reach upgrade no longer freezes

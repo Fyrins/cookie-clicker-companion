@@ -8,7 +8,10 @@ export default function createGarden(ctx) {
             // Elderwort) so plants are not lost unharvested. Immortal plants never die,
             // so they are left untouched. WARNING: this destroys whatever is growing —
             // not for players running mutation gardens (mutations are pure RNG anyway).
-            if (ctx.TOGGLES.clovergarden && ctx.TOGGLES.clovergarden.t.isActive()) return; // clover field owns the plot
+            // The Golden Clover Garden and the Garden Breeder both own the whole plot when
+            // active, so defer to either of them (precedence: breeder > clover field > garden).
+            if (ctx.TOGGLES.breeder && ctx.TOGGLES.breeder.t.isActive()) return;
+            if (ctx.TOGGLES.clovergarden && ctx.TOGGLES.clovergarden.t.isActive()) return;
             var m = Game.Objects['Farm'].minigame;
             if (!m || !Game.isMinigameReady(Game.Objects['Farm'])) return;
             for (var y = 0; y < 6; y++) {

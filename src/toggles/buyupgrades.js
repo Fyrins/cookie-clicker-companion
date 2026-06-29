@@ -2,8 +2,9 @@ export default function createBuyupgrades(ctx) {
     return {
         configKey: 'autoBuyUpgrades',
         t: ctx.makeToggle(function() {
-            // Lucky Reserve keeps CPS*6000 banked; only the surplus is spendable.
-            var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
+            // Lucky Reserve keeps rawCpS×6000 banked; only the surplus is spendable. RAW
+            // (not buffed) CpS, so a Frenzy doesn't inflate the reserve and freeze buying.
+            var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6000 : 0);
             Game.UpgradesInStore.forEach(function(upgrade) {
                 if (!ctx.upgradeEligible(upgrade)) return;
                 var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;

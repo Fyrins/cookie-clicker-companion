@@ -27,12 +27,13 @@ All-in-one automation mod for Cookie Clicker (Steam / PC). It automates repetiti
 | **Dragon** | Levels up Krumblor automatically, using only cookie-paid levels by default |
 | **Dragon Sacrifice** | Opt-in (shown while Dragon is on): also levels the sacrifice levels, which cost buildings |
 | **Dragon Aura** | Opt-in: sets the primary aura to Radiant Appetite (×2 CPS) at dragon level 19, paying the real building-sacrifice cost once |
-| **Stock Market** | Trades the Bank minigame: buys below the mean price on an uptrend, sells on a downturn above your buy-in, and hires brokers to cut fees. Building and upgrade purchases keep priority — it only invests the leftover surplus above the Lucky Reserve |
+| **Stock Market** | Cost-averages the Bank minigame: buys below the mean price and lowers its tracked average on each dip, then sells the whole position once the price clears that average by enough to beat the broker fee. Hires brokers to cut fees; the average buy-in is saved with your game. Building and upgrade purchases keep priority — it only invests the leftover surplus above the Lucky Reserve |
 | **Market Offices** | Opt-in: upgrades the Bank's offices for more stock storage (bigger trades) by sacrificing cursors, gated behind the Cursor building's sugar-lump level |
 | **Garden** | Harvests mature plants just before they wither and replants them, for passive farm income (leaves immortal plants alone) |
 | **Golden Clover Garden** | Opt-in: fills the Garden with Golden clover and maintains it for a large permanent boost to golden cookie frequency. Requires the Turbo-charged soil upgrade (free planting) and Golden clover unlocked; never spends cookies, and the basic Garden toggle defers to it |
-| **Pantheon** | Slots a set-and-forget idle line-up (Mokalsium + Jeremy), spending real worship swaps |
-| **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Grandmapocalypse path) |
+| **Garden Breeder** | Opt-in: auto-cross-breeds the Garden to unlock valuable locked seeds (Golden clover, then Shimmerlily and Elderwort) by planting their parents in a checkerboard and harvesting the mutations. Free-planting only (Turbo-charged soil); hides once the targets are unlocked. Long, RNG-driven — a deliberate unlock phase, not passive farming |
+| **Pantheon** | Slots a set-and-forget line-up chosen by your **play style**: Golden gods (Selebrak + Vomitrax) when golden auto-click is on, CpS gods (Mokalsium + Holobore) when it is off, plus Muridal for clicking power when the big-cookie auto-click is on. Spends real worship swaps |
+| **One Mind** | Allows Auto Buy to purchase the "One Mind" upgrade (Grandmapocalypse path), and once the apocalypse is running, turns on the wrath-cookie auto-pop for you (wrath cookies are net-positive to click) |
 | **Lucky Reserve** | Keeps about CPS × 6000 banked so Golden "Lucky!" cookies pay their maximum |
 
 The panel is draggable and collapsible, and each feature toggles independently. Every toggle stays hidden until its in-game system is unlocked (the dragon, the Grimoire spells, sugar lumps, and so on) and appears automatically as you progress, so you only ever see what you can actually use. Settings are saved with your Cookie Clicker save file.
@@ -53,8 +54,8 @@ of the panel resolves this with three presets:
 - **Grind** — pure CPS growth. Auto-buys buildings and upgrades and sets the Radiant Appetite
   dragon aura; the Stock Market, offices and Lucky Reserve stay off so every cookie funds
   growth.
-- **Investor** — maximum income. Adds the Lucky Reserve, an aggressive Stock Market (offices
-  and brokers included) and the idle Pantheon line-up on top of the auto-buy.
+- **Investor** — maximum income. Adds the Lucky Reserve, the cost-averaging Stock Market
+  (offices and brokers included) and the idle Pantheon line-up on top of the auto-buy.
 - **Manual** — every toggle independent; the preset changes nothing (the classic behaviour).
 
 The modes are presets, not locks: after picking one you can still flip any toggle by hand,

@@ -38,7 +38,10 @@
 #ccc-collapse{width:18px;height:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#6a4010;font-size:9px;line-height:1;transition:color .2s,transform .3s;transform:rotate(0deg)}
 #ccc-collapse:hover{color:#d4963a}
 #ccc-collapse.open{transform:rotate(180deg)}
-#ccc-body{overflow:hidden;transition:max-height .3s ease,padding .3s ease;max-height:500px;padding:7px 0}
+#ccc-body{overflow-y:auto;overflow-x:hidden;transition:max-height .3s ease,padding .3s ease;max-height:85vh;padding:7px 0}
+#ccc-body::-webkit-scrollbar{width:7px}
+#ccc-body::-webkit-scrollbar-thumb{background:#3a1a06;border-radius:4px}
+#ccc-body::-webkit-scrollbar-thumb:hover{background:#6a4418}
 #ccc-body.hidden{max-height:0;padding:0}
 .ccc-sec-hdr{padding:3px 13px 2px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#5a3410;margin-bottom:3px}
 .ccc-mode-row{display:flex;align-items:center;gap:7px;padding:5px 13px 8px;border-bottom:1px solid #220f04;margin-bottom:4px}
@@ -64,10 +67,29 @@
     }
   });
 
+  // src/breeder-recipes.js
+  var THUMB, CRONE, GILD, CLOV, SHIM, CHAINS, TARGET_PRIORITY;
+  var init_breeder_recipes = __esm({
+    "src/breeder-recipes.js"() {
+      THUMB = { target: "thumbcorn", parents: { bakerWheat: 2 } };
+      CRONE = { target: "cronerice", parents: { bakerWheat: 1, thumbcorn: 1 } };
+      GILD = { target: "gildmillet", parents: { cronerice: 1, thumbcorn: 1 } };
+      CLOV = { target: "clover", parents: { bakerWheat: 1, gildmillet: 1 } };
+      SHIM = { target: "shimmerlily", parents: { clover: 1, gildmillet: 1 } };
+      CHAINS = {
+        goldenClover: [THUMB, CRONE, GILD, { target: "goldenClover", parents: { bakerWheat: 1, gildmillet: 1 } }],
+        shimmerlily: [THUMB, CRONE, GILD, CLOV, SHIM],
+        elderwort: [THUMB, CRONE, GILD, CLOV, SHIM, { target: "elderwort", parents: { shimmerlily: 1, cronerice: 1 } }]
+      };
+      TARGET_PRIORITY = ["goldenClover", "shimmerlily", "elderwort"];
+    }
+  });
+
   // src/features.js
   var FEATURES;
   var init_features = __esm({
     "src/features.js"() {
+      init_breeder_recipes();
       FEATURES = [
         { id: "golden", labelKey: "golden", section: "clicks" },
         { id: "wrath", labelKey: "wrath", section: "clicks", unlocked: function() {
@@ -106,6 +128,16 @@
         } },
         { id: "garden", labelKey: "garden", section: "minigame", unlocked: function() {
           return Game.isMinigameReady(Game.Objects["Farm"]);
+        } },
+        { id: "breeder", labelKey: "breeder", section: "minigame", unlocked: function() {
+          if (!Game.isMinigameReady(Game.Objects["Farm"]) || !Game.Has("Turbo-charged soil")) return false;
+          var m = Game.Objects["Farm"].minigame;
+          if (!m) return false;
+          for (var i = 0; i < TARGET_PRIORITY.length; i++) {
+            var p = m.plants[TARGET_PRIORITY[i]];
+            if (p && !p.unlocked) return true;
+          }
+          return false;
         } },
         { id: "clovergarden", labelKey: "cloverGarden", section: "minigame", unlocked: function() {
           if (!Game.isMinigameReady(Game.Objects["Farm"]) || !Game.Has("Turbo-charged soil")) return false;
@@ -167,6 +199,7 @@
           office: "Market Offices",
           garden: "Garden",
           cloverGarden: "Golden Clover Garden",
+          breeder: "Garden Breeder",
           pantheon: "Pantheon",
           buyBuildings: "Auto Buy Buildings",
           buyUpgrades: "Auto Buy Upgrades",
@@ -203,6 +236,8 @@
           gardenOff: "",
           pantheonOn: "",
           pantheonOff: "",
+          breederOn: "",
+          breederOff: "",
           buyBuildingsOn: "",
           buyBuildingsOff: "",
           buyUpgradesOn: "",
@@ -323,7 +358,7 @@
 
   // src/persistence.js
   function save() {
-    return JSON.stringify({ config: this.config, colors: this.colors, mode: this.activeMode });
+    return JSON.stringify({ config: this.config, colors: this.colors, mode: this.activeMode, marketBasis: this.marketBasis });
   }
   function load(str) {
     if (!this.activateFns) {
@@ -342,6 +377,7 @@
     for (var key in config) {
       if (config[key] === true && this.activateFns[key]) this.activateFns[key]();
     }
+    this.marketBasis = data.marketBasis && typeof data.marketBasis === "object" ? data.marketBasis : {};
     this.activeMode = data.mode === "grind" || data.mode === "investor" ? data.mode : "manual";
     var modeSel = l("ccc-mode");
     if (modeSel) modeSel.value = this.activeMode;
@@ -363,14 +399,16 @@
     "src/strategy.js"() {
       CLUSTER = ["buybuildings", "buyupgrades", "luckyreserve", "market", "office", "dragonaura", "pantheon"];
       PRESETS = {
-        // Grind = pure CPS growth: buy everything, divert nothing to investment.
-        grind: { buybuildings: true, buyupgrades: true, luckyreserve: false, market: false, office: false, dragonaura: true, pantheon: false },
-        // Investor = max income: reserve + aggressive market + offices + brokers + Mokalsium.
+        // Grind = pure CPS growth: buy everything, divert nothing to investment. Pantheon ON
+        // for its free CpS line-up (Mokalsium + Jeremy); it spends worship swaps, not cookies.
+        grind: { buybuildings: true, buyupgrades: true, luckyreserve: false, market: false, office: false, dragonaura: true, pantheon: true },
+        // Investor = max income: reserve + aggressive market + offices + brokers + the golden
+        // pantheon line-up (Selebrak + Vomitrax: more frequent, longer golden cookies).
         investor: { buybuildings: true, buyupgrades: true, luckyreserve: true, market: true, office: true, dragonaura: true, pantheon: true }
       };
       MARKET = {
-        conservative: { buyBelow: 0.9, cap: 0.25, sellGain: 1.15, reversalFloor: 1.03 },
-        aggressive: { buyBelow: 0.95, cap: 0.5, sellGain: 1.08, reversalFloor: 1.03 }
+        conservative: { buyBelow: 0.92, cap: 0.08 },
+        aggressive: { buyBelow: 0.95, cap: 0.12 }
       };
     }
   });
@@ -454,7 +492,7 @@
       var bldgs = 0;
       for (var b in Game.Objects) bldgs += Game.Objects[b].amount;
       var bank = Game.Objects["Bank"], mkt = bank && bank.minigame;
-      var spend = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6e3 : 0);
+      var spend = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0);
       var bb = null, brat = 0;
       for (var i in Game.Objects) {
         var ob = Game.Objects[i], r = ctx.MOD.calculateRatio(ob);
@@ -569,6 +607,7 @@
         var grimoire = Game.ObjectsById[7].minigame;
         if (!grimoire || grimoire.magic !== grimoire.magicM) return;
         var spell = grimoire.spellsById[1];
+        if (grimoire.magic < grimoire.getSpellCost(spell)) return;
         var failChance = grimoire.getFailChance(spell);
         Math.seedrandom(Game.seed + "/" + grimoire.spellsCastTotal);
         var willWin = Math.random() < 1 - failChance;
@@ -595,17 +634,19 @@
 
   // src/toggles/market.js
   function createMarket(ctx) {
+    var lastBuy = {};
     return {
       configKey: "autoMarket",
       t: ctx.makeToggle(function() {
         var m = Game.Objects["Bank"].minigame;
         if (!m || !Game.isMinigameReady(Game.Objects["Bank"])) return;
-        var reserve = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6e3 : 0;
+        var basis = ctx.MOD.marketBasis || (ctx.MOD.marketBasis = {});
+        var reserve = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0;
         var spendable = Game.cookies - reserve;
         var overhead = 1 + 0.01 * (20 * Math.pow(0.95, m.brokers));
         var canInvest = spendable > 0 && !ctx.autoBuyWillSpend(spendable);
         if (!canInvest && ctx.devActive()) ctx.MOD._mktStarvedTicks++;
-        if (canInvest && m.brokers < m.getMaxBrokers()) {
+        if (m.brokers < m.getMaxBrokers()) {
           var brokerPrice = m.getBrokerPrice();
           if (brokerPrice <= spendable && Game.cookies >= brokerPrice) {
             Game.Spend(brokerPrice);
@@ -617,23 +658,43 @@
           if (!good.active) return;
           var resting = m.getRestingVal(good.id);
           var mp = ctx.marketParams();
-          if (good.stock > 0 && good.last === 0 && good.prev > 0) {
-            var gain = good.val / good.prev;
-            var hitTarget = gain >= mp.sellGain;
-            var reversal = (good.mode === 2 || good.mode === 4) && gain >= mp.reversalFloor;
+          if (good.stock <= 0) {
+            if (basis[good.id]) delete basis[good.id];
+            delete lastBuy[good.id];
+          } else if (!basis[good.id]) {
+            basis[good.id] = { avgVal: good.val, units: good.stock };
+          }
+          var b = basis[good.id];
+          if (b && good.stock > 0) {
+            var hitTarget = good.val >= b.avgVal * overhead * 1.02;
+            var reversal = (good.mode === 2 || good.mode === 4) && good.val >= b.avgVal * overhead;
             if (hitTarget || reversal) {
               var soldQty = good.stock;
               m.sellGood(good.id, 1e4);
-              ctx.devLog("MKT sell " + good.name + " mode=" + good.mode + " val=" + good.val.toFixed(2) + " prev=" + good.prev.toFixed(2) + " gain=" + gain.toFixed(3) + " qty=" + soldQty + " total=" + Beautify(m.profit));
+              delete basis[good.id];
+              delete lastBuy[good.id];
+              ctx.devLog("MKT sell " + good.name + " val=" + good.val.toFixed(2) + " avg=" + b.avgVal.toFixed(2) + " qty=" + soldQty + " total=" + Beautify(m.profit));
               return;
             }
           }
-          if (good.last === 0 && (good.mode === 1 || good.mode === 3) && good.val < resting * mp.buyBelow && canInvest) {
+          var maxStock = typeof m.getGoodMaxStock === "function" ? m.getGoodMaxStock(good) : 1e9;
+          if (canInvest && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id] && (!b || good.val < b.avgVal) && good.stock < maxStock) {
             var costPerUnit = Game.cookiesPsRawHighest * good.val * overhead;
             if (costPerUnit <= 0) return;
             var n = Math.floor(spendable * mp.cap / costPerUnit);
-            if (n > 0 && m.buyGood(good.id, n)) {
-              ctx.devLog("MKT buy " + good.name + " mode=" + good.mode + " val=" + good.val.toFixed(2) + " rest=" + resting + " qty=" + n + " cost=" + Beautify(costPerUnit * n));
+            var room = maxStock - good.stock;
+            if (n > room) n = room;
+            if (n > 0) {
+              var before = good.stock;
+              var prevAvg = b ? b.avgVal : good.val;
+              lastBuy[good.id] = good.val;
+              if (m.buyGood(good.id, n)) {
+                var added = good.stock - before;
+                if (added > 0) {
+                  basis[good.id] = { avgVal: (prevAvg * before + good.val * added) / (before + added), units: good.stock };
+                  ctx.devLog("MKT buy " + good.name + " val=" + good.val.toFixed(2) + " rest=" + resting + " qty=" + added + " avg=" + basis[good.id].avgVal.toFixed(2));
+                }
+              }
             }
           }
         });
@@ -672,6 +733,7 @@
     return {
       configKey: "autoGarden",
       t: ctx.makeToggle(function() {
+        if (ctx.TOGGLES.breeder && ctx.TOGGLES.breeder.t.isActive()) return;
         if (ctx.TOGGLES.clovergarden && ctx.TOGGLES.clovergarden.t.isActive()) return;
         var m = Game.Objects["Farm"].minigame;
         if (!m || !Game.isMinigameReady(Game.Objects["Farm"])) return;
@@ -703,6 +765,7 @@
     return {
       configKey: "autoCloverGarden",
       t: ctx.makeToggle(function() {
+        if (ctx.TOGGLES.breeder && ctx.TOGGLES.breeder.t.isActive()) return;
         var m = Game.Objects["Farm"].minigame;
         if (!m || !Game.isMinigameReady(Game.Objects["Farm"])) return;
         var clover = m.plants["goldenClover"];
@@ -732,6 +795,82 @@
     }
   });
 
+  // src/toggles/breeder.js
+  function createBreeder(ctx) {
+    function isSlot(x, y) {
+      return x % 2 === 1 && y % 2 === 1;
+    }
+    function parentForTile(x, y, pkeys) {
+      return pkeys.length === 1 ? pkeys[0] : pkeys[(x + y) % 2];
+    }
+    return {
+      configKey: "autoBreeder",
+      t: ctx.makeToggle(function() {
+        var m = Game.Objects["Farm"].minigame;
+        if (!m || !Game.isMinigameReady(Game.Objects["Farm"])) return;
+        var wheat = m.plants["bakerWheat"];
+        if (!wheat || m.getCost(wheat) > 0) return;
+        var chain = null;
+        for (var ti = 0; ti < TARGET_PRIORITY.length; ti++) {
+          var tplant = m.plants[TARGET_PRIORITY[ti]];
+          if (tplant && !tplant.unlocked) {
+            chain = CHAINS[TARGET_PRIORITY[ti]];
+            break;
+          }
+        }
+        if (!chain) return;
+        var step = null;
+        for (var i = 0; i < chain.length; i++) {
+          var tp = m.plants[chain[i].target];
+          if (tp && !tp.unlocked) {
+            step = chain[i];
+            break;
+          }
+        }
+        if (!step) return;
+        var pkeys = [];
+        for (var key in step.parents) {
+          var p = m.plants[key];
+          if (!p || !p.unlocked) return;
+          pkeys.push(key);
+        }
+        var targetKey = step.target;
+        for (var y = 0; y < 6; y++) {
+          for (var x = 0; x < 6; x++) {
+            if (!m.isTileUnlocked(x, y)) continue;
+            var tile = m.plot[y][x];
+            if (isSlot(x, y)) {
+              if (tile[0] === 0) continue;
+              var occ = m.plantsById[tile[0] - 1];
+              if (occ && occ.key === targetKey) {
+                if (tile[1] >= occ.mature && m.harvest(x, y, 1)) {
+                  ctx.devLog("BREED unlocked " + targetKey + " @" + x + "," + y);
+                }
+              } else if (occ && !occ.immortal) {
+                m.harvest(x, y, 1);
+              }
+            } else {
+              var pkey = parentForTile(x, y, pkeys);
+              if (tile[0] === 0) {
+                m.useTool(m.plants[pkey].id, x, y);
+              } else {
+                var occ2 = m.plantsById[tile[0] - 1];
+                if (occ2 && occ2.key !== pkey && !occ2.immortal) {
+                  m.harvest(x, y, 1);
+                }
+              }
+            }
+          }
+        }
+      }, 1e3, "breederOn", "breederOff")
+    };
+  }
+  var init_breeder = __esm({
+    "src/toggles/breeder.js"() {
+      init_breeder_recipes();
+    }
+  });
+
   // src/toggles/pantheon.js
   function createPantheon(ctx) {
     return {
@@ -740,7 +879,15 @@
         var m = Game.Objects["Temple"].minigame;
         if (!m || !Game.isMinigameReady(Game.Objects["Temple"])) return;
         if (m.swaps <= 0) return;
-        var plan = [["mother", 0], ["industry", 1]];
+        var T = ctx.TOGGLES;
+        var clicking = !!(T.bigcookie && T.bigcookie.t.isActive());
+        var farmingGolden = !!(T.golden && T.golden.t.isActive());
+        var plan;
+        if (farmingGolden) {
+          plan = clicking ? [["seasons", 0], ["decadence", 1], ["labor", 2]] : [["seasons", 0], ["decadence", 1]];
+        } else {
+          plan = clicking ? [["mother", 0], ["asceticism", 1], ["labor", 2]] : [["mother", 0], ["asceticism", 1], ["industry", 2]];
+        }
         for (var i = 0; i < plan.length; i++) {
           var god = m.gods[plan[i][0]];
           var slot = plan[i][1];
@@ -832,7 +979,7 @@
     return {
       configKey: "autoBuyUpgrades",
       t: ctx.makeToggle(function() {
-        var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6e3 : 0);
+        var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0);
         Game.UpgradesInStore.forEach(function(upgrade) {
           if (!ctx.upgradeEligible(upgrade)) return;
           var price = upgrade.getPrice ? upgrade.getPrice() : upgrade.basePrice;
@@ -854,7 +1001,7 @@
     return {
       configKey: "autoBuyBuildings",
       t: ctx.makeToggle(function() {
-        var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6e3 : 0);
+        var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0);
         if (ctx.TOGGLES.buyupgrades.t.isActive() && ctx.hasAffordableEligibleUpgrade(spendable)) return;
         var best = null, bestRatio = 0, aff = null, affRatio = 0;
         for (var i in Game.Objects) {
@@ -892,7 +1039,19 @@
   function createOnemind(ctx) {
     return {
       configKey: "oneMind",
-      t: ctx.makeBoolToggle("oneMindOn", "oneMindOff")
+      t: ctx.makeToggle(function() {
+        if (Game.elderWrath <= 0) {
+          ctx.MOD._wrathBundled = false;
+          return;
+        }
+        if (ctx.MOD._wrathBundled) return;
+        ctx.MOD._wrathBundled = true;
+        var w = ctx.TOGGLES.wrath;
+        if (w && !w.t.isActive()) {
+          w.t.activate();
+          ctx.devLog("ONEMIND bundle -> wrath on");
+        }
+      }, 2e3, "oneMindOn", "oneMindOff")
     };
   }
   var init_onemind = __esm({
@@ -1073,6 +1232,7 @@
       TOGGLES.office = createOffice(ctx);
       TOGGLES.garden = createGarden(ctx);
       TOGGLES.clovergarden = createClovergarden(ctx);
+      TOGGLES.breeder = createBreeder(ctx);
       TOGGLES.pantheon = createPantheon(ctx);
       TOGGLES.fortune = createFortune(ctx);
       TOGGLES.dragon = createDragon(ctx);
@@ -1241,7 +1401,7 @@
           var desc = S.descriptions[f.labelKey];
           if (desc) {
             var tipText = f.id === "luckyreserve" ? function() {
-              return desc + "\n\u2BA1 " + Beautify(Math.round(Game.cookiesPs * 6e3));
+              return desc + "\n\u2BA1 " + Beautify(Math.round(Game.cookiesPsRawHighest * 6e3));
             } : function() {
               return desc;
             };
@@ -1368,6 +1528,7 @@
       init_office();
       init_garden();
       init_clovergarden();
+      init_breeder();
       init_pantheon();
       init_fortune();
       init_dragon();

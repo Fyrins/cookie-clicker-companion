@@ -11,6 +11,43 @@ parts of the public version (for example `1.0.x` and `1.1.x` map to `ModVersion`
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-06-29
+
+### Added
+- **Garden Breeder** toggle (opt-in) — auto-cross-breeds the Garden to unlock valuable locked
+  seeds. It targets the most valuable still-locked seed in turn (Golden clover, then
+  Shimmerlily, then Elderwort), planting each step's parents in a checkerboard so the isolated
+  empty tiles roll the right mutation, and harvests the result once mature to unlock the seed.
+  Free-planting only (Turbo-charged soil), never spends cookies, and hides once the targets are
+  unlocked. It is a long, RNG-driven unlock phase, not passive farming. The basic Garden and
+  Golden Clover Garden toggles defer to it so they never fight over the plot.
+- **Grandmapocalypse bundle** — once the apocalypse is running, the **One Mind** toggle now
+  also turns on the wrath-cookie auto-pop a single time (wrath cookies give far more than they
+  cost). It re-arms each apocalypse and respects a manual off afterwards.
+
+### Changed
+- **Pantheon line-up now follows your play style, not the mode.** It is chosen from the
+  golden- and big-cookie auto-click toggles: Golden gods (Selebrak + Vomitrax) when golden
+  auto-click is on, CpS gods (Mokalsium + Holobore) when it is off, plus Muridal in the jade
+  slot for clicking power when the big-cookie auto-click is on. Holobore is only ever slotted
+  while golden auto-click is off, so it never self-unslots.
+- **Stock Market rewritten to cost-averaging (DCA).** It tracks a weighted-average buy price
+  per good, averages down on dips, and sells the whole position once the price clears that
+  average by enough to beat the broker fee — instead of the previous aggressive profile, which
+  could hoard illiquid stock at a loss. Broker hiring is now prioritised (each broker cuts the
+  fee), and the average buy-in is saved with your game so a reload keeps it.
+- **Lucky Reserve now uses raw (un-buffed) CPS.** Previously the reserve was based on buffed
+  CPS, so a Frenzy multiplied it ~7× and could exceed the whole bank, freezing every building,
+  upgrade and Stock Market purchase for the buff's duration. The reserve is now stable.
+- **The panel body scrolls.** Tall panels (many unlocked features) are no longer clipped — the
+  body is capped at 85% of the window height with a thin scrollbar, so every row stays
+  reachable.
+
+### Fixed
+- **Force the Hand of Fate no longer busy-loops on a full-but-too-small magic pool.** Early in
+  an ascension the pool can be full yet below the spell's cost; the safe-cast now waits instead
+  of re-predicting every tick (which, in dev mode, also flooded the log).
+
 ## [2.0.0] - 2026-06-27
 
 ### Added

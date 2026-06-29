@@ -10,6 +10,7 @@ export default function createClovergarden(ctx) {
             // empty tiles are replanted. Non-clover MORTAL plants are harvested to
             // convert the plot; immortal plants are left untouched. The basic Garden
             // toggle defers to this one, so the two never fight over the plot.
+            if (ctx.TOGGLES.breeder && ctx.TOGGLES.breeder.t.isActive()) return; // breeder owns the plot first
             var m = Game.Objects['Farm'].minigame;
             if (!m || !Game.isMinigameReady(Game.Objects['Farm'])) return;
             var clover = m.plants['goldenClover'];

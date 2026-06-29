@@ -8,7 +8,10 @@ export const CSS = `
 #ccc-collapse{width:18px;height:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#6a4010;font-size:9px;line-height:1;transition:color .2s,transform .3s;transform:rotate(0deg)}
 #ccc-collapse:hover{color:#d4963a}
 #ccc-collapse.open{transform:rotate(180deg)}
-#ccc-body{overflow:hidden;transition:max-height .3s ease,padding .3s ease;max-height:500px;padding:7px 0}
+#ccc-body{overflow-y:auto;overflow-x:hidden;transition:max-height .3s ease,padding .3s ease;max-height:85vh;padding:7px 0}
+#ccc-body::-webkit-scrollbar{width:7px}
+#ccc-body::-webkit-scrollbar-thumb{background:#3a1a06;border-radius:4px}
+#ccc-body::-webkit-scrollbar-thumb:hover{background:#6a4418}
 #ccc-body.hidden{max-height:0;padding:0}
 .ccc-sec-hdr{padding:3px 13px 2px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#5a3410;margin-bottom:3px}
 .ccc-mode-row{display:flex;align-items:center;gap:7px;padding:5px 13px 8px;border-bottom:1px solid #220f04;margin-bottom:4px}

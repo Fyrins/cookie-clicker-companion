@@ -1,5 +1,5 @@
 export function save() {
-    return JSON.stringify({ config: this.config, colors: this.colors, mode: this.activeMode });
+    return JSON.stringify({ config: this.config, colors: this.colors, mode: this.activeMode, marketBasis: this.marketBasis });
 }
 
 export function load(str) {
@@ -18,6 +18,11 @@ export function load(str) {
     for (var key in config) {
         if (config[key] === true && this.activateFns[key]) this.activateFns[key]();
     }
+
+    // Restore the Stock Market cost basis (per-good average buy price) so a reload does
+    // not lose it and re-adopt the current price. Goods we no longer hold get reconciled
+    // away on the next market tick.
+    this.marketBasis = (data.marketBasis && typeof data.marketBasis === 'object') ? data.marketBasis : {};
 
     // The toggles above are already persisted in their real state, so we only restore
     // the mode as a label (no preset re-application). Sync the dropdown if it is built.

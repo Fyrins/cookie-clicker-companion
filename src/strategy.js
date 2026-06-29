@@ -6,9 +6,11 @@
 // hand drops the selector back to Manual (handled at the row click listener).
 export var CLUSTER = ['buybuildings', 'buyupgrades', 'luckyreserve', 'market', 'office', 'dragonaura', 'pantheon'];
 export var PRESETS = {
-    // Grind = pure CPS growth: buy everything, divert nothing to investment.
-    grind:    { buybuildings: true, buyupgrades: true, luckyreserve: false, market: false, office: false, dragonaura: true, pantheon: false },
-    // Investor = max income: reserve + aggressive market + offices + brokers + Mokalsium.
+    // Grind = pure CPS growth: buy everything, divert nothing to investment. Pantheon ON
+    // for its free CpS line-up (Mokalsium + Jeremy); it spends worship swaps, not cookies.
+    grind:    { buybuildings: true, buyupgrades: true, luckyreserve: false, market: false, office: false, dragonaura: true, pantheon: true },
+    // Investor = max income: reserve + aggressive market + offices + brokers + the golden
+    // pantheon line-up (Selebrak + Vomitrax: more frequent, longer golden cookies).
     investor: { buybuildings: true, buyupgrades: true, luckyreserve: true,  market: true,  office: true,  dragonaura: true, pantheon: true  },
 };
 // Market trading aggressiveness depends on the active mode. Investor buys closer
@@ -23,9 +25,23 @@ export var PRESETS = {
 // minutes to hours, so this is a long-idle mechanic — cycles complete over hours,
 // not over a short active session. The sell rule is anchored to our buy-in (not a
 // falling trend) so a gain is realised whenever the slow drift clears the target.
+// OVERHEAD CAVEAT (verified in the game's minigameMarket.js): buy/sell convert at
+// `cookiesPsRawHighest × val`, and every BUY pays overhead = 1 + 0.2×0.95^brokers
+// (≈1.088 at 16 brokers, ≈1.19 at 1). So a sale that clears the buy-in by less than
+// the overhead LOSES cookies on the eventual rebuy. The real edge is riding the
+// monotonic rawCpS up and realising before ascension — the $-price arbitrage is
+// noise — so Investor takes profit LATER (higher sellGain) rather than churning, and
+// market.js floors both exits at the live overhead (see minGain there).
+// Cost-averaging (DCA) profile — market.js anchors the sell to our weighted-average
+// buy-in × overhead, so the only knobs here are how often/much we average IN:
+//   buyBelow — buy only under (resting mean × this); lower = rarer, deeper discount
+//   cap      — fraction of the investable surplus per lot; small = smooths the basis
+// Investor averages a touch more aggressively (shallower dips, bigger lots) than the
+// conservative profile used by Manual/Grind. The old "sellGain/reversalFloor" knobs
+// are gone: with cost-averaging, mean-reversion past the average basis is the exit.
 export var MARKET = {
-    conservative: { buyBelow: 0.90, cap: 0.25, sellGain: 1.15, reversalFloor: 1.03 },
-    aggressive:   { buyBelow: 0.95, cap: 0.50, sellGain: 1.08, reversalFloor: 1.03 },
+    conservative: { buyBelow: 0.92, cap: 0.08 },
+    aggressive:   { buyBelow: 0.95, cap: 0.12 },
 };
 export function makeMarketParams(MOD) {
     return function marketParams() { return MOD.activeMode === 'investor' ? MARKET.aggressive : MARKET.conservative; };

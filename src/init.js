@@ -11,6 +11,7 @@ import createMarket from './toggles/market.js';
 import createOffice from './toggles/office.js';
 import createGarden from './toggles/garden.js';
 import createClovergarden from './toggles/clovergarden.js';
+import createBreeder from './toggles/breeder.js';
 import createPantheon from './toggles/pantheon.js';
 import createFortune from './toggles/fortune.js';
 import createDragon from './toggles/dragon.js';
@@ -179,6 +180,7 @@ export function init() {
         TOGGLES.office         = createOffice(ctx);
         TOGGLES.garden         = createGarden(ctx);
         TOGGLES.clovergarden   = createClovergarden(ctx);
+        TOGGLES.breeder        = createBreeder(ctx);
         TOGGLES.pantheon       = createPantheon(ctx);
         TOGGLES.fortune        = createFortune(ctx);
         TOGGLES.dragon         = createDragon(ctx);
@@ -382,10 +384,10 @@ export function init() {
 
                 var desc = S.descriptions[f.labelKey];
                 if (desc) {
-                    // Lucky Reserve shows the live reserved amount (CPS*6000) under its
+                    // Lucky Reserve shows the live reserved amount (rawCpS*6000) under its
                     // description, refreshed while hovered so it tracks each purchase.
                     var tipText = (f.id === 'luckyreserve')
-                        ? function() { return desc + '\n⮡ ' + Beautify(Math.round(Game.cookiesPs * 6000)); }
+                        ? function() { return desc + '\n⮡ ' + Beautify(Math.round(Game.cookiesPsRawHighest * 6000)); }
                         : function() { return desc; };
                     row.addEventListener('mouseenter', function() {
                         var rect = row.getBoundingClientRect();

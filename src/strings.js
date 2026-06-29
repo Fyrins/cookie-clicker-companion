@@ -6,7 +6,7 @@ export const FALLBACK_STRINGS = {
         wrinklers:'Wrinklers', lumps:'Sugar Lumps', spell:'Force the Hand of Fate',
         fortune:'Fortune', dragon:'Dragon', dragonSacrifice:'Dragon Sacrifice', dragonAura:'Dragon Aura',
         market:'Stock Market', office:'Market Offices', garden:'Garden',
-        cloverGarden:'Golden Clover Garden', pantheon:'Pantheon',
+        cloverGarden:'Golden Clover Garden', breeder:'Garden Breeder', pantheon:'Pantheon',
         buyBuildings:'Auto Buy Buildings', buyUpgrades:'Auto Buy Upgrades',
         oneMind:'One Mind', luckyReserve:'Lucky Reserve' },
     descriptions: {}, notify: {
@@ -15,6 +15,7 @@ export const FALLBACK_STRINGS = {
         fortuneOn:'', fortuneOff:'', dragonOn:'', dragonOff:'',
         dragonSacrificeOn:'', dragonSacrificeOff:'', dragonAuraOn:'', dragonAuraOff:'',
         marketOn:'', marketOff:'', officeOn:'', officeOff:'', gardenOn:'', gardenOff:'', pantheonOn:'', pantheonOff:'',
+        breederOn:'', breederOff:'',
         buyBuildingsOn:'', buyBuildingsOff:'', buyUpgradesOn:'', buyUpgradesOff:'',
         oneMindOn:'', oneMindOff:'',
         luckyReserveOn:'', luckyReserveOff:'',

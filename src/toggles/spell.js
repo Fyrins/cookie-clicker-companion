@@ -10,6 +10,11 @@ export default function createSpell(ctx) {
             var grimoire = Game.ObjectsById[7].minigame;
             if (!grimoire || grimoire.magic !== grimoire.magicM) return; // wait for full magic
             var spell = grimoire.spellsById[1]; // Force the Hand of Fate
+            // Early ascension the magic pool can be full yet smaller than FtHoF's cost
+            // (e.g. magic 5/5 vs cost ~23). Without this guard castSpell() would no-op
+            // every tick while magic stays pinned full — busy-looping and (in dev mode)
+            // flooding the log with phantom "cast FtHoF" lines that never advance N.
+            if (grimoire.magic < grimoire.getSpellCost(spell)) return; // pool too small yet
             var failChance = grimoire.getFailChance(spell);
             Math.seedrandom(Game.seed + '/' + grimoire.spellsCastTotal);
             var willWin = Math.random() < (1 - failChance);

@@ -1,25 +1,36 @@
 export default function createMarket(ctx) {
+    // The $-price we last bought each good at. The Bank ticks ONCE A MINUTE but this
+    // toggle runs every second, so without this we would re-buy the same price ~60×
+    // and pile up stock without lowering the average. Session-only (a fresh reload may
+    // re-buy once per good, harmless) — it is the average cost, not this, that matters.
+    var lastBuy = {};
+
     return {
         configKey: 'autoMarket',
         t: ctx.makeToggle(function() {
-            // Conservative trading on the Bank minigame: buy below the resting (mean)
-            // price during an uptrend, take profit on a downturn once the price beats
-            // our buy-in. Each good's `mode` is the game's trend signal (1 slow rise,
-            // 3 fast rise, 2 slow fall, 4 fast fall). Future prices are not predictable,
-            // so we lean on the trend + mean-reversion, never all-in.
+            // Cost-averaging (DCA) on the Bank minigame. Buy below the resting (mean)
+            // price; every buy lowers the weighted-average basis, so a smaller bounce
+            // realises the whole stack. Sell the ENTIRE position once the price clears
+            // our average buy-in by enough to beat the buy overhead. Mean-reversion
+            // toward the resting value keeps carrying a below-mean basis back over that
+            // line, and rawCpS is monotonic so the cookie payout only ever beats the
+            // cookie cost. Surplus-only: buildings/upgrades always come first.
             var m = Game.Objects['Bank'].minigame;
             if (!m || !Game.isMinigameReady(Game.Objects['Bank'])) return;
-            var reserve   = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0;
+            // Per-good cost basis { avgVal, units } — weighted-average $-price we paid and
+            // the stock we believe we hold. Lives on MOD so it is PERSISTED through save()/
+            // load(): a reload keeps the real average instead of re-adopting the current
+            // price. Read fresh each tick so a load() that replaces the object is picked up.
+            var basis = ctx.MOD.marketBasis || (ctx.MOD.marketBasis = {});
+            var reserve   = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6000 : 0; // RAW CpS: a Frenzy must not inflate the reserve and starve the market
             var spendable = Game.cookies - reserve; // never touch the Lucky reserve
             var overhead  = 1 + 0.01 * (20 * Math.pow(0.95, m.brokers));
-            // Buildings and upgrades come first: only invest cookies the auto-buy is not
-            // about to spend this tick. Selling is always allowed (it only adds cookies).
             var canInvest = spendable > 0 && !ctx.autoBuyWillSpend(spendable);
             if (!canInvest && ctx.devActive()) ctx.MOD._mktStarvedTicks++; // track buildings-first deferrals
-            // Hire a broker (one per tick) when affordable from the investable surplus:
-            // each broker shaves 5% off the buy overhead. Same priority as stocks, so it
-            // never outranks buildings/upgrades and never dips into the Lucky Reserve.
-            if (canInvest && m.brokers < m.getMaxBrokers()) {
+            // Brokers are the single biggest market lever: each shaves 5% off the buy
+            // overhead PERMANENTLY and they are cheap (~20 min of CpS). Hire one per tick
+            // up to the cap, gated only by the Lucky Reserve.
+            if (m.brokers < m.getMaxBrokers()) {
                 var brokerPrice = m.getBrokerPrice();
                 if (brokerPrice <= spendable && Game.cookies >= brokerPrice) {
                     Game.Spend(brokerPrice);
@@ -31,36 +42,55 @@ export default function createMarket(ctx) {
                 if (!good.active) return;
                 var resting = m.getRestingVal(good.id);
                 var mp = ctx.marketParams();
-                // Take profit on the whole stock. Two exits, whichever comes first:
-                //  (a) the slow drift has cleared our buy-in by the sellGain margin
-                //      — lock the gain instead of waiting for the exact top (which is
-                //      unpredictable), the main path on this once-a-minute clock;
-                //  (b) a fast downturn (mode 2/4) starts while we are still in profit
-                //      — bail before the gain evaporates.
-                // Selling is never gated by the Lucky Reserve or the auto-buy: it only
-                // adds cookies, so it always runs. (good.prev = our last buy price.)
-                if (good.stock > 0 && good.last === 0 && good.prev > 0) {
-                    var gain      = good.val / good.prev;
-                    var hitTarget = gain >= mp.sellGain;
-                    // Only bail on a downturn if there is a worthwhile gain to
-                    // protect; below the floor, hold and let mean-reversion carry
-                    // the price back toward the take-profit target.
-                    var reversal  = (good.mode === 2 || good.mode === 4) && gain >= mp.reversalFloor;
+
+                // Reconcile our tracked basis with the real stock (manual trades / reload):
+                // no stock → forget it; stock with no basis → adopt the current price.
+                if (good.stock <= 0) { if (basis[good.id]) delete basis[good.id]; delete lastBuy[good.id]; }
+                else if (!basis[good.id]) { basis[good.id] = { avgVal: good.val, units: good.stock }; }
+                var b = basis[good.id];
+
+                // Take profit on the WHOLE position once price clears the average buy-in by
+                // the overhead (+2% margin). On a fast downturn (mode 2/4) bail as soon as we
+                // are merely above overhead, before the gain evaporates. Selling only adds
+                // cookies, so it is never gated by the reserve or the auto-buy.
+                if (b && good.stock > 0) {
+                    var hitTarget = good.val >= b.avgVal * overhead * 1.02;
+                    var reversal  = (good.mode === 2 || good.mode === 4) && good.val >= b.avgVal * overhead;
                     if (hitTarget || reversal) {
                         var soldQty = good.stock;
                         m.sellGood(good.id, 10000);
-                        ctx.devLog('MKT sell ' + good.name + ' mode=' + good.mode + ' val=' + good.val.toFixed(2) + ' prev=' + good.prev.toFixed(2) + ' gain=' + gain.toFixed(3) + ' qty=' + soldQty + ' total=' + Beautify(m.profit));
+                        delete basis[good.id];
+                        delete lastBuy[good.id];
+                        ctx.devLog('MKT sell ' + good.name + ' val=' + good.val.toFixed(2) + ' avg=' + b.avgVal.toFixed(2) + ' qty=' + soldQty + ' total=' + Beautify(m.profit));
                         return;
                     }
                 }
-                // Buy cheap during a rise, but only with the surplus the auto-buy will
-                // not use this tick (CPS-growing purchases keep priority).
-                if (good.last === 0 && (good.mode === 1 || good.mode === 3) && good.val < resting * mp.buyBelow && canInvest) {
+
+                // Cost-average IN, surplus only. Add to a position ONLY when:
+                //  • the price is cheap vs the mean (val < resting × buyBelow),
+                //  • it has MOVED since our last buy here (val !== lastBuy) — one add per
+                //    market tick, never 60× the same second-priced lot,
+                //  • and it sits below our average (new position, or a genuine dip that
+                //    lowers the basis), so every add actually smooths the average down.
+                var maxStock = (typeof m.getGoodMaxStock === 'function') ? m.getGoodMaxStock(good) : 1e9;
+                if (canInvest && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id]
+                    && (!b || good.val < b.avgVal) && good.stock < maxStock) {
                     var costPerUnit = Game.cookiesPsRawHighest * good.val * overhead;
                     if (costPerUnit <= 0) return;
                     var n = Math.floor((spendable * mp.cap) / costPerUnit);
-                    if (n > 0 && m.buyGood(good.id, n)) {
-                        ctx.devLog('MKT buy ' + good.name + ' mode=' + good.mode + ' val=' + good.val.toFixed(2) + ' rest=' + resting + ' qty=' + n + ' cost=' + Beautify(costPerUnit * n));
+                    var room = maxStock - good.stock;
+                    if (n > room) n = room;
+                    if (n > 0) {
+                        var before = good.stock;
+                        var prevAvg = b ? b.avgVal : good.val;
+                        lastBuy[good.id] = good.val; // this price is now handled, whatever the fill
+                        if (m.buyGood(good.id, n)) {
+                            var added = good.stock - before; // actual fill (affordability/cap clamp)
+                            if (added > 0) {
+                                basis[good.id] = { avgVal: (prevAvg * before + good.val * added) / (before + added), units: good.stock };
+                                ctx.devLog('MKT buy ' + good.name + ' val=' + good.val.toFixed(2) + ' rest=' + resting + ' qty=' + added + ' avg=' + basis[good.id].avgVal.toFixed(2));
+                            }
+                        }
                     }
                 }
             });

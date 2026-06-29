@@ -1,3 +1,5 @@
+import { TARGET_PRIORITY } from './breeder-recipes.js';
+
 export const FEATURES = [
     { id: 'golden',       labelKey: 'golden',       section: 'clicks' },
     { id: 'wrath',        labelKey: 'wrath',        section: 'clicks', unlocked: function() { return Game.elderWrath > 0; } },
@@ -14,6 +16,19 @@ export const FEATURES = [
     { id: 'market',       labelKey: 'market',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Bank']); } },
     { id: 'office',       labelKey: 'office',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Bank']); } },
     { id: 'garden',       labelKey: 'garden',       section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Farm']); } },
+    { id: 'breeder',      labelKey: 'breeder',      section: 'minigame', unlocked: function() {
+        // Shown only while it has something to do: planting is FREE (Turbo-charged soil)
+        // and at least one priority target seed is still locked. Once they are all
+        // unlocked, this hides (and you switch to the Golden Clover Garden for the field).
+        if (!Game.isMinigameReady(Game.Objects['Farm']) || !Game.Has('Turbo-charged soil')) return false;
+        var m = Game.Objects['Farm'].minigame;
+        if (!m) return false;
+        for (var i = 0; i < TARGET_PRIORITY.length; i++) {
+            var p = m.plants[TARGET_PRIORITY[i]];
+            if (p && !p.unlocked) return true;
+        }
+        return false;
+    } },
     { id: 'clovergarden', labelKey: 'cloverGarden', section: 'minigame', unlocked: function() {
         // Only viable when planting is FREE (Turbo-charged soil) and Golden clover is unlocked.
         if (!Game.isMinigameReady(Game.Objects['Farm']) || !Game.Has('Turbo-charged soil')) return false;

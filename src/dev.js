@@ -4,7 +4,7 @@
 // committed default is false, so all of this stays completely inert in the released
 // mod. The in-game toggle and localStorage 'cccDev' = '1' also enable it without
 // editing this file.
-export var DEV_MODE = false; // release default — flip to true locally to enable tuning telemetry
+export var DEV_MODE = false; // release default — flip to true to enable tuning telemetry
 
 // Factory that creates the dev-tool functions bound to a shared ctx.
 // ctx must expose: ctx.TOGGLES, ctx.MOD
@@ -73,7 +73,7 @@ export function createDevTools(ctx) {
         for (var b in Game.Objects) bldgs += Game.Objects[b].amount;
         var bank = Game.Objects['Bank'], mkt = bank && bank.minigame;
         // Diagnostics: WHY each automation is (in)active.
-        var spend = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPs * 6000 : 0);
+        var spend = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6000 : 0);
         var bb = null, brat = 0;
         for (var i in Game.Objects) {
             var ob = Game.Objects[i], r = ctx.MOD.calculateRatio(ob);
