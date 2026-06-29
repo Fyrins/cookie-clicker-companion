@@ -955,17 +955,25 @@
     return {
       configKey: "autoDragonAura",
       t: ctx.makeToggle(function() {
-        var target = 15;
-        if (Game.dragonLevel < target + 4) return;
-        if (Game.dragonAura === target) return;
-        var highest = 0;
-        for (var i in Game.Objects) {
-          if (Game.Objects[i].amount > 0) highest = Game.Objects[i];
+        function setAura(slot, auraId) {
+          var highest = 0;
+          for (var i in Game.Objects) {
+            if (Game.Objects[i].amount > 0) highest = Game.Objects[i];
+          }
+          if (highest !== 0) highest.sacrifice(1);
+          if (slot === 0) Game.dragonAura = auraId;
+          else Game.dragonAura2 = auraId;
+          Game.recalculateGains = 1;
+          ctx.devLog("DRAGON aura" + (slot === 1 ? "2" : "") + " set " + Game.dragonAuras[auraId].name + " (sacrificed " + (highest !== 0 ? highest.name : "none") + ")");
         }
-        if (highest !== 0) highest.sacrifice(1);
-        Game.dragonAura = target;
-        Game.recalculateGains = 1;
-        ctx.devLog("DRAGON aura set Radiant Appetite (sacrificed " + (highest !== 0 ? highest.name : "none") + ")");
+        var target = Game.dragonLevel >= 19 ? 15 : Game.dragonLevel >= 5 ? 1 : -1;
+        if (target >= 0 && Game.dragonAura !== target) {
+          setAura(0, target);
+          return;
+        }
+        if (Game.dragonLevel >= Game.dragonLevels.length - 1 && Game.dragonAura === 15 && Game.dragonAura2 !== 1) {
+          setAura(1, 1);
+        }
       }, 1e3, "dragonAuraOn", "dragonAuraOff")
     };
   }
