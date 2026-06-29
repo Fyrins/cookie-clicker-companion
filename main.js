@@ -1202,7 +1202,7 @@
           return price < spendable;
         });
       }
-      var BUY_FLOOR = 0.05;
+      var BUY_FLOOR = 0.25;
       ctx.BUY_FLOOR = BUY_FLOOR;
       function autoBuyWillSpend(spendable) {
         if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return true;
