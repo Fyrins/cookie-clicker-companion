@@ -33,15 +33,27 @@ export var PRESETS = {
 // noise — so Investor takes profit LATER (higher sellGain) rather than churning, and
 // market.js floors both exits at the live overhead (see minGain there).
 // Cost-averaging (DCA) profile — market.js anchors the sell to our weighted-average
-// buy-in × overhead, so the only knobs here are how often/much we average IN:
-//   buyBelow — buy only under (resting mean × this); lower = rarer, deeper discount
-//   cap      — fraction of the investable surplus per lot; small = smooths the basis
+// buy-in × overhead. Knobs:
+//   buyBelow        — buy only under (resting mean × this); lower = rarer, deeper discount
+//   cap             — fraction of the investable BUDGET committed per good per lot
+//   profitMargin    — take profit once price ≥ buy-in × overhead × (1 + this)
+//   budgetFrac      — (Investor only) the market's investable budget as a fraction of the
+//                     whole bank, computed INDEPENDENTLY of the Lucky Reserve floor and of
+//                     the building auto-buy. This is the fix for issue #6: without it the
+//                     market only saw `bank − reserve` minus whatever buildings spent, which
+//                     at high CpS is ~0, so the bot starved and never traded. With a
+//                     budgetFrac the bot always has a bounded slice to work; the reserve
+//                     still keeps a high bank for Lucky goldens (a market buy can be sold
+//                     back any tick, so the only cost is a temporarily smaller bank).
+//                     Absent (conservative) → the legacy surplus-above-reserve, buildings-first.
+//   maxExposureFrac — (Investor only) cap total capital held across all goods to this
+//                     fraction of the budget; skip new buys above it. Absent → no cap.
 // Investor averages a touch more aggressively (shallower dips, bigger lots) than the
-// conservative profile used by Manual/Grind. The old "sellGain/reversalFloor" knobs
-// are gone: with cost-averaging, mean-reversion past the average basis is the exit.
+// conservative profile used by Manual/Grind. Manual/Grind keep the exact v1.6.0 behaviour
+// (no budgetFrac / maxExposureFrac; profitMargin 0.02 reproduces the old hardcoded ×1.02).
 export var MARKET = {
-    conservative: { buyBelow: 0.92, cap: 0.08 },
-    aggressive:   { buyBelow: 0.95, cap: 0.12 },
+    conservative: { buyBelow: 0.92, cap: 0.08, profitMargin: 0.02 },
+    aggressive:   { buyBelow: 0.95, cap: 0.12, profitMargin: 0.02, budgetFrac: 0.15, maxExposureFrac: 0.60 },
 };
 export function makeMarketParams(MOD) {
     return function marketParams() { return MOD.activeMode === 'investor' ? MARKET.aggressive : MARKET.conservative; };

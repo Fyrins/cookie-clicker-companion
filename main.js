@@ -408,8 +408,8 @@
         investor: { buybuildings: true, buyupgrades: true, luckyreserve: true, market: true, office: true, dragonaura: true, pantheon: true }
       };
       MARKET = {
-        conservative: { buyBelow: 0.92, cap: 0.08 },
-        aggressive: { buyBelow: 0.95, cap: 0.12 }
+        conservative: { buyBelow: 0.92, cap: 0.08, profitMargin: 0.02 },
+        aggressive: { buyBelow: 0.95, cap: 0.12, profitMargin: 0.02, budgetFrac: 0.15, maxExposureFrac: 0.6 }
       };
     }
   });
@@ -642,23 +642,36 @@
         var m = Game.Objects["Bank"].minigame;
         if (!m || !Game.isMinigameReady(Game.Objects["Bank"])) return;
         var basis = ctx.MOD.marketBasis || (ctx.MOD.marketBasis = {});
+        var mp = ctx.marketParams();
         var reserve = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0;
-        var spendable = Game.cookies - reserve;
+        var surplus = Game.cookies - reserve;
         var overhead = 1 + 0.01 * (20 * Math.pow(0.95, m.brokers));
-        var canInvest = spendable > 0 && !ctx.autoBuyWillSpend(spendable);
+        var rawCps = Game.cookiesPsRawHighest;
+        var budget, canInvest;
+        if (mp.budgetFrac) {
+          budget = Game.cookies * mp.budgetFrac;
+          canInvest = budget > 0;
+        } else {
+          budget = surplus;
+          canInvest = surplus > 0 && !ctx.autoBuyWillSpend(surplus);
+        }
         if (!canInvest && ctx.devActive()) ctx.MOD._mktStarvedTicks++;
         if (m.brokers < m.getMaxBrokers()) {
           var brokerPrice = m.getBrokerPrice();
-          if (brokerPrice <= spendable && Game.cookies >= brokerPrice) {
+          if (brokerPrice <= surplus && Game.cookies >= brokerPrice) {
             Game.Spend(brokerPrice);
             m.brokers += 1;
             ctx.devLog("MKT broker hired -> " + m.brokers + " (cost=" + Beautify(brokerPrice) + ")");
           }
         }
+        var exposure = 0;
+        m.goodsById.forEach(function(g) {
+          if (g.active && g.stock > 0) exposure += g.stock * rawCps * g.val;
+        });
+        var overExposed = mp.maxExposureFrac ? exposure >= budget * mp.maxExposureFrac : false;
         m.goodsById.forEach(function(good) {
           if (!good.active) return;
           var resting = m.getRestingVal(good.id);
-          var mp = ctx.marketParams();
           if (good.stock <= 0) {
             if (basis[good.id]) delete basis[good.id];
             delete lastBuy[good.id];
@@ -667,22 +680,23 @@
           }
           var b = basis[good.id];
           if (b && good.stock > 0) {
-            var hitTarget = good.val >= b.avgVal * overhead * 1.02;
+            var hitTarget = good.val >= b.avgVal * overhead * (1 + mp.profitMargin);
             var reversal = (good.mode === 2 || good.mode === 4) && good.val >= b.avgVal * overhead;
             if (hitTarget || reversal) {
               var soldQty = good.stock;
+              var pnl = (soldQty * good.val - soldQty * b.avgVal * overhead) * rawCps;
               m.sellGood(good.id, 1e4);
               delete basis[good.id];
               delete lastBuy[good.id];
-              ctx.devLog("MKT sell " + good.name + " val=" + good.val.toFixed(2) + " avg=" + b.avgVal.toFixed(2) + " qty=" + soldQty + " total=" + Beautify(m.profit));
+              ctx.devLog("MKT sell " + good.name + " val=" + good.val.toFixed(2) + " avg=" + b.avgVal.toFixed(2) + " qty=" + soldQty + " pnl=" + (pnl >= 0 ? "+" : "") + Beautify(pnl) + " total=" + Beautify(m.profit));
               return;
             }
           }
           var maxStock = typeof m.getGoodMaxStock === "function" ? m.getGoodMaxStock(good) : 1e9;
-          if (canInvest && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id] && (!b || good.val < b.avgVal) && good.stock < maxStock) {
-            var costPerUnit = Game.cookiesPsRawHighest * good.val * overhead;
+          if (canInvest && !overExposed && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id] && (!b || good.val < b.avgVal) && good.stock < maxStock) {
+            var costPerUnit = rawCps * good.val * overhead;
             if (costPerUnit <= 0) return;
-            var n = Math.floor(spendable * mp.cap / costPerUnit);
+            var n = Math.floor(budget * mp.cap / costPerUnit);
             var room = maxStock - good.stock;
             if (n > room) n = room;
             if (n > 0) {
@@ -693,7 +707,7 @@
                 var added = good.stock - before;
                 if (added > 0) {
                   basis[good.id] = { avgVal: (prevAvg * before + good.val * added) / (before + added), units: good.stock };
-                  ctx.devLog("MKT buy " + good.name + " val=" + good.val.toFixed(2) + " rest=" + resting + " qty=" + added + " avg=" + basis[good.id].avgVal.toFixed(2));
+                  ctx.devLog("MKT buy " + good.name + " val=" + good.val.toFixed(2) + " rest=" + resting + " qty=" + added + " avg=" + basis[good.id].avgVal.toFixed(2) + " exp=" + Beautify(exposure));
                 }
               }
             }
