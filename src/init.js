@@ -150,6 +150,12 @@ export function init() {
         function autoBuyWillSpend(spendable) {
             if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return true;
             if (TOGGLES.buybuildings.t.isActive()) {
+                // Unlock-first will spend this tick (mirror buybuildings.js): any affordable,
+                // unlocked, unowned building type is bought before the ratio logic runs.
+                for (var k in Game.Objects) {
+                    var nb = Game.Objects[k];
+                    if (nb.amount === 0 && !nb.locked && nb.price < spendable) return true;
+                }
                 var best = null, bestRatio = 0, aff = null, affRatio = 0;
                 for (var i in Game.Objects) {
                     var b = Game.Objects[i];

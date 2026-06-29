@@ -13,6 +13,22 @@ export default function createBuybuildings(ctx) {
             // actually purchasable now. An out-of-reach upgrade no longer freezes
             // building purchases (which would also stall milestone progress).
             if (ctx.TOGGLES.buyupgrades.t.isActive() && ctx.hasAffordableEligibleUpgrade(spendable)) return;
+            // Unlock-first: own at least one of every affordable, UNLOCKED building type so
+            // new tiers (and their upgrade lines + synergies) actually unlock. A brand-new
+            // type scores a lower ratio than cheap synergy-boosted buildings, so pure
+            // best-ratio never picks it, and the bank just grows the low tiers forever. Buy
+            // one unit of the cheapest affordable unowned type, then fall through to ratio
+            // buying. Locked (not-yet-available) types are skipped.
+            var newType = null;
+            for (var k in Game.Objects) {
+                var nb = Game.Objects[k];
+                if (nb.amount === 0 && !nb.locked && nb.price < spendable && (!newType || nb.price < newType.price)) newType = nb;
+            }
+            if (newType) {
+                ctx.devLog('BUY bldg ' + newType.name + ' #1 price=' + Beautify(newType.price) + ' (unlock new type)');
+                newType.buy(1);
+                return;
+            }
             // Score the highest-ratio building overall AND the highest-ratio one we can
             // afford right now. calculateRatio already factors milestone proximity (the
             // amortised tier ×2 score). Decision:
