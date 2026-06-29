@@ -150,6 +150,10 @@
         { id: "onemind", labelKey: "oneMind", section: "other", unlocked: function() {
           return !!(Game.Upgrades["One mind"] && Game.Upgrades["One mind"].unlocked);
         } },
+        { id: "elderpact", labelKey: "elderPact", section: "other", unlocked: function() {
+          var r = l("ccc-row-onemind");
+          return !!(r && r.classList.contains("on"));
+        } },
         { id: "luckyreserve", labelKey: "luckyReserve", section: "other" },
         { id: "devlog", labelKey: "devLog", section: "other" }
         // DEV ONLY — hidden unless DEV_MODE/devActive()
@@ -204,6 +208,7 @@
           buyBuildings: "Auto Buy Buildings",
           buyUpgrades: "Auto Buy Upgrades",
           oneMind: "One Mind",
+          elderPact: "Push to Stage 3",
           luckyReserve: "Lucky Reserve"
         },
         descriptions: {},
@@ -244,6 +249,8 @@
           buyUpgradesOff: "",
           oneMindOn: "",
           oneMindOff: "",
+          elderPactOn: "",
+          elderPactOff: "",
           luckyReserveOn: "",
           luckyReserveOff: ""
         }
@@ -1072,6 +1079,18 @@
     }
   });
 
+  // src/toggles/elderpact.js
+  function createElderpact(ctx) {
+    return {
+      configKey: "autoElderPact",
+      t: ctx.makeBoolToggle("elderPactOn", "elderPactOff")
+    };
+  }
+  var init_elderpact = __esm({
+    "src/toggles/elderpact.js"() {
+    }
+  });
+
   // src/toggles/luckyreserve.js
   function createLuckyreserve(ctx) {
     return {
@@ -1191,8 +1210,11 @@
       MOD._mktStarvedTicks = 0;
       function upgradeEligible(upgrade) {
         if (upgrade.pool === "toggle") return false;
-        if (upgrade.name === "Communal brainsweep" || upgrade.name === "Elder Pact" || upgrade.name === "Elder Pledge" || upgrade.name === "Elder Covenant" || upgrade.name === "Revoke Elder Covenant") return false;
-        if (upgrade.name === "One mind") return TOGGLES.onemind.t.isActive();
+        if (upgrade.name === "Elder Pledge" || upgrade.name === "Elder Covenant" || upgrade.name === "Revoke Elder Covenant") return false;
+        if (upgrade.name === "One mind" || upgrade.name === "Communal brainsweep")
+          return TOGGLES.onemind.t.isActive();
+        if (upgrade.name === "Elder Pact")
+          return !!(TOGGLES.elderpact && TOGGLES.elderpact.t.isActive());
         return true;
       }
       function hasAffordableEligibleUpgrade(spendable) {
@@ -1254,6 +1276,7 @@
       TOGGLES.buyupgrades = createBuyupgrades(ctx);
       TOGGLES.buybuildings = createBuybuildings(ctx);
       TOGGLES.onemind = createOnemind(ctx);
+      TOGGLES.elderpact = createElderpact(ctx);
       TOGGLES.luckyreserve = createLuckyreserve(ctx);
       TOGGLES.devlog = createDevlog(ctx);
       MOD.activateFns = {};
@@ -1550,6 +1573,7 @@
       init_buyupgrades();
       init_buybuildings();
       init_onemind();
+      init_elderpact();
       init_luckyreserve();
       init_devlog();
     }
