@@ -133,7 +133,13 @@ export function init() {
         // only buy the best affordable when it scores at least this fraction of the global
         // best ratio; otherwise we hold and let the bank build. Shared with buybuildings.js
         // via ctx so the two stay in lockstep.
-        var BUY_FLOOR = 0.05;
+        // Tuning (late-game ascension regrind, real logs): at 0.05 the floor was far too low.
+        // calculateRatio returns max(perUnit, tierBundle); between tier thresholds the best
+        // building's score collapses to its myopic per-unit value, which drops the floor and
+        // let the bank fritter into ratio-0.001 buildings (20x worse than saving for the next
+        // tier spike). 0.25 means "only buy an affordable building within 4x of the best,
+        // otherwise save toward it". Value to revisit on further logs.
+        var BUY_FLOOR = 0.25;
         ctx.BUY_FLOOR = BUY_FLOOR;
 
         // True when the building/upgrade auto-buy is about to spend cookies this tick: an
