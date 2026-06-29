@@ -22,26 +22,53 @@ export default function createMarket(ctx) {
             // load(): a reload keeps the real average instead of re-adopting the current
             // price. Read fresh each tick so a load() that replaces the object is picked up.
             var basis = ctx.MOD.marketBasis || (ctx.MOD.marketBasis = {});
+            var mp        = ctx.marketParams();     // per-tick, not per-good
             var reserve   = ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6000 : 0; // RAW CpS: a Frenzy must not inflate the reserve and starve the market
-            var spendable = Game.cookies - reserve; // never touch the Lucky reserve
+            var surplus   = Game.cookies - reserve; // bank above the Lucky reserve
             var overhead  = 1 + 0.01 * (20 * Math.pow(0.95, m.brokers));
-            var canInvest = spendable > 0 && !ctx.autoBuyWillSpend(spendable);
-            if (!canInvest && ctx.devActive()) ctx.MOD._mktStarvedTicks++; // track buildings-first deferrals
+            var rawCps    = Game.cookiesPsRawHighest;
+
+            // Investable budget for averaging IN — the fix for issue #6 (the bot starved
+            // because the reserve floor + buildings-first left no surplus to invest):
+            //  • Investor (mp.budgetFrac): a dedicated slice of the bank, computed
+            //    INDEPENDENTLY of the reserve floor and of the building auto-buy, so the
+            //    market always has something to work with. The reserve still keeps a high
+            //    bank for Lucky goldens; a position can be sold back any tick, so the only
+            //    cost is a temporarily smaller bank — an accepted Investor tradeoff. Bounded
+            //    to a fraction of the bank, so a buy can never overdraw it.
+            //  • Manual/Grind (no budgetFrac): the legacy surplus above the reserve, and
+            //    only when the building/upgrade auto-buy stands down this tick (buildings
+            //    first). Byte-identical to v1.6.0.
+            var budget, canInvest;
+            if (mp.budgetFrac) {
+                budget    = Game.cookies * mp.budgetFrac;
+                canInvest = budget > 0;
+            } else {
+                budget    = surplus;
+                canInvest = surplus > 0 && !ctx.autoBuyWillSpend(surplus);
+            }
+            if (!canInvest && ctx.devActive()) ctx.MOD._mktStarvedTicks++; // track starved/deferred ticks
             // Brokers are the single biggest market lever: each shaves 5% off the buy
             // overhead PERMANENTLY and they are cheap (~20 min of CpS). Hire one per tick
-            // up to the cap, gated only by the Lucky Reserve.
+            // up to the cap, gated only by the Lucky Reserve (surplus), never by canInvest.
             if (m.brokers < m.getMaxBrokers()) {
                 var brokerPrice = m.getBrokerPrice();
-                if (brokerPrice <= spendable && Game.cookies >= brokerPrice) {
+                if (brokerPrice <= surplus && Game.cookies >= brokerPrice) {
                     Game.Spend(brokerPrice);
                     m.brokers += 1;
                     ctx.devLog('MKT broker hired -> ' + m.brokers + ' (cost=' + Beautify(brokerPrice) + ')');
                 }
             }
+            // Total open exposure in cookies (Σ stock × rawCps × $-price). Capped to a
+            // fraction of the budget so the bot does not pile capital into every good at
+            // once. Investor only: absent maxExposureFrac, no cap (Manual/Grind unchanged).
+            var exposure = 0;
+            m.goodsById.forEach(function(g) { if (g.active && g.stock > 0) exposure += g.stock * rawCps * g.val; });
+            var overExposed = mp.maxExposureFrac ? (exposure >= budget * mp.maxExposureFrac) : false;
+
             m.goodsById.forEach(function(good) {
                 if (!good.active) return;
                 var resting = m.getRestingVal(good.id);
-                var mp = ctx.marketParams();
 
                 // Reconcile our tracked basis with the real stock (manual trades / reload):
                 // no stock → forget it; stock with no basis → adopt the current price.
@@ -50,18 +77,22 @@ export default function createMarket(ctx) {
                 var b = basis[good.id];
 
                 // Take profit on the WHOLE position once price clears the average buy-in by
-                // the overhead (+2% margin). On a fast downturn (mode 2/4) bail as soon as we
-                // are merely above overhead, before the gain evaporates. Selling only adds
-                // cookies, so it is never gated by the reserve or the auto-buy.
+                // the LIVE overhead plus a profit margin. On a fast downturn (mode 2/4) bail
+                // as soon as we are merely above overhead (break-even), before the gain
+                // evaporates. Selling only adds cookies, so it is never gated by the reserve,
+                // the budget or the auto-buy.
                 if (b && good.stock > 0) {
-                    var hitTarget = good.val >= b.avgVal * overhead * 1.02;
+                    var hitTarget = good.val >= b.avgVal * overhead * (1 + mp.profitMargin);
                     var reversal  = (good.mode === 2 || good.mode === 4) && good.val >= b.avgVal * overhead;
                     if (hitTarget || reversal) {
                         var soldQty = good.stock;
+                        // Per-trade cookie P&L: cookies received now − cookie cost of the
+                        // position at its average buy-in (incl. the buy overhead paid).
+                        var pnl = (soldQty * good.val - soldQty * b.avgVal * overhead) * rawCps;
                         m.sellGood(good.id, 10000);
                         delete basis[good.id];
                         delete lastBuy[good.id];
-                        ctx.devLog('MKT sell ' + good.name + ' val=' + good.val.toFixed(2) + ' avg=' + b.avgVal.toFixed(2) + ' qty=' + soldQty + ' total=' + Beautify(m.profit));
+                        ctx.devLog('MKT sell ' + good.name + ' val=' + good.val.toFixed(2) + ' avg=' + b.avgVal.toFixed(2) + ' qty=' + soldQty + ' pnl=' + (pnl >= 0 ? '+' : '') + Beautify(pnl) + ' total=' + Beautify(m.profit));
                         return;
                     }
                 }
@@ -73,11 +104,11 @@ export default function createMarket(ctx) {
                 //  • and it sits below our average (new position, or a genuine dip that
                 //    lowers the basis), so every add actually smooths the average down.
                 var maxStock = (typeof m.getGoodMaxStock === 'function') ? m.getGoodMaxStock(good) : 1e9;
-                if (canInvest && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id]
+                if (canInvest && !overExposed && good.val < resting * mp.buyBelow && good.val !== lastBuy[good.id]
                     && (!b || good.val < b.avgVal) && good.stock < maxStock) {
-                    var costPerUnit = Game.cookiesPsRawHighest * good.val * overhead;
+                    var costPerUnit = rawCps * good.val * overhead;
                     if (costPerUnit <= 0) return;
-                    var n = Math.floor((spendable * mp.cap) / costPerUnit);
+                    var n = Math.floor((budget * mp.cap) / costPerUnit);
                     var room = maxStock - good.stock;
                     if (n > room) n = room;
                     if (n > 0) {
@@ -88,7 +119,7 @@ export default function createMarket(ctx) {
                             var added = good.stock - before; // actual fill (affordability/cap clamp)
                             if (added > 0) {
                                 basis[good.id] = { avgVal: (prevAvg * before + good.val * added) / (before + added), units: good.stock };
-                                ctx.devLog('MKT buy ' + good.name + ' val=' + good.val.toFixed(2) + ' rest=' + resting + ' qty=' + added + ' avg=' + basis[good.id].avgVal.toFixed(2));
+                                ctx.devLog('MKT buy ' + good.name + ' val=' + good.val.toFixed(2) + ' rest=' + resting + ' qty=' + added + ' avg=' + basis[good.id].avgVal.toFixed(2) + ' exp=' + Beautify(exposure));
                             }
                         }
                     }
