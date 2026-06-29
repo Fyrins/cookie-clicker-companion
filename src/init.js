@@ -20,6 +20,7 @@ import createDragonaura from './toggles/dragonaura.js';
 import createBuyupgrades from './toggles/buyupgrades.js';
 import createBuybuildings from './toggles/buybuildings.js';
 import createOnemind from './toggles/onemind.js';
+import createElderpact from './toggles/elderpact.js';
 import createLuckyreserve from './toggles/luckyreserve.js';
 import createDevlog from './toggles/devlog.js';
 
@@ -110,10 +111,19 @@ export function init() {
         // irreversible Elder/Grandmapocalypse upgrade, or "One mind" without its toggle.
         function upgradeEligible(upgrade) {
             if (upgrade.pool === 'toggle') return false;
-            if (upgrade.name === 'Communal brainsweep' || upgrade.name === 'Elder Pact' ||
-                upgrade.name === 'Elder Pledge' || upgrade.name === 'Elder Covenant' ||
+            // Apocalypse-ending upgrades: never auto-buy, so idling can't end the apocalypse.
+            if (upgrade.name === 'Elder Pledge' || upgrade.name === 'Elder Covenant' ||
                 upgrade.name === 'Revoke Elder Covenant') return false;
-            if (upgrade.name === 'One mind') return TOGGLES.onemind.t.isActive();
+            // Apocalypse escalation gated on the One Mind toggle. One mind -> stage 1 (its
+            // confirmation prompt is auto-accepted in buyupgrades.js); Communal brainsweep ->
+            // stage 2. Neither has a production downside; both raise wrinkler spawns and wrath
+            // cookie odds. Communal brainsweep has no prompt, so it buys directly.
+            if (upgrade.name === 'One mind' || upgrade.name === 'Communal brainsweep')
+                return TOGGLES.onemind.t.isActive();
+            // Elder Pact -> stage 3. Separate opt-in (it is also the Portal building synergy
+            // condition, so escalating this far stays a deliberate choice). No prompt either.
+            if (upgrade.name === 'Elder Pact')
+                return !!(TOGGLES.elderpact && TOGGLES.elderpact.t.isActive());
             return true;
         }
         // True when an eligible upgrade is BOTH in the store and affordable right
@@ -195,6 +205,7 @@ export function init() {
         TOGGLES.buyupgrades    = createBuyupgrades(ctx);
         TOGGLES.buybuildings   = createBuybuildings(ctx);
         TOGGLES.onemind        = createOnemind(ctx);
+        TOGGLES.elderpact      = createElderpact(ctx);
         TOGGLES.luckyreserve   = createLuckyreserve(ctx);
         // DEV ONLY — toggles the tuning telemetry (ccc-devlog.txt). Inert unless DEV_MODE.
         TOGGLES.devlog         = createDevlog(ctx);

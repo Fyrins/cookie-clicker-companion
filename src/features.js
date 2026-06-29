@@ -37,6 +37,7 @@ export const FEATURES = [
     } },
     { id: 'pantheon',     labelKey: 'pantheon',     section: 'minigame', unlocked: function() { return Game.isMinigameReady(Game.Objects['Temple']); } },
     { id: 'onemind',      labelKey: 'oneMind',      section: 'other',  unlocked: function() { return !!(Game.Upgrades['One mind'] && Game.Upgrades['One mind'].unlocked); } },
+    { id: 'elderpact',    labelKey: 'elderPact',    section: 'other',  unlocked: function() { var r = l('ccc-row-onemind'); return !!(r && r.classList.contains('on')); } },
     { id: 'luckyreserve', labelKey: 'luckyReserve', section: 'other'  },
     { id: 'devlog',       labelKey: 'devLog',       section: 'other'  }, // DEV ONLY — hidden unless DEV_MODE/devActive()
 ];

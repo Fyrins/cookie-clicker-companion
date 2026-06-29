@@ -8,7 +8,7 @@ export const FALLBACK_STRINGS = {
         market:'Stock Market', office:'Market Offices', garden:'Garden',
         cloverGarden:'Golden Clover Garden', breeder:'Garden Breeder', pantheon:'Pantheon',
         buyBuildings:'Auto Buy Buildings', buyUpgrades:'Auto Buy Upgrades',
-        oneMind:'One Mind', luckyReserve:'Lucky Reserve' },
+        oneMind:'One Mind', elderPact:'Push to Stage 3', luckyReserve:'Lucky Reserve' },
     descriptions: {}, notify: {
         goldenOn:'', goldenOff:'', wrathOn:'', wrathOff:'', bigOn:'', bigOff:'',
         wrinklOn:'', wrinklOff:'', lumpsOn:'', lumpsOff:'', spellOn:'', spellOff:'',
@@ -18,6 +18,7 @@ export const FALLBACK_STRINGS = {
         breederOn:'', breederOff:'',
         buyBuildingsOn:'', buyBuildingsOff:'', buyUpgradesOn:'', buyUpgradesOff:'',
         oneMindOn:'', oneMindOff:'',
+        elderPactOn:'', elderPactOff:'',
         luckyReserveOn:'', luckyReserveOff:'',
     },
 };
