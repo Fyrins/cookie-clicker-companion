@@ -124,6 +124,10 @@ export function updateRatios(mod) {
     for (var i in Game.Objects) {
         var building = Game.Objects[i];
         var ratio    = mod.calculateRatio(building);
+        // calculateRatio returns 0 for an unowned building (amount 0); fall back to a raw
+        // cps/price estimate (same as buybuildings.js) so the store still shows a ratio
+        // under buildings you have not bought yet.
+        if (!ratio || isNaN(ratio)) ratio = (building.cps(building) * Game.globalCpsMult / building.price) * 100;
         if (ratio > 0 && factor !== 1) ratio = Number((ratio * factor).toPrecision(3));
         mod.values[building.id] = ratio > 0 ? ratio : 0;
         var el = l('ccc-ratio' + building.id);

@@ -318,6 +318,7 @@
     for (var i in Game.Objects) {
       var building = Game.Objects[i];
       var ratio = mod.calculateRatio(building);
+      if (!ratio || isNaN(ratio)) ratio = building.cps(building) * Game.globalCpsMult / building.price * 100;
       if (ratio > 0 && factor !== 1) ratio = Number((ratio * factor).toPrecision(3));
       mod.values[building.id] = ratio > 0 ? ratio : 0;
       var el = l("ccc-ratio" + building.id);
@@ -1016,6 +1017,16 @@
       t: ctx.makeToggle(function() {
         var spendable = Game.cookies - (ctx.TOGGLES.luckyreserve.t.isActive() ? Game.cookiesPsRawHighest * 6e3 : 0);
         if (ctx.TOGGLES.buyupgrades.t.isActive() && ctx.hasAffordableEligibleUpgrade(spendable)) return;
+        var newType = null;
+        for (var k in Game.Objects) {
+          var nb = Game.Objects[k];
+          if (nb.amount === 0 && !nb.locked && nb.price < spendable && (!newType || nb.price < newType.price)) newType = nb;
+        }
+        if (newType) {
+          ctx.devLog("BUY bldg " + newType.name + " #1 price=" + Beautify(newType.price) + " (unlock new type)");
+          newType.buy(1);
+          return;
+        }
         var best = null, bestRatio = 0, aff = null, affRatio = 0;
         for (var i in Game.Objects) {
           var building = Game.Objects[i];
@@ -1207,6 +1218,10 @@
       function autoBuyWillSpend(spendable) {
         if (TOGGLES.buyupgrades.t.isActive() && hasAffordableEligibleUpgrade(spendable)) return true;
         if (TOGGLES.buybuildings.t.isActive()) {
+          for (var k in Game.Objects) {
+            var nb = Game.Objects[k];
+            if (nb.amount === 0 && !nb.locked && nb.price < spendable) return true;
+          }
           var best = null, bestRatio = 0, aff = null, affRatio = 0;
           for (var i2 in Game.Objects) {
             var b = Game.Objects[i2];
