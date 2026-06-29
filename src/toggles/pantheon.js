@@ -5,10 +5,14 @@ export default function createPantheon(ctx) {
             // Set-and-forget line-up, recomposed from the active PLAY STYLE — read straight
             // off the auto-click toggles, NOT the Grind/Investor mode (which only governs
             // cookie allocation). Two independent axes:
-            //   golden ON  -> we auto-pop golden cookies, so farm them: Selebrak (seasons,
-            //                 +frequency) diamond + Vomitrax (decadence, +duration) ruby.
-            //                 Holobore is BANNED here — it un-slots itself and burns every
-            //                 swap the instant a golden is clicked, which we do constantly.
+            //   golden ON  -> we auto-pop golden cookies, so farm them. Selebrak (seasons,
+            //                 +frequency) only helps DURING an active season, so it goes in
+            //                 diamond + Vomitrax (decadence, +duration) ruby ONLY when a
+            //                 season is active. With no season Selebrak is dead weight (no
+            //                 god raises golden frequency without a season, and the CpS gods
+            //                 cut it), so we instead put Vomitrax in diamond for max golden
+            //                 duration. Holobore is BANNED here — it un-slots itself and
+            //                 burns every swap the instant a golden is clicked.
             //   golden OFF -> no goldens popped, so max raw CpS: Mokalsium (mother, +milk)
             //                 diamond + Holobore (asceticism, +base CpS — safe as long as no
             //                 golden is clicked) ruby. Holobore even rewards NOT clicking.
@@ -30,8 +34,15 @@ export default function createPantheon(ctx) {
             var farmingGolden = !!(T.golden && T.golden.t.isActive());
             var plan;
             if (farmingGolden) {
-                plan = clicking ? [['seasons', 0], ['decadence', 1], ['labor', 2]]   // Golden + click
-                                : [['seasons', 0], ['decadence', 1]];                // Golden idle (jade empty)
+                // Game.season is '' (falsy) when no season is active.
+                var seasonActive = !!Game.season;
+                if (seasonActive) {
+                    plan = clicking ? [['seasons', 0], ['decadence', 1], ['labor', 2]]  // Golden + click, in season
+                                    : [['seasons', 0], ['decadence', 1]];               // Golden idle, in season
+                } else {
+                    plan = clicking ? [['decadence', 0], ['labor', 2]]                  // Golden + click, no season
+                                    : [['decadence', 0]];                               // Golden idle, no season
+                }
             } else {
                 plan = clicking ? [['mother', 0], ['asceticism', 1], ['labor', 2]]   // CpS + click
                                 : [['mother', 0], ['asceticism', 1], ['industry', 2]]; // CpS idle

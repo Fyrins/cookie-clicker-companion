@@ -884,7 +884,12 @@
         var farmingGolden = !!(T.golden && T.golden.t.isActive());
         var plan;
         if (farmingGolden) {
-          plan = clicking ? [["seasons", 0], ["decadence", 1], ["labor", 2]] : [["seasons", 0], ["decadence", 1]];
+          var seasonActive = !!Game.season;
+          if (seasonActive) {
+            plan = clicking ? [["seasons", 0], ["decadence", 1], ["labor", 2]] : [["seasons", 0], ["decadence", 1]];
+          } else {
+            plan = clicking ? [["decadence", 0], ["labor", 2]] : [["decadence", 0]];
+          }
         } else {
           plan = clicking ? [["mother", 0], ["asceticism", 1], ["labor", 2]] : [["mother", 0], ["asceticism", 1], ["industry", 2]];
         }
